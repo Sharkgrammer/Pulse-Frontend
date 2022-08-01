@@ -30,6 +30,30 @@ module.exports = {
 
             },
         },
+        animation: {
+            bounce: 'bounce 1s infinite',
+            spin: 'spin 2s linear infinite',
+        },
+        keyframes: {
+            bounce: {
+                '50%': {
+                    'transform': 'translateY(-15%)',
+                    'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)'
+                },
+                '0%, 100%':{
+                    'transform': 'translateY(0)',
+                    'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)'
+                }
+            },
+            spin: {
+                from: {
+                    transform: 'rotate(0deg)'
+                },
+                to: {
+                    transform: 'rotate(360deg)'
+                }
+            }
+        },
     },
     variants: {
         extend: {},

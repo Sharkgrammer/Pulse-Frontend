@@ -4,7 +4,7 @@
   <br><br>
 
   <div v-for="obj in temp" :key="obj" class="w-full justify-center flex">
-    <UserPost />
+    <UserPost :imagePost="obj % 2 === 0" />
   </div>
 
 </template>

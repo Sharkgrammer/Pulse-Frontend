@@ -23,7 +23,7 @@ export default {
     outline: {
       type: Boolean,
       default: true
-    }
+    },
   },
 }
 </script>
