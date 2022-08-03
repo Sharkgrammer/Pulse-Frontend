@@ -4,23 +4,32 @@
   <br><br>
 
   <div v-for="post in posts" :key="post" class="w-full justify-center flex">
-    <UserPost :profile_name="post.profile_name" :profile_username="post.profile_username" :content="post.content"
-              :likes="post.likes" :comments="post.comments" :shares="post.shares" :profile_image="post.profile_image"
-              :image_post="post.image_post"/>
+    <UserPost :post="post"/>
   </div>
+
+  <FAB @click="showModalNewPost=true"/>
+
+  <transition type="transition" mode="in-out">
+
+    <ModalNewPost v-if="showModalNewPost" :key="showModalNewPost" @close="showModalNewPost=false"/>
+
+  </transition>
 
 </template>
 
 <script>
 import UserPost from "@/components/posts/UserPost";
 import * as network from "@/assets/js/network";
+import FAB from "@/components/buttons/FAB";
+import ModalNewPost from "@/components/modals/ModalNewPost";
 
 export default {
   name: "HomePage",
-  components: {UserPost},
+  components: {ModalNewPost, FAB, UserPost},
   data() {
     return {
       posts: Object,
+      showModalNewPost: false,
     }
   },
   async mounted() {

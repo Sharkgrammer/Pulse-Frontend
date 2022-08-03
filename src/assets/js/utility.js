@@ -19,6 +19,10 @@ export function getCookie(name) {
 
 export function params(params) {
 
+    if (params === "{}"){
+        return "";
+    }
+
     let result = "?";
     let count = 0;
     let len = Object.keys(params).length

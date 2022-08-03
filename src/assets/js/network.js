@@ -90,8 +90,6 @@ export async function JSONFetchGet(context, urlEnd, params = null) {
         "method": 'GET',
         "headers": {
             'Authorization': 'Bearer ' + utils.getAccessKey(context),
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
         }
     });
 
@@ -125,8 +123,6 @@ export async function JSONFetchPost(context, urlEnd, body = null, params = null)
         "method": 'POST',
         "headers": {
             'Authorization': 'Bearer ' + utils.getAccessKey(context),
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
         },
         body: JSON.stringify(body)
     });
@@ -160,7 +156,6 @@ export async function JSONFetchGetText(context, urlEnd, body = null, params = nu
         "method": 'POST',
         "headers": {
             'Authorization': 'Bearer ' + utils.getAccessKey(context),
-            'Content-Type': 'application/json',
         },
         body: JSON.stringify(body)
     });
