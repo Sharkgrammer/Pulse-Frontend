@@ -81,7 +81,7 @@ export async function checkStatus(context, status, data) {
     }
 }
 
-export async function JSONFetchGet(context, urlEnd, params = null) {
+export async function GetFetch(context, urlEnd, params = null) {
     let url = context._backend_url + urlEnd;
 
     if (params === null) params = "{}";
@@ -106,14 +106,14 @@ export async function JSONFetchGet(context, urlEnd, params = null) {
     }
 
     if (result === true) {
-        return await JSONFetchGet(context, urlEnd, params)
+        return await GetFetch(context, urlEnd, params)
     } else {
         return result
     }
 }
 
 
-export async function JSONFetchPost(context, urlEnd, body = null, params = null) {
+export async function PostFetch(context, urlEnd, body = null, params = null) {
     let url = context._backend_url + urlEnd;
 
     if (body === null) body = "{}";
@@ -140,98 +140,22 @@ export async function JSONFetchPost(context, urlEnd, body = null, params = null)
     }
 
     if (result === true) {
-        return await JSONFetchPost(context, urlEnd, body, params)
+        return await PostFetch(context, urlEnd, body, params)
     } else {
         return result
     }
 }
 
-export async function JSONFetchGetText(context, urlEnd, body = null, params = null) {
+export async function UploadPost(context, urlEnd, formData, params = null) {
     let url = context._backend_url + urlEnd;
 
-    if (body === null) body = "{}";
     if (params === null) params = "{}";
-
-    const res = await fetch(url + utils.params(params), {
-        "method": 'POST',
-        "headers": {
-            'Authorization': 'Bearer ' + utils.getAccessKey(context),
-        },
-        body: JSON.stringify(body)
-    });
-
-    let result = false;
-
-    try {
-        const data = await res.text();
-        const status = res.status;
-
-        result = await checkStatus(context, status, data);
-    } catch (e) {
-        console.log(e)
-        return false;
-    }
-
-    if (result === true) {
-        return await JSONFetchGetText(context, urlEnd, body, params)
-    } else {
-        return result
-    }
-
-}
-
-export async function HTMLFetch(context, urlEnd, body = null, params = null) {
-    let url = context._backend_url + urlEnd;
-
-    if (body === null) body = "{}";
-    if (params === null) params = "{}";
-
-    const res = await fetch(url + utils.params(params), {
-        "method": 'POST',
-        "headers": {
-            'Authorization': 'Bearer ' + utils.getAccessKey(context),
-            'Content-Type': 'text/html',
-            'Accept': 'text/html',
-        },
-        body: JSON.stringify(body)
-    });
-
-    let result = false;
-
-    try {
-        const data = await res.text();
-        const status = res.status;
-
-        result = await checkStatus(context, status, data);
-    } catch (e) {
-        console.log(e)
-        return false;
-    }
-
-    if (result === true) {
-        return await HTMLFetch(context, urlEnd, body, params)
-    } else {
-        return result
-    }
-
-}
-
-export async function FileSendFetch(context, urlEnd, body = null, params = null) {
-    let url = context._backend_url + urlEnd;
-
-    if (body === null) body = "{}";
-    if (params === null) params = "{}";
-
-    let formData = new FormData()
-    formData.append('file', body)
-
-    console.log(formData.get('file'))
 
     const res = await fetch(url + utils.params(params), {
         "method": 'PUT',
         "headers": {
             'Authorization': 'Bearer ' + utils.getAccessKey(context),
-            'Content-Disposition': 'attachment; filename=' + params.title + "." + params.type
+            'Content-Disposition': 'attachment',
         },
         body: formData
     }).catch((error) => {
@@ -246,42 +170,13 @@ export async function FileSendFetch(context, urlEnd, body = null, params = null)
         let result = await checkStatus(context, status, data);
 
         if (result === true) {
-            return await FileSendFetch(context, urlEnd, body, params)
+            return await UploadPost(context, urlEnd, formData, params)
         } else {
             return result
         }
     } catch (e) {
         // Error already logged
         return false
-    }
-
-}
-
-export async function FileGetFetch(context, urlEnd, body = null, params = null) {
-    let url = context._backend_url + urlEnd;
-
-    if (body === null) body = "{}";
-    if (params === null) params = "{}";
-
-    const res = await fetch(url + utils.params(params), {
-        "method": 'POST',
-        "headers": {
-            'Authorization': 'Bearer ' + utils.getAccessKey(context),
-        },
-        body: body
-    }).catch((error) => {
-        console.log(error)
-    });
-
-    const data = await res.blob();
-    const status = res.status;
-
-    let result = await checkStatus(context, status, data);
-
-    if (result === true) {
-        return await FileGetFetch(context, urlEnd, body, params)
-    } else {
-        return result
     }
 
 }

@@ -13,7 +13,7 @@
 
           <TextBox @update="updateText"/>
 
-          <input type='file' @input="updateFile"/>
+          <input accept="image/jpeg,image/png,image/gif" type='file' @input="updateFile"/>
 
           <button @click="createNewPost">Click me</button>
 
@@ -48,19 +48,18 @@ export default {
     async createNewPost() {
 
       let formData = new FormData()
-      formData.append('file', this.file)
-      formData.append('content', this.postText)
-      formData.append('image_post', 'false')
 
-      let post = {
-        content: this.postText,
-        image_post: false,
-        image_contents: this.file
-      };
+      formData.append('file', this.file)
+      formData.append('file_name', this.file.name)
+      formData.append('content', this.postText)
+
+      let params = {
+        isFile: true,
+      }
 
       console.log(this.file)
 
-      let data = await network.JSONFetchGetText(this, "/api/post", post, null);
+      let data = await network.UploadPost(this, "/api/post", formData, params);
 
       if (data !== false && data === "True") {
         //this.close();

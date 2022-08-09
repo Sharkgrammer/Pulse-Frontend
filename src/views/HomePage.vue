@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     async getAllPosts() {
-      let data = await network.JSONFetchGet(this, "/api/post", null, null);
+      let data = await network.GetFetch(this, "/api/post", null, null);
 
       console.log(data);
 

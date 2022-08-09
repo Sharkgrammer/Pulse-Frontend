@@ -18,7 +18,7 @@
 
         <!-- Content Div -->
         <div v-if="post.image_post" class="w-full justify-center flex pb-2">
-          <img :src="this._backend_url + post.image_contents" loading="lazy" alt="Shonk" class="rounded-2xl shadow"/>
+          <img :src="this._backend_url + post.image_contents" loading="lazy" alt="Shonk" class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
 
