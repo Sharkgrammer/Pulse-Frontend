@@ -1,7 +1,7 @@
 <template>
 
   <div
-      class="w-1/2 max-w-96 bg-gray-100 dark:bg-gray-800 text-center pt-2">
+      class="w-100 bg-gray-100 dark:bg-gray-800 text-center pt-2">
     <div class="w-full grid grid-cols-12 pr-2 pb-2">
 
       <!-- Image Only -->
@@ -29,23 +29,26 @@
         <div class="w-full grid grid-cols-3 pl-3 pr-3">
 
           <div class="flex justify-center w-full" v-if="post.likes != null">
-            <div class="flex text-gray-900 dark:text-gray-100 hover:text-red-800 dark:hover:text-red-500 cursor-pointer" @click="like = true; likeCount++"
-                 @mouseover="likeBounce = false" @mouseleave="likeBounce=true">
+            <div class="flex text-gray-900 dark:text-gray-100 hover:text-red-800 dark:hover:text-red-500 cursor-pointer"
+                 @click="like = true; likeCount++" @mouseover="likeBounce = false" @mouseleave="likeBounce=true">
               <PostReact type="like" :outline="!like" :key="like" :bounce="!likeBounce"/>
               <span class="inline-block mt-0.5 ml-1">{{ likeCount }}</span>
             </div>
           </div>
 
           <div class="flex justify-center w-full" v-if="post.comments != null">
-            <div class="flex text-gray-900 dark:text-gray-100 hover:text-blue-800 dark:hover:text-blue-500 cursor-pointer" @mouseover="comment = true"
-                 @mouseleave="comment=false">
+            <div
+                class="flex text-gray-900 dark:text-gray-100 hover:text-blue-800 dark:hover:text-blue-500 cursor-pointer"
+                @mouseover="comment = true" @mouseleave="comment=false">
               <PostReact type="comment" :key="comment" :bounce="comment"/>
               <span class="inline-block mt-0.5 ml-1">{{ post.comments }}</span>
             </div>
           </div>
 
           <div class="flex justify-center w-full" v-if="post.shares != null">
-            <div class="flex text-gray-900 dark:text-gray-100 hover:text-yellow-800 dark:hover:text-yellow-500 cursor-pointer" @mouseover="share = true" @mouseleave="share=false">
+            <div
+                class="flex text-gray-900 dark:text-gray-100 hover:text-yellow-800 dark:hover:text-yellow-500 cursor-pointer"
+                @mouseover="share = true" @mouseleave="share=false">
               <PostReact type="share" :key="share" :bounce="share"/>
               <span class="inline-block mt-0.5 ml-1">{{ post.shares }}</span>
             </div>

@@ -1,14 +1,25 @@
 <template>
 
-  <div class="w-full justify-center flex dark:bg-gray-900">
-    <SystemPost title="Social Shonks" content="Chillest of social media platforms I guess?"/>
+  <div class="dark:bg-gray-900">
+
+    <!-- Visual Size Checker -->
+    <div class="w-full h-10 bg-pink-500 sm:bg-red-500 md:bg-yellow-500 lg:bg-accent xl:bg-green-500 2xl:bg-purple-500">
+
+    </div>
+
+
+
+    <div class="w-full justify-center flex">
+      <SystemPost title="Social Shonks" content="Chillest of social media platforms I guess?"/>
+    </div>
+
+    <div v-for="post in posts" :key="post" class="w-full justify-center flex">
+      <UserPost :post="post"/>
+    </div>
+
+    <FAB @click="showModalNewPost=true"/>
   </div>
 
-  <div v-for="post in posts" :key="post" class="w-full justify-center flex  dark:bg-gray-900">
-    <UserPost :post="post"/>
-  </div>
-
-  <FAB @click="showModalNewPost=true"/>
 
   <transition type="transition" mode="in-out">
 
