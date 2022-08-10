@@ -47,25 +47,16 @@ export default {
     },
     async createNewPost() {
 
-      let formData = new FormData()
+      let body = new FormData()
+      body.append('file', this.file)
+      body.append('file_name', this.file.name)
+      body.append('content', this.postText)
 
-      formData.append('file', this.file)
-      formData.append('file_name', this.file.name)
-      formData.append('content', this.postText)
-
-      let params = {
-        isFile: true,
-      }
-
-      console.log(this.file)
-
-      let data = await network.UploadPost(this, "/api/post", formData, params);
+      let data = await network.NetworkRequest(this, "/api/post", "PUT", body, null, false);
 
       if (data !== false && data === "True") {
-        //this.close();
+        this.close();
       }
-
-      //this.close();
     },
     close() {
       this.$emit('close');

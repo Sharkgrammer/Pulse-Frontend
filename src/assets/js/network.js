@@ -18,7 +18,6 @@ export async function login(context, user) {
         utils.setAccessKey(context, data.access);
         utils.setRefreshKey(context, data.refresh);
 
-        console.log("Login Succeeded");
         return true;
     } else {
         return false;
@@ -44,12 +43,10 @@ export async function refresh(context) {
 
     if (status === 200) {
         const data = await res.json();
-        console.log(data)
 
         utils.setAccessKey(context, data.access);
         utils.setRefreshKey(context, data.refresh);
 
-        console.log("Access Refreshed");
         return true;
     } else {
         return false;
@@ -81,102 +78,61 @@ export async function checkStatus(context, status, data) {
     }
 }
 
-export async function GetFetch(context, urlEnd, params = null) {
+export async function NetworkRequest(context, urlEnd, type = "GET", body = null, params = null, JSON = true) {
     let url = context._backend_url + urlEnd;
 
     if (params === null) params = "{}";
+    if (body === null) body = "{}";
 
-    const res = await fetch(url + utils.params(params), {
-        "method": 'GET',
+    let input = url + utils.params(params)
+    let init = {
+        "method": type,
         "headers": {
             'Authorization': 'Bearer ' + utils.getAccessKey(context),
         }
-    });
-
-    let result = false;
-
-    try {
-        const data = await res.json();
-        const status = res.status;
-
-        result = await checkStatus(context, status, data);
-    } catch (e) {
-        console.log(e)
-        return false;
     }
 
-    if (result === true) {
-        return await GetFetch(context, urlEnd, params)
-    } else {
-        return result
-    }
-}
-
-
-export async function PostFetch(context, urlEnd, body = null, params = null) {
-    let url = context._backend_url + urlEnd;
-
-    if (body === null) body = "{}";
-    if (params === null) params = "{}";
-
-    const res = await fetch(url + utils.params(params), {
-        "method": 'POST',
-        "headers": {
-            'Authorization': 'Bearer ' + utils.getAccessKey(context),
-        },
-        body: JSON.stringify(body)
-    });
-
-    let result = false;
-
-    try {
-        const data = await res.json();
-        const status = res.status;
-
-        result = await checkStatus(context, status, data);
-    } catch (e) {
-        console.log(e)
-        return false;
+    switch (type) {
+        case "GET":
+            // Nothing here yet
+            break;
+        case "PUT":
+            init.headers["Content-Disposition"] = "attachment"
+            //init.headers["Content-Type"] = "multipart/form-data"
+            init.body = body
+            break
+        case "POST":
+            init.body = JSON.stringify(body)
+            break;
     }
 
-    if (result === true) {
-        return await PostFetch(context, urlEnd, body, params)
-    } else {
-        return result
-    }
-}
-
-export async function UploadPost(context, urlEnd, formData, params = null) {
-    let url = context._backend_url + urlEnd;
-
-    if (params === null) params = "{}";
-
-    const res = await fetch(url + utils.params(params), {
-        "method": 'PUT',
-        "headers": {
-            'Authorization': 'Bearer ' + utils.getAccessKey(context),
-            'Content-Disposition': 'attachment',
-        },
-        body: formData
-    }).catch((error) => {
+    const res = await fetch(input, init).catch((error) => {
         console.log(error)
         return false
     });
 
+    let result = false;
+
     try {
-        const data = await res.text();
+        let data = "";
+
+        if (JSON) {
+            data = await res.json();
+        } else {
+            data = await res.text();
+        }
+
         const status = res.status;
 
-        let result = await checkStatus(context, status, data);
-
-        if (result === true) {
-            return await UploadPost(context, urlEnd, formData, params)
-        } else {
-            return result
-        }
+        result = await checkStatus(context, status, data);
     } catch (e) {
-        // Error already logged
-        return false
+        console.log(e)
+        return false;
     }
 
+    if (result === true) {
+        return await NetworkRequest(context, urlEnd, type, body, params, JSON)
+    } else {
+        return result
+    }
 }
