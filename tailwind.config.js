@@ -10,13 +10,13 @@ module.exports = {
                 accent_dark: '#2782A1',
             },
             spacing:{
-                '100': '28rem',
+                'post': '30rem',
             },
             animation: {
                 bounce: 'bounce 1s infinite',
                 spin: 'spin 2s linear infinite',
                 wave: 'wave 2s linear infinite',
-                neon: "neon 10s infinite"
+                rainbow: "rainbow 12s linear infinite"
             },
             keyframes: {
                 bounce: {
@@ -48,21 +48,39 @@ module.exports = {
                         transform: 'rotate(0deg)',
                     }
                 },
-                neon: {
+                rainbow: {
                     '0%': {
-                        'background-color': 'inherit'
+                        'color': ''
                     },
-                    '25%': {
-                        'background-color': 'yellow'
+                    '10%': {
+                        'color': 'red'
+                    },
+                    '20%': {
+                        'color': 'orange'
+                    },
+                    '30%': {
+                        'color': 'yellow'
+                    },
+                    '40%': {
+                        'color': 'green'
                     },
                     '50%': {
-                        'background-color': 'blue'
+                        'color': 'blue'
                     },
-                    '75%': {
-                        'background-color': 'red'
+                    '60%': {
+                        'color': 'purple'
+                    },
+                    '70%': {
+                        'color': 'pink'
+                    },
+                    '80%': {
+                        'color': 'lightblue'
+                    },
+                    '90%': {
+                        'color': 'brown'
                     },
                     '100%': {
-                        'background-color': 'green'
+                        'color': ''
                     }
                 }
             },

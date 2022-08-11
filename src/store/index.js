@@ -7,7 +7,11 @@ export default createStore({
             access: "",
             refresh: "",
             username: "",
-            userid: 0
+            first_name: "",
+            last_name: "",
+            prof_image: "",
+            followers: 0,
+            following: 0,
         }
     },
     mutations: {
@@ -20,15 +24,31 @@ export default createStore({
         setUsername(state, username) {
             state.username = username
         },
-        setUserid(state, userid) {
-            state.userid = userid
-        }
+        setFirstName(state, first_name) {
+            state.first_name = first_name
+        },
+        setLastName(state, last_name) {
+            state.last_name = last_name
+        },
+        setProfImage(state, prof_image) {
+            state.prof_image = prof_image
+        },
+        setFollowers(state, followers) {
+            state.followers = followers
+        },
+        setFollowing(state, following) {
+            state.following = following
+        },
     },
     getters: {
         access: state => state.access,
         refresh: state => state.refresh,
         username: state => state.username,
-        userid: state => state.userid
+        first_name: state => state.first_name,
+        last_name: state => state.last_name,
+        prof_image: state => state.prof_image,
+        followers: state => state.followers,
+        following: state => state.following,
     },
     plugins: [createPersistedState()]
 });

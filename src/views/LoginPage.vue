@@ -40,36 +40,25 @@ export default {
 
       const loggedIn = await network.login(this, user)
 
-      /* if (loggedIn) {
-        let user2 = {
-          email: this.email,
-        };
+      if (loggedIn) {
+        const data = await network.NetworkRequest(this, "/api/user", "GET", null, {email: this.email})
 
-        const data = await network.JSONFetch(this, "data/get_single_user_email", null, user2)
+        console.log(data)
 
         if (data !== false) {
-          utils.setUserFirstName(this, data[0].first_name);
-          utils.setUserLastName(this, data[0].last_name);
-          utils.setUserID(this, data[0].id);
+          utils.setFirstName(this, data.first_name);
+          utils.setLastName(this, data.last_name);
+          utils.setUsername(this, data.username);
+          utils.setFollowing(this, data.following);
+          utils.setFollowers(this, data.followers);
+          utils.setProfImage(this, data.prof_image);
 
-          console.log("Login Succeeded");
-          this.$emit("loggedin");
           await router.push('/');
         }
 
       } else {
         console.log("Login Failed");
         this.showLoginFailedModal = true;
-      }
-
-       */
-
-      if (loggedIn) {
-        utils.setUserID(this, "temp");
-        utils.setUsername(this, "temp");
-        await router.push('/');
-      } else {
-        console.log(user.email + " " + user.password)
       }
     },
     close() {

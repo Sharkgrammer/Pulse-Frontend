@@ -1,12 +1,11 @@
 <template>
 
-  <div
-      class="w-100 bg-gray-100 dark:bg-gray-800 text-center pt-2">
+  <div class="w-post bg-gray-100 dark:bg-gray-800 text-center pt-2 border-l border-r dark:border-gray-700">
     <div class="w-full grid grid-cols-12 pr-2 pb-2">
 
       <!-- Image Only -->
       <div class="col-span-2 flex items-start justify-center">
-        <img :src="this._backend_url + post.profile_image" class="rounded-full w-14 h-14" loading="lazy" width="50"
+        <img :src="this._backend_url + post.profile_image" class="profile-image" loading="lazy" width="50"
              height="50"/>
       </div>
 

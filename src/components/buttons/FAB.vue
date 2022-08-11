@@ -4,17 +4,17 @@
        text-gray-900 dark:text-gray-100 dark:hover:text-accent_light hover:text-accent_dark cursor-pointer
        hover:animate-wave border-gray-800 dark:border-gray-200 border hover:border-accent dark:hover:border-accent">
 
-    <IconChat class="h-10 w-10 mx-auto mt-2"/>
+    <IconPost class="h-10 w-10 mx-auto mt-2"/>
 
   </div>
 </template>
 
 <script>
-import IconChat from "@/components/heroicons/IconComment";
+import IconPost from "@/components/heroicons/IconPost";
 
 export default {
   name: "FAB",
-  components: {IconChat}
+  components: {IconPost}
 }
 </script>
 

@@ -19,7 +19,7 @@ export function getCookie(name) {
 
 export function params(params) {
 
-    if (params === "{}"){
+    if (params === "{}") {
         return "";
     }
 
@@ -63,15 +63,47 @@ export function setUsername(context, name) {
 }
 
 export function getUsername(context) {
-    return context.$store.getters.fname
+    return context.$store.getters.username
 }
 
-export function setUserID(context, userid) {
-    context.$store.commit("setUserid", userid)
+export function setFirstName(context, name) {
+    context.$store.commit("setFirstName", name)
 }
 
-export function getUserID(context) {
-    return context.$store.getters.userid
+export function getFirstName(context) {
+    return context.$store.getters.first_name
+}
+
+export function setLastName(context, name) {
+    context.$store.commit("setLastName", name)
+}
+
+export function getLastName(context) {
+    return context.$store.getters.last_name
+}
+
+export function setProfImage(context, image) {
+    context.$store.commit("setProfImage", image)
+}
+
+export function getProfImage(context) {
+    return context.$store.getters.prof_image
+}
+
+export function setFollowers(context, followers) {
+    context.$store.commit("setFollowers", followers)
+}
+
+export function getFollowers(context) {
+    return context.$store.getters.followers
+}
+
+export function setFollowing(context, following) {
+    context.$store.commit("setFollowing", following)
+}
+
+export function getFollowing(context) {
+    return context.$store.getters.following
 }
 
 export async function redirectToLogin() {
@@ -80,9 +112,7 @@ export async function redirectToLogin() {
 
 export async function logout(context) {
     setAccessKey(context, "");
-    setRefreshKey(context, "");
-    setUserID(context, "");
-    setUsername(context, "");
+    localStorage.clear()
 
     await redirectToLogin();
 }

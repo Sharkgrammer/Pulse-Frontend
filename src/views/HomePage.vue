@@ -1,20 +1,38 @@
 <template>
 
-  <div class="dark:bg-gray-900">
+  <div class="dark:bg-gray-800">
 
     <!-- Visual Size Checker -->
-    <div class="w-full h-10 bg-pink-500 sm:bg-red-500 md:bg-yellow-500 lg:bg-accent xl:bg-green-500 2xl:bg-purple-500">
+    <div v-if="false" class="w-full h-10 bg-pink-500 sm:bg-red-500 md:bg-yellow-500 lg:bg-accent xl:bg-green-500 2xl:bg-purple-500">
 
     </div>
 
 
+    <div class="grid grid-cols-12">
 
-    <div class="w-full justify-center flex">
-      <SystemPost title="Social Shonks" content="Chillest of social media platforms I guess?"/>
-    </div>
+      <div class="col-span-3">
 
-    <div v-for="post in posts" :key="post" class="w-full justify-center flex">
-      <UserPost :post="post"/>
+        <ProfilePost />
+
+      </div>
+
+
+      <div class="col-span-6">
+        <SystemPost :title="getWelcomeMessage()"/>
+
+        <div v-for="post in posts" :key="post">
+          <UserPost :post="post"/>
+        </div>
+
+      </div>
+
+
+      <div class="col-span-3">
+
+
+      </div>
+
+
     </div>
 
     <FAB @click="showModalNewPost=true"/>
@@ -35,10 +53,12 @@ import SystemPost from "@/components/posts/SystemPost";
 import * as network from "@/assets/js/network";
 import FAB from "@/components/buttons/FAB";
 import ModalNewPost from "@/components/modals/ModalNewPost";
+import {getFirstName} from "@/assets/js/utility";
+import ProfilePost from "@/components/profile/ProfilePost";
 
 export default {
   name: "HomePage",
-  components: {ModalNewPost, FAB, UserPost, SystemPost},
+  components: {ProfilePost, ModalNewPost, FAB, UserPost, SystemPost},
   data() {
     return {
       posts: Object,
@@ -52,9 +72,20 @@ export default {
     async getAllPosts() {
       let data = await network.NetworkRequest(this, "/api/post", "GET", null, null);
 
-      console.log(data);
+      //console.log(data);
 
       if (data !== false) this.posts = data;
+
+      let p = {
+        username: "@admin"
+      }
+
+      let x = await network.NetworkRequest(this, "/api/user", "GET", null, p);
+      console.log(x)
+
+    },
+    getWelcomeMessage() {
+      return "Good Afternoon " + getFirstName(this);
     }
   }
 }

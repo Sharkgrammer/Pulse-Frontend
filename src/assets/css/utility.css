@@ -1,3 +1,12 @@
 body{
     @apply bg-gray-50;
 }
+
+
+.profile-image{
+    @apply rounded-full w-14 h-14
+}
+
+.profile-image-lg{
+    @apply rounded-full w-20 h-20
+}
