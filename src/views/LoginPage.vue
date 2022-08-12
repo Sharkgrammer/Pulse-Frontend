@@ -41,7 +41,7 @@ export default {
       const loggedIn = await network.login(this, user)
 
       if (loggedIn) {
-        const data = await network.NetworkRequest(this, "/api/user", "GET", null, {email: this.email})
+        const data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, {email: this.email})
 
         console.log(data)
 

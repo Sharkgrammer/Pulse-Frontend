@@ -2,7 +2,7 @@ import * as utils from "./utility";
 
 export async function login(context, user) {
 
-    const res = await fetch(context._backend_url + "/api/token/", {
+    const res = await fetch(context._backend_url + "/api/v1/token/", {
         "method": "POST",
         "headers": {
             'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export async function refresh(context) {
         refresh: utils.getRefreshKey(context)
     }
 
-    const res = await fetch(context._backend_url + "/api/token/refresh/", {
+    const res = await fetch(context._backend_url + "/api/v1/token/refresh/", {
         "method": "POST",
         "headers": {
             'Content-Type': 'application/json'

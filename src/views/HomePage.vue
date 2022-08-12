@@ -8,12 +8,10 @@
     </div>
 
 
-    <div class="grid grid-cols-12">
+    <div class="w-full grid grid-cols-12 gap-0">
 
       <div class="col-span-3">
-
-        <ProfilePost />
-
+        <ProfileTab />
       </div>
 
 
@@ -28,8 +26,7 @@
 
 
       <div class="col-span-3">
-
-
+        <FriendTab />
       </div>
 
 
@@ -54,11 +51,12 @@ import * as network from "@/assets/js/network";
 import FAB from "@/components/buttons/FAB";
 import ModalNewPost from "@/components/modals/ModalNewPost";
 import {getFirstName} from "@/assets/js/utility";
-import ProfilePost from "@/components/profile/ProfilePost";
+import ProfileTab from "@/components/system/ProfileTab";
+import FriendTab from "@/components/system/FriendTab";
 
 export default {
   name: "HomePage",
-  components: {ProfilePost, ModalNewPost, FAB, UserPost, SystemPost},
+  components: {FriendTab, ProfileTab, ModalNewPost, FAB, UserPost, SystemPost},
   data() {
     return {
       posts: Object,
@@ -70,7 +68,7 @@ export default {
   },
   methods: {
     async getAllPosts() {
-      let data = await network.NetworkRequest(this, "/api/post", "GET", null, null);
+      let data = await network.NetworkRequest(this, "/api/v1/post", "GET", null, null);
 
       //console.log(data);
 
@@ -80,7 +78,7 @@ export default {
         username: "@admin"
       }
 
-      let x = await network.NetworkRequest(this, "/api/user", "GET", null, p);
+      let x = await network.NetworkRequest(this, "/api/v1/user", "GET", null, p);
       console.log(x)
 
     },

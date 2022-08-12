@@ -52,7 +52,7 @@ export default {
       body.append('file_name', this.file.name)
       body.append('content', this.postText)
 
-      let data = await network.NetworkRequest(this, "/api/post", "PUT", body, null, false);
+      let data = await network.NetworkRequest(this, "/api/v1/post", "PUT", body, null, false);
 
       if (data !== false && data === "True") {
         this.close();
