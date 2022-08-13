@@ -116,3 +116,12 @@ export async function logout(context) {
 
     await redirectToLogin();
 }
+
+export function updateUser(context, data) {
+    this.setFirstName(context, data.first_name);
+    this.setLastName(context, data.last_name);
+    this.setUsername(context, data.username);
+    this.setFollowing(context, data.following);
+    this.setFollowers(context, data.followers);
+    this.setProfImage(context, data.prof_image);
+}

@@ -43,15 +43,8 @@ export default {
       if (loggedIn) {
         const data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, {email: this.email})
 
-        console.log(data)
-
         if (data !== false) {
-          utils.setFirstName(this, data.first_name);
-          utils.setLastName(this, data.last_name);
-          utils.setUsername(this, data.username);
-          utils.setFollowing(this, data.following);
-          utils.setFollowers(this, data.followers);
-          utils.setProfImage(this, data.prof_image);
+          utils.updateUser(this, data)
 
           await router.push('/');
         }

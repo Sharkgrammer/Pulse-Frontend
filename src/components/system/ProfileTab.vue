@@ -1,6 +1,6 @@
 <template>
 
-  <div class="">
+  <div class="max-w-post">
     <div class="flex items-start justify-center pt-5">
       <img :src="this._backend_url + getProfileImage()" class="profile-image-lg" loading="lazy"/>
     </div>
@@ -12,12 +12,12 @@
       <div class="flex justify-evenly pt-2">
         <div class="inline-flex">
           <IconFollower/>
-          <span class="pl-1 font-bold">1</span>
+          <span class="pl-1 font-bold">{{ this.getFollowers() }}</span>
         </div>
 
         <div class="inline-flex">
           <IconFollowing/>
-          <span class="pl-1 font-bold">1</span>
+          <span class="pl-1 font-bold">{{ this.getFollowing() }}</span>
         </div>
 
       </div>
@@ -93,6 +93,12 @@ export default {
     },
     getUsername() {
       return utils.getUsername(this);
+    },
+    getFollowers() {
+      return utils.getFollowers(this);
+    },
+    getFollowing() {
+      return utils.getFollowing(this);
     }
   }
 }
