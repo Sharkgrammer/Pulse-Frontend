@@ -1,6 +1,6 @@
 <template>
 
-  <div class="dark:bg-gray-800">
+  <div>
 
     <!-- Visual Size Checker -->
     <div v-if="false"
@@ -9,27 +9,22 @@
     </div>
 
 
-    <div class="w-full flex">
+    <div class="w-full flex justify-center">
 
-      <div class="w-full">
-        <ProfileTab/>
-      </div>
+      <ProfileTab/>
 
-
-      <div class="w-full">
+      <div>
         <SystemPost :title="getWelcomeMessage()"/>
 
         <div v-for="post in posts" :key="post">
           <UserPost :post="post"/>
         </div>
 
+        <LoadingPost />
+
       </div>
 
-
-      <div class="w-full">
-        <FriendTab/>
-      </div>
-
+      <FriendTab/>
 
     </div>
 
@@ -54,10 +49,11 @@ import ModalNewPost from "@/components/modals/ModalNewPost";
 import * as utils from "@/assets/js/utility";
 import ProfileTab from "@/components/system/ProfileTab";
 import FriendTab from "@/components/system/FriendTab";
+import LoadingPost from "@/components/posts/LoadingPost";
 
 export default {
   name: "HomePage",
-  components: {FriendTab, ProfileTab, ModalNewPost, FAB, UserPost, SystemPost},
+  components: {LoadingPost, FriendTab, ProfileTab, ModalNewPost, FAB, UserPost, SystemPost},
   data() {
     return {
       posts: Object,

@@ -20,4 +20,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body{
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
 </style>

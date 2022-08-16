@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-post bg-gray-100 dark:bg-gray-800 text-center pt-2 border-l border-r dark:border-gray-700">
+  <div class="w-post text-center pt-2 border-l border-r dark:border-gray-700">
     <div class="w-full grid grid-cols-12 pr-2 pb-2">
 
       <!-- Image Only -->

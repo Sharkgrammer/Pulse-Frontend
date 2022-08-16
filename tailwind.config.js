@@ -10,11 +10,13 @@ module.exports = {
                 accent_dark: '#2782A1',
             },
             spacing:{
-                'post': '30rem',
+                'post': '32rem',
+                'profile' : '22rem',
+                'friend' : '25rem',
             },
             animation: {
                 bounce: 'bounce 1s infinite',
-                spin: 'spin 2s linear infinite',
+                'spin-slowly': 'spin 1.5s linear infinite',
                 wave: 'wave 2s linear infinite',
                 rainbow: "rainbow 12s linear infinite"
             },

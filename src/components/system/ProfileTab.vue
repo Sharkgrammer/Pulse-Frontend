@@ -1,6 +1,6 @@
 <template>
 
-  <div class="max-w-post">
+  <div class="w-profile">
     <div class="flex items-start justify-center pt-5">
       <img :src="this._backend_url + getProfileImage()" class="profile-image-lg" loading="lazy"/>
     </div>
@@ -25,7 +25,7 @@
     </div>
 
 
-    <HRV2 class="pt-2 mb-5"/>
+    <!-- <HRV2 class="pt-2 mb-5"/> -->
 
     <div class="grid grid-cols-3 pr-5">
 
@@ -67,14 +67,13 @@
 
     </div>
 
-    <HRV2 class="pt-10"/>
+    <!-- <HRV2 class="pt-10"/> -->
   </div>
 
 </template>
 
 <script>
 import * as utils from "@/assets/js/utility";
-import HRV2 from "@/components/forms/HRV2";
 import HRV2SM from "@/components/forms/HRV2SM";
 import IconFollower from "@/components/heroicons/IconFollower";
 import IconFollowing from "@/components/heroicons/IconFollowing";
@@ -83,7 +82,7 @@ import IconSetting from "@/components/heroicons/IconSetting";
 
 export default {
   name: "ProfilePost",
-  components: {IconSetting, IconHome, IconFollowing, IconFollower, HRV2SM, HRV2},
+  components: {IconSetting, IconHome, IconFollowing, IconFollower, HRV2SM},
   methods: {
     getProfileImage() {
       return utils.getProfImage(this);
