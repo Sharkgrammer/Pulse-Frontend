@@ -11,7 +11,7 @@
 
     <div class="w-full flex justify-center">
 
-      <ProfileTab/>
+      <ProfileTab ref="homePageProfileTab"/>
 
       <div>
         <SystemPost :title="getWelcomeMessage()"/>
@@ -20,11 +20,11 @@
           <UserPost :post="post"/>
         </div>
 
-        <LoadingPost />
+        <LoadingPost/>
 
       </div>
 
-      <FriendTab/>
+      <FriendTab @followUpdate="refreshUser"/>
 
     </div>
 
@@ -62,7 +62,7 @@ export default {
   },
   mounted() {
     this.getAllPosts();
-    this.checkUser()
+    this.checkUser();
   },
   methods: {
     async getAllPosts() {
@@ -80,6 +80,10 @@ export default {
     },
     getWelcomeMessage() {
       return "Good Afternoon " + utils.getFirstName(this);
+    },
+    refreshUser() {
+      this.checkUser();
+      this.$refs.homePageProfileTab.$forceUpdate();
     }
   }
 }

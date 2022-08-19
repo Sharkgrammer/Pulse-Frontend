@@ -78,7 +78,7 @@ export async function checkStatus(context, status, data) {
     }
 }
 
-export async function NetworkRequest(context, urlEnd, type = "GET", body = null, params = null, JSON = true) {
+export async function NetworkRequest(context, urlEnd, type = "GET", body = null, params = null, isJSON = true) {
     let url = context._backend_url + urlEnd;
 
     if (params === null) params = "{}";
@@ -116,7 +116,7 @@ export async function NetworkRequest(context, urlEnd, type = "GET", body = null,
     try {
         let data = "";
 
-        if (JSON) {
+        if (isJSON) {
             data = await res.json();
         } else {
             data = await res.text();
