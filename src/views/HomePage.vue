@@ -68,6 +68,7 @@ export default {
     async getAllPosts() {
       let data = await network.NetworkRequest(this, "/api/v1/post", "GET", null, null);
 
+      //console.log(data)
       if (data !== false) this.posts = data;
     },
     async checkUser() {

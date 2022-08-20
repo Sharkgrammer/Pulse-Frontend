@@ -106,8 +106,8 @@ export async function NetworkRequest(context, urlEnd, type = "GET", body = null,
             break;
     }
 
-    const res = await fetch(input, init).catch((error) => {
-        console.log(error)
+    const res = await fetch(input, init).catch(() => {
+        //console.log(error)
         return false
     });
 
@@ -126,7 +126,7 @@ export async function NetworkRequest(context, urlEnd, type = "GET", body = null,
 
         result = await checkStatus(context, status, data);
     } catch (e) {
-        console.log(e)
+        //console.log(e)
         return false;
     }
 

@@ -29,7 +29,7 @@
 
           <div class="flex justify-center w-full" v-if="post.likes != null">
             <div class="flex text-gray-900 dark:text-gray-100 hover:text-red-800 dark:hover:text-red-500 cursor-pointer"
-                 @click="like = true; likeCount++" @mouseover="likeBounce = false" @mouseleave="likeBounce=true">
+                 @click="likePost" @mouseover="likeBounce = false" @mouseleave="likeBounce=true">
               <PostReact type="like" :outline="!like" :key="like" :bounce="!likeBounce"/>
               <span class="inline-block mt-0.5 ml-1">{{ likeCount }}</span>
             </div>
@@ -69,6 +69,7 @@
 <script>
 import PostReact from "@/components/posts/PostReact";
 import HRV2 from "@/components/forms/HRV2";
+import * as network from "@/assets/js/network";
 
 export default {
   name: "UserPost",
@@ -81,6 +82,7 @@ export default {
   },
   mounted() {
     this.likeCount = this.post.likes;
+    this.like = this.post.liked;
   },
   data() {
     return {
@@ -90,6 +92,33 @@ export default {
 
       likeBounce: true,
       likeCount: 100,
+    }
+  },
+  methods: {
+    async likePost() {
+      let body = {
+        id: this.post.id
+      }
+
+      let data = await network.NetworkRequest(this, "/api/v1/like", "POST", body, null, false);
+
+      if (data !== false) {
+
+        this.like = !this.like
+        if (this.like) {
+          this.likeCount++;
+        } else {
+          this.likeCount--;
+        }
+
+      }
+
+    },
+    commentPost() {
+
+    },
+    sharePost() {
+
     }
   },
 }
