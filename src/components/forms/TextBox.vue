@@ -1,7 +1,8 @@
 <template>
-  <div class="">
+  <div>
     <input :type='type' :disabled="disabled" :placeholder="placeholder" @input="update($event.target.value)"
-           class="h-10 w-full px-3 py-2 border rounded-lg bg-gray-800 focus:border-accent border-gray-300 text-gray-300 focus:outline-none"/>
+           class="h-10 w-full px-3 py-2 border rounded-lg bg-gray-800 focus:border-accent border-gray-300 text-gray-300
+            focus:outline-none hover:border-accent" :maxlength="max"/>
   </div>
 </template>
 
@@ -10,6 +11,10 @@
 export default {
   name: "TextBox",
   props: {
+    max: {
+      type: Number,
+      default: 255
+    },
     placeholder: String,
     disabled: {
       type: Boolean,

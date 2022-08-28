@@ -1,5 +1,5 @@
 <template>
-  <router-view :key="$route.fullPath"/>
+  <router-view :key="$route.fullPath" />
 
 </template>
 
@@ -7,9 +7,6 @@
 
 export default {
   name: 'App',
-  components: {
-
-  }
 }
 </script>
 
@@ -20,8 +17,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body{
+body {
   @apply bg-gray-100 dark:bg-gray-800;
+  overflow-y: scroll;
 }
 
 </style>

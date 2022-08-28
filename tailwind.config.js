@@ -9,16 +9,24 @@ module.exports = {
                 accent_light: '#B3ECFF',
                 accent_dark: '#2782A1',
             },
-            spacing:{
+            spacing: {
                 'post': '32rem',
-                'profile' : '22rem',
-                'friend' : '25rem',
+                'profile': '22rem',
+                'friend': '25rem',
+            },
+            maxWidth: {
+                '1/2': '50%',
+            },
+            padding: {
+                'post-t': '0.56rem',
+                'post-b': '0.07rem'
             },
             animation: {
                 bounce: 'bounce 1s infinite',
                 'spin-slowly': 'spin 1.5s linear infinite',
                 wave: 'wave 2s linear infinite',
-                rainbow: "rainbow 12s linear infinite"
+                rainbow: "rainbow 12s linear infinite",
+                'gentle-pulse': "genPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;"
             },
             keyframes: {
                 bounce: {
@@ -84,7 +92,15 @@ module.exports = {
                     '100%': {
                         'color': ''
                     }
-                }
+                },
+                genPulse: {
+                    '0%, 100%': {
+                        opacity: 1,
+                    },
+                    '50%': {
+                        opacity: 0.8,
+                    },
+                },
             },
         },
     },

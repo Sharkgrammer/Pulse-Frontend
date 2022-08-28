@@ -1,42 +1,16 @@
 <template>
 
-  <div>
 
-    <!-- Visual Size Checker -->
-    <div v-if="false"
-         class="w-full h-10 bg-pink-500 sm:bg-red-500 md:bg-yellow-500 lg:bg-accent xl:bg-green-500 2xl:bg-purple-500">
+  <PageLayout>
+    <SystemPost :title="getWelcomeMessage()" @postUpdate="refreshPosts"/>
 
+    <div v-for="post in posts" :key="post">
+      <UserPost :post="post"/>
     </div>
 
-
-    <div class="w-full flex justify-center">
-
-      <ProfileTab ref="homePageProfileTab"/>
-
-      <div>
-        <SystemPost :title="getWelcomeMessage()"/>
-
-        <div v-for="post in posts" :key="post">
-          <UserPost :post="post"/>
-        </div>
-
-        <LoadingPost/>
-
-      </div>
-
-      <FriendTab @followUpdate="refreshUser"/>
-
-    </div>
-
-    <FAB @click="showModalNewPost=true"/>
-  </div>
-
-
-  <transition type="transition" mode="in-out">
-
-    <ModalNewPost v-if="showModalNewPost" :key="showModalNewPost" @close="showModalNewPost=false"/>
-
-  </transition>
+    <LoadingPost v-if="showLoadingPost"/>
+    <NothingPost v-else />
+  </PageLayout>
 
 </template>
 
@@ -44,47 +18,61 @@
 import UserPost from "@/components/posts/UserPost";
 import SystemPost from "@/components/posts/SystemPost";
 import * as network from "@/assets/js/network";
-import FAB from "@/components/buttons/FAB";
-import ModalNewPost from "@/components/modals/ModalNewPost";
 import * as utils from "@/assets/js/utility";
-import ProfileTab from "@/components/system/ProfileTab";
-import FriendTab from "@/components/system/FriendTab";
 import LoadingPost from "@/components/posts/LoadingPost";
+import PageLayout from "@/components/util/PageLayout";
+import NothingPost from "@/components/posts/NothingPost";
 
 export default {
   name: "HomePage",
-  components: {LoadingPost, FriendTab, ProfileTab, ModalNewPost, FAB, UserPost, SystemPost},
+  components: {NothingPost, PageLayout, LoadingPost, UserPost, SystemPost},
   data() {
     return {
       posts: Object,
-      showModalNewPost: false,
+      postAmt: 7,
+      showLoadingPost: true,
     }
   },
   mounted() {
     this.getAllPosts();
-    this.checkUser();
+    this.scroll();
   },
   methods: {
     async getAllPosts() {
-      let data = await network.NetworkRequest(this, "/api/v1/post", "GET", null, null);
+
+      let params = {
+        amt: this.postAmt,
+      }
+
+      let data = await network.NetworkRequest(this, "/api/v1/post", "GET", null, params);
 
       //console.log(data)
       if (data !== false) this.posts = data;
     },
-    async checkUser() {
-      let data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, {username: utils.getUsername(this)});
-
-      if (data !== false) {
-        utils.updateUser(this, data);
-      }
-
-    },
     getWelcomeMessage() {
       return "Good Afternoon " + utils.getFirstName(this);
     },
-    refreshUser() {
-      this.checkUser();
-      this.$refs.homePageProfileTab.$forceUpdate();
+    refreshPosts() {
+      this.amt++;
+      this.getAllPosts();
+    },
+    async updatePostAmt() {
+      if (this.showLoadingPost === false) return
+
+      this.postAmt += 5;
+      await this.getAllPosts();
+
+      if (this.postAmt > this.posts.length) this.showLoadingPost = false;
+    },
+    scroll() {
+      window.onscroll = () => {
+        let bottomOfWindow = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) +
+            window.innerHeight === document.documentElement.offsetHeight
+
+        if (bottomOfWindow) {
+          this.updatePostAmt()
+        }
+      }
     }
   }
 }

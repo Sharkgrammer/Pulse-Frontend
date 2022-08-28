@@ -1,27 +1,38 @@
 <template>
-  <div class="w-friend pt-5 pl-2 pb-5">
+  <div class="w-friend pl-5">
 
-    <div class="text-left">
-      <p class="text-gray-900 dark:text-gray-100 font-bold text-xl">Who to Follow</p>
+    <div class="flex items-start justify-center pt-5">
+      <img :src="this._backend_url + getProfileImage()" class="profile-image-lg" loading="lazy"/>
     </div>
 
-    <div v-for="user in users" :key="user" ref="followList">
+    <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-100 hover:animate-rainbow">
+      <p class="text-xl font-bold">{{ this.getName() }}</p>
+      <p class="text-lg text-gray-400 hover:animate-wave">{{ this.getUsername() }}</p>
 
-      <div class="flex h-full w-full cursor-pointer mt-5">
-        <img :src="this._backend_url + user.prof_image" class="profile-image" loading="lazy"/>
-
-        <div class="pl-2 pr-2 w-full">
-          <p class="text-gray-100 text-lg">{{ user.first_name + " " + user.last_name }}</p>
-          <p class="text-gray-300 text-md hover:animate-rainbow">{{ user.username }}</p>
+      <div class="flex justify-evenly pt-2">
+        <div class="inline-flex">
+          <IconFollower/>
+          <span class="pl-1 font-bold">{{ this.getFollowers() }}</span>
         </div>
 
-        <div class="flex items-center">
-          <ButtonOutline title="Follow" size="small" class="text-gray-100"
-                         @click="followUser(user.username)" :ref="'butt-' + user.username"/>
+        <div class="inline-flex">
+          <IconFollowing/>
+          <span class="pl-1 font-bold">{{ this.getFollowing() }}</span>
         </div>
 
       </div>
-      <HRV2SM class="mt-2 w-full"/>
+
+    </div>
+
+    <HRV2SM class="mt-5 mb-5"/>
+
+    <div class="text-left">
+      <p class="text-gray-900 dark:text-gray-100 font-bold text-xl">Suggested Cool People</p>
+    </div>
+
+    <div v-for="user in users" :key="user">
+
+      <FollowUser :user="user" @followUpdate="this.$emit('followUpdate')"/>
 
     </div>
 
@@ -34,11 +45,14 @@
 <script>
 import * as network from "@/assets/js/network";
 import HRV2SM from "@/components/forms/HRV2SM";
-import ButtonOutline from "@/components/buttons/ButtonOutline";
+import IconFollower from "@/components/icons/IconFollower";
+import IconFollowing from "@/components/icons/IconFollowing";
+import * as utils from "@/assets/js/utility";
+import FollowUser from "@/components/util/FollowUser";
 
 export default {
   name: "FriendTab",
-  components: {ButtonOutline, HRV2SM},
+  components: {FollowUser, IconFollowing, IconFollower, HRV2SM},
   data() {
     return {
       users: Object
@@ -56,27 +70,21 @@ export default {
         this.users = data;
       }
     },
-    async followUser(username) {
-
-      let body = {
-        username: username,
-      }
-
-      let data = await network.NetworkRequest(this, "/api/v1/follow", "POST", body, null, false);
-
-      if (data !== false) {
-        let button = this.$refs["butt-" + username][0].$el.children[0];
-
-        if (button.innerHTML === "Follow") {
-          button.innerHTML = "Unfollow";
-        } else {
-          button.innerHTML = "Follow";
-        }
-
-        this.$emit('followUpdate');
-      }
-
-    }
+    getProfileImage() {
+      return utils.getProfImage(this);
+    },
+    getName() {
+      return utils.getFirstName(this) + " " + utils.getLastName(this);
+    },
+    getUsername() {
+      return utils.getUsername(this);
+    },
+    getFollowers() {
+      return utils.getFollowers(this);
+    },
+    getFollowing() {
+      return utils.getFollowing(this);
+    },
   }
 }
 </script>

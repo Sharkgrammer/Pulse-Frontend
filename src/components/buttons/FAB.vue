@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import IconPost from "@/components/heroicons/IconPost";
+import IconPost from "@/components/icons/IconPost";
 
 export default {
   name: "FAB",

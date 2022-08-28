@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import HomePage from "@/views/HomePage";
 import LoginPage from "@/views/LoginPage";
+import PostPage from "@/views/PostPage";
 //import ErrorPage from "@/views/ErrorPage";
 
 const routes = [
@@ -13,6 +14,11 @@ const routes = [
         path: "/login",
         name: "Login",
         component: LoginPage,
+    },
+    {
+        path: "/post",
+        name: "Post",
+        component: PostPage,
     },
    /* {
         path: '/:catchAll(.*)*', //catch all to send a 404

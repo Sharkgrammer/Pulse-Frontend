@@ -78,7 +78,7 @@ export async function checkStatus(context, status, data) {
     }
 }
 
-export async function NetworkRequest(context, urlEnd, type = "GET", body = null, params = null, isJSON = true) {
+export async function NetworkRequest(context, urlEnd, type = "GET", body = null, params = null, isJSON = true, skipLogin = false) {
     let url = context._backend_url + urlEnd;
 
     if (params === null) params = "{}";
@@ -87,9 +87,11 @@ export async function NetworkRequest(context, urlEnd, type = "GET", body = null,
     let input = url + utils.params(params)
     let init = {
         "method": type,
-        "headers": {
-            'Authorization': 'Bearer ' + utils.getAccessKey(context),
-        }
+        "headers": {}
+    }
+
+    if (!skipLogin) {
+        init.headers["Authorization"] = 'Bearer ' + utils.getAccessKey(context)
     }
 
     switch (type) {
@@ -98,7 +100,6 @@ export async function NetworkRequest(context, urlEnd, type = "GET", body = null,
             break;
         case "PUT":
             init.headers["Content-Disposition"] = "attachment"
-            //init.headers["Content-Type"] = "multipart/form-data"
             init.body = body
             break
         case "POST":

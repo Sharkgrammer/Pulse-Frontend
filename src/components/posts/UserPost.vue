@@ -1,6 +1,10 @@
 <template>
 
-  <div class="w-post text-center pt-2 border-l border-r dark:border-gray-700">
+  <div class="w-post text-center border dark:border-gray-700 cursor-pointer
+      dark:hover:border-gray-300 dark:hover:bg-gray-900"
+       :class="showExtraBorder ? 'post-fix' : 'post'" @mouseover="showExtraBorder = true"
+       @mouseleave="showExtraBorder = false" @click="openPost">
+
     <div class="w-full grid grid-cols-12 pr-2 pb-2">
 
       <!-- Image Only -->
@@ -13,48 +17,23 @@
       <div class="col-span-10">
 
         <div class="text-left pb-2">
-          <p class="text-gray-900 dark:text-gray-100 font-bold text-xl">{{ post.profile_name }}</p>
-          <p class="text-gray-600 dark:text-gray-200 text-lg">{{ post.content }}</p>
+          <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
+          <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
+          <p class="text-gray-600 dark:text-gray-100 text-lg pt-1">{{ post.content }}</p>
         </div>
 
         <!-- Content Div -->
         <div v-if="post.image_post" class="w-full justify-end flex pb-2">
-          <img :src="this._backend_url + post.image_contents" loading="lazy" alt="Shonk"
+          <img :src="this._backend_url + post.image_contents" loading="lazy" alt="Image Post"
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
-
-        <!-- Reactions Div -->
-        <div class="w-full grid grid-cols-3 pl-3 pr-3">
-
-          <div class="flex justify-center w-full" v-if="post.likes != null">
-            <div class="flex text-gray-900 dark:text-gray-100 hover:text-red-800 dark:hover:text-red-500 cursor-pointer"
-                 @click="likePost" @mouseover="likeBounce = false" @mouseleave="likeBounce=true">
-              <PostReact type="like" :outline="!like" :key="like" :bounce="!likeBounce"/>
-              <span class="inline-block mt-0.5 ml-1">{{ likeCount }}</span>
-            </div>
-          </div>
-
-          <div class="flex justify-center w-full" v-if="post.comments != null">
-            <div
-                class="flex text-gray-900 dark:text-gray-100 hover:text-blue-800 dark:hover:text-blue-500 cursor-pointer"
-                @mouseover="comment = true" @mouseleave="comment=false">
-              <PostReact type="comment" :key="comment" :bounce="comment"/>
-              <span class="inline-block mt-0.5 ml-1">{{ post.comments }}</span>
-            </div>
-          </div>
-
-          <div class="flex justify-center w-full" v-if="post.shares != null">
-            <div
-                class="flex text-gray-900 dark:text-gray-100 hover:text-yellow-800 dark:hover:text-yellow-500 cursor-pointer"
-                @mouseover="share = true" @mouseleave="share=false">
-              <PostReact type="share" :key="share" :bounce="share"/>
-              <span class="inline-block mt-0.5 ml-1">{{ post.shares }}</span>
-            </div>
-          </div>
-
-
+        <div class="w-full" @click.stop>
+          <ReactsLine :pid="post.pid" :likes="post.likes" :comments="post.comments" :shares="post.shares"
+                      :liked="post.liked"/>
         </div>
+
+
       </div>
 
 
@@ -67,58 +46,27 @@
 </template>
 
 <script>
-import PostReact from "@/components/posts/PostReact";
 import HRV2 from "@/components/forms/HRV2";
-import * as network from "@/assets/js/network";
+import router from "@/router/router";
+import ReactsLine from "@/components/util/ReactsLine";
 
 export default {
   name: "UserPost",
-  components: {HRV2, PostReact},
+  components: {ReactsLine, HRV2},
   props: {
     post: {
       type: Object,
       required: true,
     }
   },
-  mounted() {
-    this.likeCount = this.post.likes;
-    this.like = this.post.liked;
-  },
   data() {
     return {
-      like: false,
-      share: false,
-      comment: false,
-
-      likeBounce: true,
-      likeCount: 100,
+      showExtraBorder: false,
     }
   },
   methods: {
-    async likePost() {
-      let body = {
-        id: this.post.id
-      }
-
-      let data = await network.NetworkRequest(this, "/api/v1/like", "POST", body, null, false);
-
-      if (data !== false) {
-
-        this.like = !this.like
-        if (this.like) {
-          this.likeCount++;
-        } else {
-          this.likeCount--;
-        }
-
-      }
-
-    },
-    commentPost() {
-
-    },
-    sharePost() {
-
+    openPost() {
+      router.push({name: 'Post', query: {pid: this.post.pid}});
     }
   },
 }
@@ -126,4 +74,13 @@ export default {
 
 <style scoped>
 
+.post-fix {
+  @apply pt-2;
+}
+
+.post {
+  border-top: transparent;
+  border-bottom: transparent;
+  @apply pt-post-t pb-post-b
+}
 </style>

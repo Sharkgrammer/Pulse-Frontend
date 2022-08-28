@@ -9,6 +9,16 @@ import "./assets/js/utility.js";
 let app = createApp(App);
 
 app.config.globalProperties._backend_url = "http://127.0.0.1:8000";
+app.config.globalProperties._frontend_url = "http://localhost:8080";
+
+document.addEventListener("hideOverflow", function (e) {
+    let data = e.detail, res = '';
+    if (data === 0) return
+
+    // Theres a small bit of movement when the overflow changes but its hard to work around
+    data === true ? res = 'hidden' : res = 'scroll'
+    document.body.style.overflowY = res;
+});
 
 app.use(store)
 app.use(router)

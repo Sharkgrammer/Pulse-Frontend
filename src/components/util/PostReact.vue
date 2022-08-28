@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import IconLike from "@/components/heroicons/IconLike";
-import IconComment from "@/components/heroicons/IconComment";
-import IconShare from "@/components/heroicons/IconShare";
-import IconSave from "@/components/heroicons/IconSave";
+import IconLike from "@/components/icons/IconLike";
+import IconComment from "@/components/icons/IconComment";
+import IconShare from "@/components/icons/IconShare";
+import IconSave from "@/components/icons/IconSave";
 export default {
   name: "PostReact",
   components: {IconSave, IconShare, IconComment, IconLike},

@@ -17,14 +17,6 @@ export default {
       default: "Button",
       type: String,
     },
-    type: {
-      default: "primary",
-      type: String,
-    },
-    size: {
-      default: "normal",
-      type: String,
-    },
     disabled: {
       type: Boolean,
       default: false

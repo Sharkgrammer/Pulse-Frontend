@@ -110,6 +110,10 @@ export async function redirectToLogin() {
     await router.push({name: 'Login'})
 }
 
+export function loggedIn(context) {
+    return getAccessKey(this)
+}
+
 export async function logout(context) {
     setAccessKey(context, "");
     localStorage.clear()
