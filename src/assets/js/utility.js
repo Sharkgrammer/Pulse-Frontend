@@ -129,3 +129,30 @@ export function updateUser(context, data) {
     this.setFollowers(context, data.followers);
     this.setProfImage(context, data.prof_image);
 }
+
+export function spliceSearch(text, search) {
+
+    if (!text.toLowerCase().includes(search.toLowerCase())) {
+        return [text, "", ""]
+    }
+
+    let searchStart = text.toLowerCase().indexOf(search.toLowerCase())
+    let searchText = text.substring(searchStart, searchStart + search.length)
+
+
+    let array = text.split(searchText)
+    let len = array.length
+
+    if (len === 2) {
+        return [array[0], searchText, array[1]]
+    } else {
+        let res = ""
+
+        for (let x = 1; x < len; x++) {
+            if (x > 1) res += searchText
+            res += array[x]
+        }
+
+        return [array[0], searchText, res]
+    }
+}

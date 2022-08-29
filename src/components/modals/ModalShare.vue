@@ -1,6 +1,6 @@
 <template>
 
-  <ModalWrapper v-slot="slotProps">>
+  <ModalWrapper v-slot="slotProps">
 
     <p class="pt-2 text-2xl font-bold">Want to share this post?</p>
     <HRV2SM class="mt-2 mb-2"/>

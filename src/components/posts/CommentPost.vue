@@ -14,8 +14,11 @@
       <div class="col-span-10">
 
         <div class="text-left pb-2">
-          <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
-          <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
+          <div @click="openProfile">
+            <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
+            <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
+          </div>
+
           <p class="text-gray-600 dark:text-gray-100 text-lg pt-1">{{ post.content }}</p>
         </div>
 
@@ -60,6 +63,11 @@
     <ModalLoading v-if="showLoading" :key="showLoading"/>
   </transition>
 
+  <transition type="transition" mode="in-out">
+    <ModalProfile :username="post.profile_username" v-if="showProfileModal" :key="showProfileModal"
+                  @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
+  </transition>
+
 </template>
 
 <script>
@@ -70,18 +78,20 @@ import ButtonIcon from "@/components/buttons/ButtonIcon";
 import * as network from "@/assets/js/network";
 import SingleComment from "@/components/util/SingleComment";
 import ModalLoading from "@/components/modals/ModalLoading";
+import ModalProfile from "@/components/modals/ModalProfile";
 
 export default {
   name: "CommentPost",
-  components: {ModalLoading, SingleComment, ButtonIcon, TextBox, HRV2, ReactsLine},
+  components: {ModalProfile, ModalLoading, SingleComment, ButtonIcon, TextBox, HRV2, ReactsLine},
   data() {
     return {
       commentText: "",
       showLoading: false,
       resetText: false,
+      showProfileModal: false,
     }
   },
-  emits: ['commentUpdate'],
+  emits: ['commentUpdate', 'followUpdate'],
   props: {
     post: {
       type: Object,
@@ -92,6 +102,9 @@ export default {
     }
   },
   methods: {
+    openProfile() {
+      this.showProfileModal = true;
+    },
     updateText(val) {
       this.commentText = val;
     },

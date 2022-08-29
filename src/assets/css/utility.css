@@ -7,6 +7,10 @@ body{
     @apply rounded-full w-14 h-14
 }
 
+.profile-image-small{
+    @apply rounded-full w-12 h-12
+}
+
 .profile-image-lg{
     @apply rounded-full w-20 h-20
 }

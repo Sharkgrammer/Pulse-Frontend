@@ -5,7 +5,7 @@
     <SystemPost :title="getWelcomeMessage()" @postUpdate="refreshPosts"/>
 
     <div v-for="post in posts" :key="post">
-      <UserPost :post="post"/>
+      <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
     </div>
 
     <LoadingPost v-if="showLoadingPost"/>

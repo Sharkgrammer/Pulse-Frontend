@@ -5,7 +5,7 @@
       <img :src="this._backend_url + getProfileImage()" class="profile-image-lg" loading="lazy"/>
     </div>
 
-    <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-100 hover:animate-rainbow">
+    <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-100 hover:animate-rainbow" @click="openProfile">
       <p class="text-xl font-bold">{{ this.getName() }}</p>
       <p class="text-lg text-gray-400 hover:animate-wave">{{ this.getUsername() }}</p>
 
@@ -38,6 +38,11 @@
 
   </div>
 
+  <transition type="transition" mode="in-out">
+    <ModalProfile :username="this.getUsername()" v-if="showProfileModal" :key="showProfileModal"
+                  @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
+  </transition>
+
   <!--  <HRV2/> -->
 
 </template>
@@ -49,13 +54,15 @@ import IconFollower from "@/components/icons/IconFollower";
 import IconFollowing from "@/components/icons/IconFollowing";
 import * as utils from "@/assets/js/utility";
 import FollowUser from "@/components/util/FollowUser";
+import ModalProfile from "@/components/modals/ModalProfile";
 
 export default {
   name: "FriendTab",
-  components: {FollowUser, IconFollowing, IconFollower, HRV2SM},
+  components: {ModalProfile, FollowUser, IconFollowing, IconFollower, HRV2SM},
   data() {
     return {
-      users: Object
+      users: Object,
+      showProfileModal: false
     }
   },
   mounted() {
@@ -69,6 +76,9 @@ export default {
       if (data !== false) {
         this.users = data;
       }
+    },
+    openProfile() {
+      this.showProfileModal = true;
     },
     getProfileImage() {
       return utils.getProfImage(this);

@@ -17,8 +17,14 @@
       <div class="col-span-10">
 
         <div class="text-left pb-2">
-          <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
-          <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
+          <div @click.prevent>
+
+            <div @click="openProfile">
+              <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
+              <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
+            </div>
+
+          </div>
           <p class="text-gray-600 dark:text-gray-100 text-lg pt-1">{{ post.content }}</p>
         </div>
 
@@ -43,16 +49,23 @@
 
   </div>
 
+  <transition type="transition" mode="in-out">
+    <ModalProfile :username="post.profile_username" v-if="showProfileModal" :key="showProfileModal"
+                  @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
+  </transition>
+
 </template>
 
 <script>
 import HRV2 from "@/components/forms/HRV2";
 import router from "@/router/router";
 import ReactsLine from "@/components/util/ReactsLine";
+import ModalProfile from "@/components/modals/ModalProfile";
 
 export default {
   name: "UserPost",
-  components: {ReactsLine, HRV2},
+  components: {ModalProfile, ReactsLine, HRV2},
+  emits: ['followUpdate'],
   props: {
     post: {
       type: Object,
@@ -62,9 +75,13 @@ export default {
   data() {
     return {
       showExtraBorder: false,
+      showProfileModal: false,
     }
   },
   methods: {
+    openProfile() {
+      this.showProfileModal = true;
+    },
     openPost() {
       router.push({name: 'Post', query: {pid: this.post.pid}});
     }

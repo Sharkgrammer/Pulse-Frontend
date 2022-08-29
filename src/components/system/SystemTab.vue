@@ -48,14 +48,7 @@
     </div>
 
     <!-- Search Div -->
-    <div class="grid grid-cols-6 gap-2 w-full p-2 pl-5 pt-10 flex justify-center items-center">
-
-      <TextBox class="w-full col-span-5 pl-2" placeholder="Search here.."/>
-
-      <div class="h-full col-span-1 flex justify-center items-center">
-        <ButtonIcon class="h-12 w-12" icon="search"/>
-      </div>
-    </div>
+    <SearchBox @followUpdate="this.$emit('followUpdate')"/>
 
     <!-- <HRV2 class="pt-10"/> -->
   </div>
@@ -74,23 +67,20 @@
 </template>
 
 <script>
-import * as utils from "@/assets/js/utility";
 import HRV2SM from "@/components/forms/HRV2SM";
 import IconFollower from "@/components/icons/IconFollower";
 import IconFollowing from "@/components/icons/IconFollowing";
 import IconHome from "@/components/icons/IconHome";
 import IconSetting from "@/components/icons/IconSetting";
 import router from "@/router/router";
-import TextBox from "@/components/forms/TextBox";
-import ButtonIcon from "@/components/buttons/ButtonIcon";
 import ModalSettings from "@/components/modals/ModalSettings";
 import ModalFollowers from "@/components/modals/ModalFollowers";
+import SearchBox from "@/components/search/SearchBox";
 
 export default {
   name: "SystemTab",
   components: {
-    ModalFollowers,
-    ModalSettings, ButtonIcon, TextBox, IconSetting, IconHome, IconFollowing, IconFollower, HRV2SM
+    SearchBox, ModalFollowers, ModalSettings, IconSetting, IconHome, IconFollowing, IconFollower, HRV2SM
   },
   emits: ['followUpdate'],
   data() {

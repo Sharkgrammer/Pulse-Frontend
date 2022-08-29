@@ -5,10 +5,11 @@
 
     <div v-if="post !== null">
 
-      <CommentPost :post="post" :comments="comments" :key="post || comments" @commentUpdate="updateData"/>
+      <CommentPost :post="post" :comments="comments" :key="post || comments" @commentUpdate="updateData"
+                   @followUpdate="this.$emit('followUpdate')"/>
 
       <LoadingPost v-if="showLoadingPost"/>
-      <NothingPost v-else />
+      <NothingPost v-else/>
     </div>
 
     <div v-else>
@@ -50,7 +51,7 @@ export default {
     await this.updateData();
   },
   methods: {
-    async updateData(){
+    async updateData() {
       this.commentAmt++;
       await this.getPostData();
       await this.getPostComments();
