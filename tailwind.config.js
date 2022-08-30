@@ -26,7 +26,8 @@ module.exports = {
                 'spin-slowly': 'spin 1.5s linear infinite',
                 wave: 'wave 2s linear infinite',
                 rainbow: "rainbow 12s linear infinite",
-                'gentle-pulse': "genPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;"
+                'gentle-pulse': "genPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                'fade-in': 'fade-in 0.2s linear'
             },
             keyframes: {
                 bounce: {
@@ -99,6 +100,14 @@ module.exports = {
                     },
                     '50%': {
                         opacity: 0.8,
+                    },
+                },
+                'fade-in': {
+                    '0%': {
+                        opacity: 0.5,
+                    },
+                    '100%': {
+                        opacity: 1,
                     },
                 },
             },

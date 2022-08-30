@@ -4,15 +4,16 @@
 
     <!-- Image Only -->
     <div class="col-span-2 flex items-start justify-center">
-      <img :src="this._backend_url + comment.profile_image" class="profile-image" loading="lazy" width="50"
-           height="50"/>
+      <img :src="this._backend_url + comment.profile_image" class="profile-image cursor-pointer" loading="lazy"
+           @click="openProfile"/>
     </div>
 
     <!-- Rest of the content -->
     <div class="col-span-8">
 
       <div class="text-left pb-2">
-        <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ comment.profile_name }}
+        <p class="text-gray-900 dark:text-gray-200 font-bold text-xl cursor-pointer" @click="openProfile">
+          {{ comment.profile_name }}
           <span class="dark:text-gray-400 text-lg hover:animate-rainbow">({{ comment.profile_username }})</span>
         </p>
         <p class="text-gray-600 dark:text-gray-100 text-lg">{{ comment.content }}</p>
@@ -31,9 +32,7 @@
 
   <p class="dark:text-gray-400 text-right text-sm pr-5">{{ formatDate(comment.created_date) }}</p>
 
-
-
-  <HRV2 class="mt-2" />
+  <HRV2 class="mt-2"/>
 
 </template>
 
@@ -53,6 +52,7 @@ export default {
     this.likeCount = this.comment.likes;
     this.like = this.comment.liked;
   },
+  emits: ['openProfile'],
   data() {
     return {
       like: false,
@@ -84,6 +84,9 @@ export default {
     formatDate(date) {
       return datetime_med(date)
     },
+    openProfile() {
+      this.$emit("openProfile", this.comment.profile_username)
+    }
   }
 }
 </script>

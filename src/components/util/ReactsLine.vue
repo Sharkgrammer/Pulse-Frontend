@@ -30,9 +30,7 @@
 
   </div>
 
-  <transition type="transition" mode="in-out">
-    <ModalShare v-if="showShareModal" :key="showShareModal" @close="closeShareModal" :pid="pid"/>
-  </transition>
+  <ModalShare v-if="showShareModal" :key="showShareModal" @close="closeShareModal" :pid="pid"/>
 </template>
 
 <script>

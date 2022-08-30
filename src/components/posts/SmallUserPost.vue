@@ -28,6 +28,8 @@
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
+        <p class="dark:text-gray-400 text-right text-sm pb-1">{{ formatDate(post.created_date) }}</p>
+
         <div class="w-full" @click.stop>
           <ReactsLine :pid="post.pid" :likes="post.likes" :comments="post.comments" :shares="post.shares"
                       :liked="post.liked"/>
@@ -51,6 +53,7 @@ import router from "@/router/router";
 import ReactsLine from "@/components/util/ReactsLine";
 import HRV2SM from "@/components/forms/HRV2SM";
 import * as utils from "@/assets/js/utility";
+import {datetime_med} from "@/assets/js/dates";
 
 export default {
   name: "SmallUserPost",
@@ -85,7 +88,10 @@ export default {
       this.content1 = content[0]
       this.content2 = content[1]
       this.content3 = content[2]
-    }
+    },
+    formatDate(date) {
+      return datetime_med(date)
+    },
   },
 }
 </script>

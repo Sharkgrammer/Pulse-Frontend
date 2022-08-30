@@ -20,19 +20,19 @@
           <p class="text-lg text-gray-300" v-if="user.username === this.getUsername()">{{ user.email }}</p>
           <p class="text-lg text-gray-400 hover:animate-wave">{{ user.username }}</p>
 
-          <div class="w-full flex justify-center text-left p-1">
+          <div class="w-full flex justify-center text-left p-1" v-if="user.prof_desc">
             <div class="w-60 rounded-xl border border-gray-600 p-2">
               <p class="text-lg">{{ user.prof_desc }}</p>
             </div>
           </div>
 
           <div class="flex justify-evenly pt-2">
-            <div class="inline-flex">
+            <div class="inline-flex cursor-pointer" @click="openFollowersModal">
               <IconFollower/>
               <span class="pl-1 font-bold text-gray-300">{{ user.followers + ' Followers' }}</span>
             </div>
 
-            <div class="inline-flex">
+            <div class="inline-flex cursor-pointer" @click="openFollowingModal">
               <IconFollowing/>
               <span class="pl-1 font-bold text-gray-300">{{ user.following + ' Following' }}</span>
             </div>
@@ -75,7 +75,15 @@
       <ButtonOutline title="Close" @click="slotProps.close"/>
     </div>
 
+    <slot name="slotOuter">
+      <!-- The same model handles both followers and following -->
+      <ModalFollowers :followers="getFollowers" v-if="showFollowersModal" :key="showFollowersModal"
+                      :username="user.username" :name="user.first_name + ' ' + user.last_name"
+                      @close="showFollowersModal = false" @followUpdate="this.$emit('followUpdate')"/>
+    </slot>
+
   </ModalWrapper>
+
 
 </template>
 
@@ -88,10 +96,11 @@ import IconFollower from "@/components/icons/IconFollower";
 import IconFollowing from "@/components/icons/IconFollowing";
 import * as utils from "@/assets/js/utility";
 import {date_med} from "@/assets/js/dates";
+import ModalFollowers from "@/components/modals/ModalFollowers";
 
 export default {
   name: "ModalProfile",
-  components: {IconFollowing, IconFollower, ModalWrapper, ButtonOutline, HRV2SM},
+  components: {ModalFollowers, IconFollowing, IconFollower, ModalWrapper, ButtonOutline, HRV2SM},
   props: {
     username: {
       type: String,
@@ -104,6 +113,8 @@ export default {
       user: null,
       followText: "Follow",
       showProfileImage: false,
+      showFollowersModal: false,
+      getFollowers: true,
     }
   },
   emits: ['followUpdate'],
@@ -149,6 +160,14 @@ export default {
     getDate(date) {
       return date_med(date);
     },
+    openFollowersModal() {
+      this.getFollowers = true;
+      this.showFollowersModal = true;
+    },
+    openFollowingModal() {
+      this.getFollowers = false;
+      this.showFollowersModal = true;
+    }
   }
 }
 </script>

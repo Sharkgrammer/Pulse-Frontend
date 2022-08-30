@@ -51,10 +51,7 @@
 
   </div>
 
-  <transition type="transition" mode="in-out">
-    <ModalLoading v-if="showLoading" :key="showLoading"/>
-  </transition>
-
+  <ModalLoading v-if="showLoading" :key="showLoading"/>
 
 </template>
 

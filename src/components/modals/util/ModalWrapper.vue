@@ -1,21 +1,19 @@
 <template>
 
-  <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"          @before-close="beforeClose">>
-    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
-           @click.self="close()" @wheel.prevent @touchmove.prevent @scroll.prevent/>
-      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+  <div class="fixed z-10 inset-0 text-center flex justify-center items-center">
 
-      <div class="inline-block align-bottom rounded-lg overflow-hidden transform transition-all sm:my-8
-       sm:align-middle sm:max-w-lg sm:w-full">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity" @click.self="close()"/>
 
-        <div class="bg-gray-800 text-gray-100">
-          <slot :close="close"/>
-        </div>
+    <div class="transform w-post">
 
+      <div class="rounded-xl bg-gray-800 text-gray-100 shadow-xl animate-fade-in">
+        <slot :close="close"/>
       </div>
+
     </div>
   </div>
+
+  <slot name="slotOuter"/>
 </template>
 
 <script>

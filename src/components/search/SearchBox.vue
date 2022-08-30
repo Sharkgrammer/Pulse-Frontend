@@ -26,7 +26,8 @@
           <div v-for="user in userResults" :key="user">
 
             <div>
-              <FollowUser :user="user" :search="searchQuery" @followUpdate="this.$emit('followUpdate')"/>
+              <FollowUser :user="user" :search="searchQuery" @followUpdate="this.$emit('followUpdate')"
+                          @openProfile="openProfile"/>
             </div>
 
           </div>
@@ -83,6 +84,11 @@
     </div>
 
   </div>
+
+  <ModalProfile :username="username" v-if="showProfileModal" :key="showProfileModal"
+                @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
+
+
 </template>
 
 <script>
@@ -92,10 +98,11 @@ import * as network from "@/assets/js/network";
 import FollowUser from "@/components/util/FollowUser";
 import HRV2SM from "@/components/forms/HRV2SM";
 import SmallUserPost from "@/components/posts/SmallUserPost";
+import ModalProfile from "@/components/modals/ModalProfile";
 
 export default {
   name: "SearchBox",
-  components: {SmallUserPost, HRV2SM, FollowUser, TextBox, ButtonIcon},
+  components: {ModalProfile, SmallUserPost, HRV2SM, FollowUser, TextBox, ButtonIcon},
   emits: ['followUpdate'],
   data() {
     return {
@@ -104,9 +111,15 @@ export default {
       postResults: null,
       userAmt: 3,
       postAmt: 3,
+      showProfileModal: false,
+      username: ""
     }
   },
   methods: {
+    openProfile(username) {
+      this.username = username;
+      this.showProfileModal = true;
+    },
     updateSearch(val) {
       this.searchQuery = val;
     },

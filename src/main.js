@@ -17,6 +17,13 @@ document.addEventListener("hideOverflow", function (e) {
 
     // Theres a small bit of movement when the overflow changes but its hard to work around
     data === true ? res = 'hidden' : res = 'scroll'
+
+    if (data) {
+        document.body.style.marginRight = "1rem";
+    } else {
+        document.body.style.marginRight = "0rem";
+    }
+
     document.body.style.overflowY = res;
 });
 

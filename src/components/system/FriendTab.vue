@@ -3,11 +3,11 @@
 
     <div class="flex items-start justify-center pt-5">
       <img :src="this._backend_url + getProfileImage()" class="profile-image-lg cursor-pointer" loading="lazy"
-           @click="openProfile"/>
+           @click="openProfile(this.getUsername())"/>
     </div>
 
     <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-100 hover:animate-rainbow cursor-pointer"
-         @click="openProfile">
+         @click="openProfile(this.getUsername())">
       <p class="text-xl font-bold">{{ this.getName() }}</p>
       <p class="text-lg text-gray-400 hover:animate-wave">{{ this.getUsername() }}</p>
 
@@ -34,16 +34,14 @@
 
     <div v-for="user in users" :key="user">
 
-      <FollowUser :user="user" @followUpdate="this.$emit('followUpdate')"/>
+      <FollowUser :user="user" @followUpdate="this.$emit('followUpdate')" @openProfile="openProfile"/>
 
     </div>
 
   </div>
 
-  <transition type="transition" mode="in-out">
-    <ModalProfile :username="this.getUsername()" v-if="showProfileModal" :key="showProfileModal"
-                  @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
-  </transition>
+  <ModalProfile :username="username" v-if="showProfileModal" :key="showProfileModal"
+                @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
 
   <!--  <HRV2/> -->
 
@@ -64,7 +62,8 @@ export default {
   data() {
     return {
       users: Object,
-      showProfileModal: false
+      showProfileModal: false,
+      username: ""
     }
   },
   mounted() {
@@ -79,7 +78,8 @@ export default {
         this.users = data;
       }
     },
-    openProfile() {
+    openProfile(username) {
+      this.username = username;
       this.showProfileModal = true;
     },
     getProfileImage() {

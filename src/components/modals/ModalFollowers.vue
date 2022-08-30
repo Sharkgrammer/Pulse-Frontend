@@ -2,20 +2,21 @@
 
   <ModalWrapper v-slot="slotProps">
 
-    <p v-if="followers" class="pt-2 text-2xl font-bold">Your Followers</p>
-    <p v-else class="pt-2 text-2xl font-bold">Who You're Following</p>
+    <p v-if="followers" class="pt-2 text-2xl font-bold">{{ name === '' ? 'Your' : name }} Followers</p>
+    <p v-else class="pt-2 text-2xl font-bold">Who {{ name === '' ? 'You\'re' : name }} is Following</p>
     <HRV2SM class="mt-2"/>
 
     <div class=" pl-10 pr-10">
 
       <div v-if="users && users.length > 0">
-        <div v-for="x in users" :key="x" class="p-2">
+        <div v-for="x in users" :key="x" class="pl-2 pr-2">
           <FollowUser :user="x" @followUpdate="this.$emit('followUpdate')"/>
         </div>
       </div>
 
       <div v-else class="text-center p-5 pb-0 dark:text-gray-400">
-        <p>{{ this.followers ? 'No one follows you' : 'You don\'t follow anyone ' }}</p>
+        <p v-if="name === ''">{{ this.followers ? 'No one follows you' : 'You don\'t follow anyone ' }}</p>
+        <p v-else>{{ this.followers ? 'No one follows ' + name : name + ' doesn\'t follow anyone ' }}</p>
       </div>
 
     </div>
@@ -33,8 +34,8 @@
 import ModalWrapper from "@/components/modals/util/ModalWrapper";
 import HRV2SM from "@/components/forms/HRV2SM";
 import ButtonOutline from "@/components/buttons/ButtonOutline";
-import FollowUser from "@/components/util/FollowUser";
 import * as network from "@/assets/js/network";
+import FollowUser from "@/components/util/FollowUser";
 
 export default {
   name: "ModalFollowers",
@@ -44,11 +45,19 @@ export default {
     followers: {
       type: Boolean,
       default: false
+    },
+    username: {
+      type: String,
+      default: '',
+    },
+    name: {
+      type: String,
+      default: '',
     }
   },
   data() {
     return {
-      users: null
+      users: null,
     }
   },
   async mounted() {
@@ -58,6 +67,10 @@ export default {
     async getFollows() {
       let params = {
         followers: this.followers
+      }
+
+      if (this.username !== "") {
+        params["username"] = this.username
       }
 
       let data = await network.NetworkRequest(this, "/api/v1/follow", "GET", null, params);

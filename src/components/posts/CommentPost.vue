@@ -7,14 +7,14 @@
       <!-- Image Only -->
       <div class="col-span-2 flex items-start justify-center">
         <img :src="this._backend_url + post.profile_image" class="profile-image cursor-pointer" loading="lazy"
-             @click="openProfile"/>
+             @click="openProfile(post.profile_username)"/>
       </div>
 
       <!-- Rest of the content -->
       <div class="col-span-10">
 
         <div class="text-left pb-2">
-          <div @click="openProfile" class="cursor-pointer">
+          <div @click="openProfile(post.profile_username)" class="cursor-pointer">
             <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
             <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
           </div>
@@ -57,19 +57,15 @@
 
 
     <div v-for="comment in comments" :key="comment" class="w-full">
-      <SingleComment :comment="comment"/>
+      <SingleComment :comment="comment" @openProfile="openProfile"/>
     </div>
 
   </div>
 
-  <transition type="transition" mode="in-out">
-    <ModalLoading v-if="showLoading" :key="showLoading"/>
-  </transition>
+  <ModalLoading v-if="showLoading" :key="showLoading"/>
 
-  <transition type="transition" mode="in-out">
-    <ModalProfile :username="post.profile_username" v-if="showProfileModal" :key="showProfileModal"
-                  @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
-  </transition>
+  <ModalProfile :username="profileModalUsername" v-if="showProfileModal" :key="showProfileModal"
+                @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
 
 </template>
 
@@ -93,6 +89,7 @@ export default {
       showLoading: false,
       resetText: false,
       showProfileModal: false,
+      profileModalUsername: ""
     }
   },
   emits: ['commentUpdate', 'followUpdate'],
@@ -106,7 +103,8 @@ export default {
     }
   },
   methods: {
-    openProfile() {
+    openProfile(username) {
+      this.profileModalUsername = username;
       this.showProfileModal = true;
     },
     updateText(val) {

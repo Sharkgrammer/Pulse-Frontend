@@ -53,15 +53,11 @@
     <!-- <HRV2 class="pt-10"/> -->
   </div>
 
-  <transition type="transition" mode="in-out">
-    <ModalSettings v-if="showSettingsModal" :key="showSettingsModal" @close="showSettingsModal = false"/>
-  </transition>
+  <ModalSettings v-if="showSettingsModal" :key="showSettingsModal" @close="showSettingsModal = false"/>
 
   <!-- The same model handles both followers and following -->
-  <transition type="transition" mode="in-out">
-    <ModalFollowers :followers="getFollowers" v-if="showFollowersModal" :key="showFollowersModal"
-                    @close="showFollowersModal = false" @followUpdate="this.$emit('followUpdate')"/>
-  </transition>
+  <ModalFollowers :followers="getFollowers" v-if="showFollowersModal" :key="showFollowersModal"
+                  @close="showFollowersModal = false" @followUpdate="this.$emit('followUpdate')"/>
 
 
 </template>
