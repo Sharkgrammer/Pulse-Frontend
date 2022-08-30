@@ -2,52 +2,58 @@
 
   <ModalWrapper v-slot="slotProps" v-if="user" :key="user">
 
-    <p class="pt-2 text-2xl font-bold">{{ user.first_name + " " + user.last_name + "\'s Profile" }}</p>
+    <p class="pt-2 text-2xl font-bold">
+      {{ user.first_name + " " + user.last_name + "\'s Profile" + (showProfileImage ? ' Image' : '') }}</p>
     <HRV2SM class="mt-2 mb-2"/>
 
 
-    <div class="pt-2">
-      <div class="flex items-start justify-center">
-        <img :src="this._backend_url + user.prof_image" class="rounded-full h-32 w-32" loading="lazy"/>
-      </div>
+    <div v-if="!showProfileImage">
 
-      <div class="p-5 pt-2 pl-10 pr-10 text-center w-full text-gray-100">
-        <p class="text-xl font-bold">{{ user.first_name + " " + user.last_name }}</p>
-        <p class="text-lg text-gray-300" v-if="user.username === this.getUsername()">{{ user.email }}</p>
-        <p class="text-lg text-gray-400 hover:animate-wave">{{ user.username }}</p>
-
-        <div class="w-full flex justify-center text-left p-1">
-          <div class="w-60 rounded-xl border border-gray-600 p-2">
-            <p class="text-lg">{{ user.prof_desc }}</p>
-          </div>
+      <div class="pt-2">
+        <div class="flex items-start justify-center">
+          <img :src="this._backend_url + user.prof_image" class="rounded-full h-32 w-32 cursor-pointer" loading="lazy"
+               @click="showProfileImage = true"/>
         </div>
 
-        <div class="flex justify-evenly pt-2">
-          <div class="inline-flex">
-            <IconFollower/>
-            <span class="pl-1 font-bold text-gray-300">{{ user.followers + ' Followers' }}</span>
+        <div class="p-5 pt-2 pl-10 pr-10 text-center w-full text-gray-100">
+          <p class="text-xl font-bold">{{ user.first_name + " " + user.last_name }}</p>
+          <p class="text-lg text-gray-300" v-if="user.username === this.getUsername()">{{ user.email }}</p>
+          <p class="text-lg text-gray-400 hover:animate-wave">{{ user.username }}</p>
+
+          <div class="w-full flex justify-center text-left p-1">
+            <div class="w-60 rounded-xl border border-gray-600 p-2">
+              <p class="text-lg">{{ user.prof_desc }}</p>
+            </div>
           </div>
 
-          <div class="inline-flex">
-            <IconFollowing/>
-            <span class="pl-1 font-bold text-gray-300">{{ user.following + ' Following' }}</span>
+          <div class="flex justify-evenly pt-2">
+            <div class="inline-flex">
+              <IconFollower/>
+              <span class="pl-1 font-bold text-gray-300">{{ user.followers + ' Followers' }}</span>
+            </div>
+
+            <div class="inline-flex">
+              <IconFollowing/>
+              <span class="pl-1 font-bold text-gray-300">{{ user.following + ' Following' }}</span>
+            </div>
+
           </div>
 
-        </div>
+
+          <div class="w-full flex justify-center gap-12 pt-5">
+
+            <div class="text-gray-400" v-if="user.username === this.getUsername()">
+              <p>Last Login</p>
+              <p>{{ getDate(user.last_login) }}</p>
+            </div>
+
+            <div class="text-gray-400">
+              <p>Member Since</p>
+              <p>{{ getDate(user.date_joined) }}</p>
+            </div>
 
 
-        <div class="w-full flex justify-center gap-12 pt-5">
-
-          <div class="text-gray-400" v-if="user.username === this.getUsername()">
-            <p>Last Login</p>
-            <p>{{ getDate(user.last_login) }}</p>
           </div>
-
-          <div class="text-gray-400">
-            <p>Member Since</p>
-            <p>{{ getDate(user.date_joined) }}</p>
-          </div>
-
 
         </div>
 
@@ -55,6 +61,10 @@
 
     </div>
 
+
+    <div v-else @click="showProfileImage = false" class="p-2 flex justify-center">
+      <img :src="this._backend_url + user.prof_image" class="rounded-xl cursor-pointer" loading="lazy"/>
+    </div>
 
     <HRV2SM class="mt-2 mb-3"/>
     <div class="pb-3 grid grid-cols-4 w-full" v-if="user.username !== getUsername()">
@@ -92,7 +102,8 @@ export default {
   data() {
     return {
       user: null,
-      followText: "Follow"
+      followText: "Follow",
+      showProfileImage: false,
     }
   },
   emits: ['followUpdate'],

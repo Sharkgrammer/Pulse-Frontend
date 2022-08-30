@@ -2,10 +2,12 @@
   <div class="w-friend pl-5">
 
     <div class="flex items-start justify-center pt-5">
-      <img :src="this._backend_url + getProfileImage()" class="profile-image-lg" loading="lazy"/>
+      <img :src="this._backend_url + getProfileImage()" class="profile-image-lg cursor-pointer" loading="lazy"
+           @click="openProfile"/>
     </div>
 
-    <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-100 hover:animate-rainbow" @click="openProfile">
+    <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-100 hover:animate-rainbow cursor-pointer"
+         @click="openProfile">
       <p class="text-xl font-bold">{{ this.getName() }}</p>
       <p class="text-lg text-gray-400 hover:animate-wave">{{ this.getUsername() }}</p>
 

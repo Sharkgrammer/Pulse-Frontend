@@ -12,7 +12,7 @@
       <div class="col-span-10">
 
         <div class="text-left p-1">
-          <p class="text-gray-900 dark:text-gray-200 font-bold" @click="openProfile">{{ post.profile_name }}
+          <p class="text-gray-900 dark:text-gray-200 font-bold">{{ post.profile_name }}
             <span class="dark:text-gray-400 text-sm hover:animate-rainbow">({{ post.profile_username }})</span>
           </p>
 
@@ -43,10 +43,7 @@
 
   </div>
 
-  <transition type="transition" mode="in-out">
-    <ModalProfile :username="post.profile_username" v-if="showProfileModal" :key="showProfileModal"
-                  @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
-  </transition>
+
 </template>
 
 <script>
@@ -54,12 +51,10 @@ import router from "@/router/router";
 import ReactsLine from "@/components/util/ReactsLine";
 import HRV2SM from "@/components/forms/HRV2SM";
 import * as utils from "@/assets/js/utility";
-import ModalProfile from "@/components/modals/ModalProfile";
 
 export default {
   name: "SmallUserPost",
-  components: {ModalProfile, HRV2SM, ReactsLine},
-  emits: ['followUpdate'],
+  components: {HRV2SM, ReactsLine},
   props: {
     post: {
       type: Object,
@@ -76,16 +71,12 @@ export default {
       content1: "",
       content2: "",
       content3: "",
-      showProfileModal: false,
     }
   },
   mounted() {
     if (this.search) this.calcBold();
   },
   methods: {
-    openProfile() {
-      this.showProfileModal = true;
-    },
     openPost() {
       router.push({name: 'Post', query: {pid: this.post.pid}});
     },

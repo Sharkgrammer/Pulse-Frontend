@@ -17,9 +17,9 @@
       <div class="col-span-10">
 
         <div class="text-left pb-2">
-          <div @click.prevent>
+          <div>
 
-            <div @click="openProfile">
+            <div>
               <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
               <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
             </div>
@@ -33,6 +33,8 @@
           <img :src="this._backend_url + post.image_contents" loading="lazy" alt="Image Post"
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
+
+        <p class="dark:text-gray-400 text-right text-sm pb-2">{{ formatDate(post.created_date) }}</p>
 
         <div class="w-full" @click.stop>
           <ReactsLine :pid="post.pid" :likes="post.likes" :comments="post.comments" :shares="post.shares"
@@ -49,23 +51,17 @@
 
   </div>
 
-  <transition type="transition" mode="in-out">
-    <ModalProfile :username="post.profile_username" v-if="showProfileModal" :key="showProfileModal"
-                  @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
-  </transition>
-
 </template>
 
 <script>
 import HRV2 from "@/components/forms/HRV2";
 import router from "@/router/router";
 import ReactsLine from "@/components/util/ReactsLine";
-import ModalProfile from "@/components/modals/ModalProfile";
+import {datetime_med} from "@/assets/js/dates";
 
 export default {
   name: "UserPost",
-  components: {ModalProfile, ReactsLine, HRV2},
-  emits: ['followUpdate'],
+  components: {ReactsLine, HRV2},
   props: {
     post: {
       type: Object,
@@ -75,16 +71,15 @@ export default {
   data() {
     return {
       showExtraBorder: false,
-      showProfileModal: false,
     }
   },
   methods: {
-    openProfile() {
-      this.showProfileModal = true;
-    },
     openPost() {
       router.push({name: 'Post', query: {pid: this.post.pid}});
-    }
+    },
+    formatDate(date) {
+      return datetime_med(date)
+    },
   },
 }
 </script>

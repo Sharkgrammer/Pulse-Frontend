@@ -29,6 +29,10 @@
 
   </div>
 
+  <p class="dark:text-gray-400 text-right text-sm pr-5">{{ formatDate(comment.created_date) }}</p>
+
+
+
   <HRV2 class="mt-2" />
 
 </template>
@@ -37,6 +41,7 @@
 import PostReact from "@/components/util/PostReact";
 import HRV2 from "@/components/forms/HRV2";
 import * as network from "@/assets/js/network";
+import {datetime_med} from "@/assets/js/dates";
 
 export default {
   name: "SingleComment",
@@ -75,7 +80,10 @@ export default {
 
       }
 
-    }
+    },
+    formatDate(date) {
+      return datetime_med(date)
+    },
   }
 }
 </script>

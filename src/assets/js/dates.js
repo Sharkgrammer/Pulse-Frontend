@@ -3,9 +3,16 @@ const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 
 export function datetime_full(input) {
     const date = new Date(input);
-    let time = time_24(input);
+    let time = time_24(input, false);
 
     return days[date.getDay()] + ", " + time + ", " + getDateLocal(date) + " " + months[date.getMonth()] + " " + date.getFullYear()
+}
+
+export function datetime_med(input) {
+    const date = new Date(input);
+    let time = time_24(input, false);
+
+    return time + ", " + getDateLocal(date) + " " + months[date.getMonth()] + " " + date.getFullYear()
 }
 
 
@@ -37,7 +44,7 @@ export function date_inter(input) {
 }
 
 
-export function time_24(input) {
+export function time_24(input, showSeconds = true) {
     const date = new Date(input);
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -54,7 +61,8 @@ export function time_24(input) {
     if (seconds < 10) {
         seconds = "0" + seconds;
     }
-    return hours + ":" + minutes + ":" + seconds;
+
+    return hours + ":" + minutes + (showSeconds ? (":" + seconds) : "");
 }
 
 

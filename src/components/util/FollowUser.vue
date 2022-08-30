@@ -1,8 +1,9 @@
 <template>
   <div class="flex h-full w-full cursor-pointer mt-5 text-left">
-    <img :src="this._backend_url + user.prof_image" class="profile-image" loading="lazy"/>
+    <img :src="this._backend_url + user.prof_image" class="profile-image cursor-pointer" loading="lazy"
+         @click="openProfile"/>
 
-    <div class="pl-2 pr-2 w-full" @click="openProfile">
+    <div class="pl-2 pr-2 w-full cursor-pointer" @click="openProfile">
       <p v-if="search" class="text-gray-100 text-lg">
         {{ name1 }}<b class="text-accent">{{ name2 }}</b>{{ name3 }}
       </p>

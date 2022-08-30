@@ -6,15 +6,15 @@
 
       <!-- Image Only -->
       <div class="col-span-2 flex items-start justify-center">
-        <img :src="this._backend_url + post.profile_image" class="profile-image" loading="lazy" width="50"
-             height="50"/>
+        <img :src="this._backend_url + post.profile_image" class="profile-image cursor-pointer" loading="lazy"
+             @click="openProfile"/>
       </div>
 
       <!-- Rest of the content -->
       <div class="col-span-10">
 
         <div class="text-left pb-2">
-          <div @click="openProfile">
+          <div @click="openProfile" class="cursor-pointer">
             <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
             <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
           </div>
@@ -27,6 +27,9 @@
           <img :src="this._backend_url + post.image_contents" loading="lazy" alt="Image Post"
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
+
+        <p class="dark:text-gray-400 text-right text-sm">{{ formatDate(post.created_date) }}</p>
+
 
       </div>
 
@@ -79,6 +82,7 @@ import * as network from "@/assets/js/network";
 import SingleComment from "@/components/util/SingleComment";
 import ModalLoading from "@/components/modals/ModalLoading";
 import ModalProfile from "@/components/modals/ModalProfile";
+import {datetime_full} from "@/assets/js/dates";
 
 export default {
   name: "CommentPost",
@@ -107,6 +111,9 @@ export default {
     },
     updateText(val) {
       this.commentText = val;
+    },
+    formatDate(date) {
+      return datetime_full(date)
     },
     async sendComment() {
       let params = {
