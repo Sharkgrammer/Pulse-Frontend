@@ -7,7 +7,7 @@
       <div class="">
 
         <div class="text-left">
-          <p class="text-gray-900 pb-1 dark:text-gray-100 font-bold text-xl">{{ title }}</p>
+          <p class="text-gray-900 pb-1 dark:text-gray-100 font-bold text-xl select-none">{{ title }}</p>
 
           <div class="grid grid-cols-6 gap-0">
 
@@ -23,7 +23,7 @@
                   <IconDelete class="text-gray-100 ml-1 cursor-pointer hover:text-red-400" @click="clearFile"/>
                 </div>
                 <div class="h-full my-auto ml-0.5" v-else>
-                  <p class="text-gray-500 text-left">&#60;&#8722;&#8722; Click to add an image</p>
+                  <p class="text-gray-500 text-left select-none">&#60;&#8722;&#8722; Click to add an image</p>
                 </div>
               </div>
 

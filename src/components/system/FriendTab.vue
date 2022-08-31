@@ -29,7 +29,7 @@
     <HRV2SM class="mt-5 mb-5"/>
 
     <div class="text-left">
-      <p class="text-gray-900 dark:text-gray-100 font-bold text-xl">Suggested Cool People</p>
+      <p class="text-gray-900 dark:text-gray-100 font-bold text-xl select-none">Suggested Cool People</p>
     </div>
 
     <div v-for="user in users" :key="user">
@@ -63,7 +63,7 @@ export default {
     return {
       users: Object,
       showProfileModal: false,
-      username: ""
+      username: "",
     }
   },
   mounted() {

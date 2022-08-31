@@ -39,7 +39,7 @@
         </div>
 
         <div v-else>
-          <p class="p-1 text-gray-500 text-center cursor-pointer">No people found :( </p>
+          <p class="p-1 text-gray-500 text-center select-none">No people found :( </p>
         </div>
 
       </div>
@@ -71,7 +71,7 @@
         </div>
 
         <div v-else>
-          <p class="p-1 text-gray-500 text-center cursor-pointer">No Posts found :( </p>
+          <p class="p-1 text-gray-500 text-center select-none">No Posts found :( </p>
         </div>
 
       </div>
@@ -80,7 +80,7 @@
     </div>
 
     <div v-else class="border-gray-300 border rounded-xl">
-      <p class="p-1 text-gray-500 text-center cursor-pointer mb-2 mt-2">Nothing here yet.</p>
+      <p class="p-1 text-gray-500 text-center mb-2 mt-2 select-none">Nothing here yet.</p>
     </div>
 
   </div>

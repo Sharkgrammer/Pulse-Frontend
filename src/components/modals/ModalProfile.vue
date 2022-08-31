@@ -2,7 +2,7 @@
 
   <ModalWrapper v-slot="slotProps" v-if="user" :key="user">
 
-    <p class="pt-2 text-2xl font-bold pr-0.5 pl-0.5">
+    <p class="pt-2 text-2xl font-bold pr-0.5 pl-0.5 select-none">
       {{ user.first_name + " " + user.last_name + "\'s Profile" + (showProfileImage ? ' Image' : '') }}</p>
     <HRV2SM class="mt-2 mb-2"/>
 
@@ -26,7 +26,20 @@
             </div>
           </div>
 
-          <div class="flex justify-evenly pt-2">
+          <p class="text-xl text-gray-200 pt-2 pb-1 select-none">
+            {{ user.username === this.getUsername() ? 'Your' : user.first_name + ' ' + user.last_name }} Interests</p>
+
+          <div class="ml-20 mr-20 p-2 border border-gray-500 rounded-xl">
+            <div class="grid grid-cols-4" v-if="user.interests.length > 0"
+                 :key="user">
+              <p v-for="i in user.interests" :key="i" class="capitalize select-none">{{ i }}</p>
+            </div>
+
+            <p v-else class="text-gray-500">No Interests Found</p>
+          </div>
+
+
+          <div class="flex justify-evenly pt-5">
             <div class="inline-flex cursor-pointer" @click="openFollowersModal">
               <IconFollower/>
               <span class="pl-1 font-bold text-gray-300">{{ user.followers + ' Followers' }}</span>
@@ -39,8 +52,7 @@
 
           </div>
 
-
-          <div class="w-full flex justify-center gap-12 pt-5">
+          <div class="w-full flex justify-center gap-12 pt-5 select-none">
 
             <div class="text-gray-400" v-if="user.username === this.getUsername()">
               <p>Last Login</p>
