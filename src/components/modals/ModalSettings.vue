@@ -14,7 +14,9 @@
       <div class="grid grid-cols-2 gap-4 pb-4">
 
         <div class="flex justify-center items-center pt-1">
-          <img :src="this._backend_url + user.prof_image" class="rounded-full h-28 w-28" loading="lazy"/>
+          <img :src="!previewImageUrl ? this._backend_url + user.prof_image : this.previewImageUrl"
+               class="rounded-full h-28 w-28"
+               loading="lazy"/>
         </div>
 
         <div class="pt-4">
@@ -125,6 +127,7 @@ export default {
       username: "",
       desc: "",
       image: null,
+      previewImageUrl: null,
       showLoading: false,
     }
   },
@@ -180,10 +183,15 @@ export default {
     },
     updateImage(image) {
       this.image = image.target.files[0];
-      this.infoErrorMessage = val.validateImage(image);
+      this.infoErrorMessage = val.validateImage(this.image);
+
+      if (this.infoErrorMessage === "") {
+        this.previewImageUrl = URL.createObjectURL(this.image)
+      }
     },
     cancelProfileEdit() {
       this.editInformation = false;
+      this.previewImageUrl = null;
     },
     async saveProfileEdit() {
       if (this.editInformation === false) {
