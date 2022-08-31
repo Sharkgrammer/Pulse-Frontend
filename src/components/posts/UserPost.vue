@@ -68,6 +68,10 @@ export default {
       required: true,
     }
   },
+  mounted() {
+    // TODO remove this debug statement
+    console.log(this.post.content + " :" +this.post.score)
+  },
   data() {
     return {
       showExtraBorder: false,

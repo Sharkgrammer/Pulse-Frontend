@@ -1,6 +1,6 @@
 <template>
 
-  <ModalWrapper :ignoreBar="ignoreBar">
+  <ModalWrapper :ignoreBar="true">
 
     <div class="p-16 animate-gentle-pulse">
       <IconLoading size="large"/>
@@ -19,12 +19,6 @@ import ModalWrapper from "@/components/modals/util/ModalWrapper";
 export default {
   name: "ModalLoading",
   components: {ModalWrapper, IconLoading},
-  props: {
-    ignoreBar: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       dots: "",

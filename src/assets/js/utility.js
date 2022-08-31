@@ -118,6 +118,9 @@ export async function logout(context) {
     setAccessKey(context, "");
     localStorage.clear()
 
+    let event = new CustomEvent("hideOverflow", {"detail": false});
+    document.dispatchEvent(event);
+
     await redirectToLogin();
 }
 

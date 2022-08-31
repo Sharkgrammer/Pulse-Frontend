@@ -52,7 +52,7 @@
 
   </div>
 
-  <ModalLoading v-if="showLoading" :key="showLoading" :ignoreBar="true"/>
+  <ModalLoading v-if="showLoading" :key="showLoading"/>
 
 </template>
 
