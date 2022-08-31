@@ -2,8 +2,8 @@
 
   <ModalWrapper v-slot="slotProps">
 
-    <p v-if="followers" class="pt-2 text-2xl font-bold">{{ name === '' ? 'Your' : name }} Followers</p>
-    <p v-else class="pt-2 text-2xl font-bold">Who {{ name === '' ? 'You\'re' : name }} is Following</p>
+    <p v-if="followers" class="pt-2 text-2xl font-bold pr-0.5 pl-0.5">{{ name === '' ? 'Your' : name }} Followers</p>
+    <p v-else class="pt-2 text-2xl font-bold pr-0.5 pl-0.5">Who {{ name === '' ? 'You Follow' : name + ' Follows' }}</p>
     <HRV2SM class="mt-2"/>
 
     <div class=" pl-10 pr-10">

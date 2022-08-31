@@ -2,7 +2,7 @@
 
   <ModalWrapper v-slot="slotProps">
 
-    <p class="pt-2 text-2xl font-bold">Want to share this post?</p>
+    <p class="pt-2 text-2xl font-bold pr-0.5 pl-0.5">Want to share this post?</p>
     <HRV2SM class="mt-2 mb-2"/>
 
     <div class="flex h-full justify-center pb-3 pt-3 cursor-pointer text-gray-200 hover:text-gray-300"

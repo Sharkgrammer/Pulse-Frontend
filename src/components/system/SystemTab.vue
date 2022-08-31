@@ -53,7 +53,8 @@
     <!-- <HRV2 class="pt-10"/> -->
   </div>
 
-  <ModalSettings v-if="showSettingsModal" :key="showSettingsModal" @close="showSettingsModal = false"/>
+  <ModalSettings v-if="showSettingsModal" :key="showSettingsModal" @close="showSettingsModal = false"
+                 @profileUpdate="this.$emit('profileUpdate')"/>
 
   <!-- The same model handles both followers and following -->
   <ModalFollowers :followers="getFollowers" v-if="showFollowersModal" :key="showFollowersModal"
@@ -78,7 +79,7 @@ export default {
   components: {
     SearchBox, ModalFollowers, ModalSettings, IconSetting, IconHome, IconFollowing, IconFollower, HRV2SM
   },
-  emits: ['followUpdate'],
+  emits: ['followUpdate', 'profileUpdate'],
   data() {
     return {
       showSettingsModal: false,

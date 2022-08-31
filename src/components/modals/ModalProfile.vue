@@ -2,7 +2,7 @@
 
   <ModalWrapper v-slot="slotProps" v-if="user" :key="user">
 
-    <p class="pt-2 text-2xl font-bold">
+    <p class="pt-2 text-2xl font-bold pr-0.5 pl-0.5">
       {{ user.first_name + " " + user.last_name + "\'s Profile" + (showProfileImage ? ' Image' : '') }}</p>
     <HRV2SM class="mt-2 mb-2"/>
 
@@ -78,8 +78,10 @@
     <slot name="slotOuter">
       <!-- The same model handles both followers and following -->
       <ModalFollowers :followers="getFollowers" v-if="showFollowersModal" :key="showFollowersModal"
-                      :username="user.username" :name="user.first_name + ' ' + user.last_name"
-                      @close="showFollowersModal = false" @followUpdate="this.$emit('followUpdate')"/>
+                      :username="user.username" @close="showFollowersModal = false"
+                      @followUpdate="this.$emit('followUpdate')"
+                      :name="user.username !== getUsername() ? user.first_name + ' ' + user.last_name : ''"/>
+
     </slot>
 
   </ModalWrapper>

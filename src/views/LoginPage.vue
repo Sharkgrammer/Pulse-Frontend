@@ -17,7 +17,8 @@
         <TextBox v-if="showRegister" class="p-2" @update="updateFirstName" placeholder="First Name"/>
         <TextBox v-if="showRegister" class="p-2" @update="updateLastName" placeholder="Last Name"/>
         <TextBox v-if="showRegister" class="p-2" @update="updateUsername" placeholder="Username" type="username"/>
-        <TextBox v-if="showRegister" class="p-2" @update="updateDesc" placeholder="Profile Description"/>
+        <TextBox v-if="showRegister" class="p-2" @update="updateDesc" placeholder="Profile Description"
+                 :multiline="true"/>
 
         <div v-if="showRegister"
              class="text-gray-100 text-center p-2 m-2 border border-gray-300 rounded-xl hover:border-accent">
@@ -51,7 +52,7 @@
 
   </div>
 
-  <ModalLoading v-if="showLoading" :key="showLoading"/>
+  <ModalLoading v-if="showLoading" :key="showLoading" :ignoreBar="true"/>
 
 </template>
 
@@ -59,6 +60,7 @@
 import TextBox from "@/components/forms/TextBox";
 import * as network from "@/assets/js/network";
 import * as utils from "@/assets/js/utility";
+import * as val from "@/assets/js/validate";
 import router from "../router/router";
 import ButtonOutline from "@/components/buttons/ButtonOutline";
 import InterestPane from "@/components/util/InterestPane";
@@ -86,128 +88,37 @@ export default {
   methods: {
     updateFirstName(firstName) {
       this.firstName = firstName;
-      this.validateFirstName();
+      this.errorMessage = val.validateFirstName(firstName);
     },
     updateLastName(lastName) {
       this.lastName = lastName;
-      this.validateLastName();
+      this.errorMessage = val.validateLastName(lastName);
     },
     updateEmail(email) {
       this.email = email;
-      if (this.showRegister) this.validateEmail();
+      if (this.showRegister) this.errorMessage = val.validateEmail(email);
     },
     updatePassword(pass) {
       this.password = pass;
-      if (this.showRegister) this.validatePassword();
+      if (this.showRegister) this.errorMessage = val.validatePassword(pass, this.passwordVal);
     },
     updatePasswordVal(pass) {
       this.passwordVal = pass;
-      this.validatePassword();
+      this.errorMessage = val.validatePassword(this.password, pass);
     },
     updateUsername(username) {
       this.username = username;
-      this.validateUsername(false)
+      this.errorMessage = val.validateUsername(username);
     },
     updateDesc(desc) {
       this.desc = desc;
     },
     updateImage(image) {
       this.image = image.target.files[0];
-      this.validateImage();
+      this.errorMessage = val.validateImage(image);
     },
     updateInterests(interests) {
       this.interests = interests;
-    },
-    validateFirstName() {
-      if (this.firstName.length >= 2) {
-        this.errorMessage = ""
-        return true;
-
-      } else {
-        this.errorMessage = "First Name needs to be longer"
-        return false;
-      }
-    },
-    validateLastName() {
-      if (this.lastName.length >= 2) {
-        this.errorMessage = ""
-        return true;
-
-      } else {
-        this.errorMessage = "Last Name needs to be longer"
-        return false;
-      }
-    },
-    async validateEmail(runNetwork = false) {
-      let pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{1,6}$/;
-      let match = this.email.match(pattern);
-
-      if (match) {
-        this.errorMessage = ""
-      } else {
-        this.errorMessage = "Email address incorrectly formatted"
-        return false;
-      }
-
-      if (runNetwork) {
-        let data = await network.NetworkRequest(this, "/api/v1/email_free", "GET", null, {email: this.email}, false)
-
-        if (data !== false) {
-          this.errorMessage = ""
-          return true;
-        } else {
-          this.errorMessage = "Email taken"
-          return false;
-        }
-
-      }
-
-    },
-    validatePassword() {
-      if (this.password.length >= 4) {
-        if (this.passwordVal !== this.password) {
-          this.errorMessage = "Passwords do not match"
-          return false;
-
-        } else {
-          this.errorMessage = ""
-          return true;
-
-        }
-      }
-    },
-    async validateUsername(runNetwork = false) {
-      let match = this.username.match(/^\w+$/);
-
-      if (!match) {
-        this.errorMessage = "Username cannot contain spaces or symbols"
-        return false;
-      } else {
-        this.errorMessage = ""
-      }
-
-      if (runNetwork) {
-        let data = await network.NetworkRequest(this, "/api/v1/username_free", "GET", null, {username: this.username}, false)
-
-        if (data !== false) {
-          this.errorMessage = ""
-          return true;
-        } else {
-          this.errorMessage = "Username taken"
-          return false;
-        }
-
-      }
-    },
-    validateImage() {
-      if (this.image === null) {
-        this.errorMessage = "Please select an image";
-        return false;
-
-      } else {
-        this.errorMessage = ""
-        return true;
-      }
     },
     async login() {
       if (this.showRegister) return;
@@ -229,7 +140,7 @@ export default {
           lin: true
         }
 
-        let data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, params)
+        let data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, params, true)
 
         if (data !== false) {
           utils.updateUser(this, data)
@@ -250,10 +161,19 @@ export default {
     async register() {
       this.showLoading = true;
 
-      let validated = (this.validateFirstName() && this.validateLastName() && await this.validateEmail(true) &&
-          await this.validateUsername(true) && this.validateImage() && this.validatePassword())
+      let user = {
+        first_name: this.firstName,
+        last_name: this.lastName,
+        email: this.email,
+        password: this.password,
+        passwordVal: this.passwordVal,
+        username: this.username,
+        image: this.image,
+      }
 
-      if (validated) {
+      this.errorMessage = await val.validateUser(this, user)
+
+      if (this.errorMessage === "") {
         let body = new FormData()
         body.append('file', this.image)
         body.append('first_name', this.firstName)
@@ -263,7 +183,7 @@ export default {
         body.append('username', this.username)
         body.append('prof_desc', this.desc)
 
-        let data = await network.NetworkRequest(this, "/api/v1/create_user", "PUT", body, null, false)
+        let data = await network.NetworkRequest(this, "/api/v1/create_user", "PUT", body, null, false, true)
 
         if (data !== false) {
           this.showRegister = false;
@@ -275,7 +195,6 @@ export default {
       }
 
       this.showLoading = false;
-
     }
   }
 }

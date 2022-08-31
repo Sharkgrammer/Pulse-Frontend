@@ -132,7 +132,7 @@ export default {
       await this.search();
     },
     async search() {
-      if (this.searchQuery !== null && this.searchQuery.length >= 2) {
+      if (this.searchQuery !== undefined && this.searchQuery !== null && this.searchQuery.length >= 2) {
 
         let params = {
           query: this.searchQuery,

@@ -13,6 +13,7 @@ module.exports = {
                 'post': '32rem',
                 'profile': '22rem',
                 'friend': '25rem',
+                'modal': '40rem',
             },
             maxWidth: {
                 '1/2': '50%',

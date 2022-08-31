@@ -4,7 +4,7 @@
 
     <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity" @click.self="close()"/>
 
-    <div class="transform w-post">
+    <div class="transform w-modal">
 
       <div class="rounded-xl bg-gray-800 text-gray-100 shadow-xl animate-fade-in">
         <slot :close="close"/>
@@ -20,14 +20,24 @@
 export default {
   name: "ModalWrapper",
   emits: ['close'],
+  props: {
+    ignoreBar: {
+      type: Boolean,
+      default: false
+    }
+  },
   mounted() {
-    let event = new CustomEvent("hideOverflow", {"detail": true});
-    document.dispatchEvent(event);
+    if (!this.ignoreBar) {
+      let event = new CustomEvent("hideOverflow", {"detail": true});
+      document.dispatchEvent(event);
+    }
   },
   methods: {
     close(returnVal = false) {
-      let event = new CustomEvent("hideOverflow", {"detail": false});
-      document.dispatchEvent(event);
+      if (!this.ignoreBar) {
+        let event = new CustomEvent("hideOverflow", {"detail": false});
+        document.dispatchEvent(event);
+      }
 
       this.$emit("close", returnVal);
     },

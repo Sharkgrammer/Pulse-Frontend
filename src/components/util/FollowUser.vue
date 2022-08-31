@@ -17,7 +17,7 @@
       </p>
     </div>
 
-    <div class="flex items-center">
+    <div class="flex items-center" v-if="user.username !== getUsername()">
       <ButtonOutline :title="buttonText" size="small" class="text-gray-100" :key="buttonText"
                      @click="followUser(user.username)"/>
     </div>
@@ -30,7 +30,7 @@
 <script>
 import HRV2SM from "@/components/forms/HRV2SM";
 import ButtonOutline from "@/components/buttons/ButtonOutline";
-import {spliceSearch} from "@/assets/js/utility";
+import {getUsername, spliceSearch} from "@/assets/js/utility";
 import {NetworkRequest} from "@/assets/js/network";
 
 export default {
@@ -87,6 +87,9 @@ export default {
 
         this.$emit('followUpdate');
       }
+    },
+    getUsername() {
+      return getUsername(this);
     },
     calcBold() {
       // I have to do it this way, v-html w/ computed would open up XSS attacks :(

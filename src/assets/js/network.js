@@ -107,14 +107,14 @@ export async function NetworkRequest(context, urlEnd, type = "GET", body = null,
             break;
     }
 
-    const res = await fetch(input, init).catch(() => {
-        //console.log(error)
-        return false
-    });
-
     let result = false;
 
     try {
+        const res = await fetch(input, init).catch(() => {
+            //console.log(error)
+            return false
+        });
+
         let data = "";
 
         if (isJSON) {

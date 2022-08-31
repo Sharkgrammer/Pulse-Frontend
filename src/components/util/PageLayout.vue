@@ -13,9 +13,9 @@
 
     <div class="w-full flex justify-center">
 
-      <SystemTab @followUpdate="checkUser(); this.$refs.friendTab.$forceUpdate"/>
+      <SystemTab @followUpdate="checkUser(); this.$refs.friendTab.$forceUpdate" @profileUpdate="profileUpdate"/>
 
-      <div>
+      <div ref="siteTab">
         <slot/>
       </div>
 
@@ -48,8 +48,11 @@ export default {
       if (data !== false) {
         utils.updateUser(this, data);
       }
-
     },
+    async profileUpdate() {
+      await this.checkUser();
+      this.$refs.siteTab.$forceUpdate;
+    }
   }
 
 }
