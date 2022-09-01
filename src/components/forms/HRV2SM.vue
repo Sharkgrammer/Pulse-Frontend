@@ -1,5 +1,5 @@
 <template>
-  <div class="border-t dark:border-gray-200 border-gray-400">
+  <div class="border-t dark:border-gray-200 border-gray-800">
   </div>
 </template>
 

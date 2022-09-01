@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-post text-center pt-10 pb-10 border-l border-r dark:border-gray-700">
+  <div class="w-post text-center pt-10 pb-10 border-l border-r border-gray-400 dark:border-gray-700">
 
     <div class="dark:text-gray-400 select-none">
       <p>Huh, Nothing here. </p>

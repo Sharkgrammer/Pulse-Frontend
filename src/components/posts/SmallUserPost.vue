@@ -12,14 +12,14 @@
       <div class="col-span-10">
 
         <div class="text-left p-1">
-          <p class="text-gray-900 dark:text-gray-200 font-bold">{{ post.profile_name }}
-            <span class="dark:text-gray-400 text-sm hover:animate-rainbow">({{ post.profile_username }})</span>
+          <p class="text-gray-800 dark:text-gray-200 font-bold">{{ post.profile_name }}
+            <span class="text-gray-600 dark:text-gray-400 text-sm hover:animate-rainbow">({{ post.profile_username }})</span>
           </p>
 
           <p v-if="search" class="text-gray-600 dark:text-gray-100">
             {{ content1 }}<b class="text-accent">{{ content2 }}</b>{{ content3 }}
           </p>
-          <p v-else class="text-gray-600 dark:text-gray-100">{{ post.content }}</p>
+          <p v-else class="text-gray-700 dark:text-gray-300">{{ post.content }}</p>
         </div>
 
         <!-- Content Div -->
@@ -28,7 +28,7 @@
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
-        <p class="dark:text-gray-400 text-right text-sm pb-1">{{ formatDate(post.created_date) }}</p>
+        <p class="text-gray-500 text-right text-sm pb-1">{{ formatDate(post.created_date) }}</p>
 
         <div class="w-full" @click.stop>
           <ReactsLine :pid="post.pid" :likes="post.likes" :comments="post.comments" :shares="post.shares"

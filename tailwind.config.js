@@ -8,6 +8,8 @@ module.exports = {
                 accent: '#30A2C8',
                 accent_light: '#B3ECFF',
                 accent_dark: '#2782A1',
+                darkBg: 'rgb(17 24 39)',
+                lightBg: 'rgb(249 250 251)'
             },
             spacing: {
                 'post': '32rem',

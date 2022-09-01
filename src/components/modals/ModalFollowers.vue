@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <div v-else class="text-center p-5 pb-0 dark:text-gray-400">
+      <div v-else class="text-center p-5 pb-0 text-gray-500">
         <p v-if="name === ''">{{ this.followers ? 'No one follows you' : 'You don\'t follow anyone ' }}</p>
         <p v-else>{{ this.followers ? 'No one follows ' + name : name + ' doesn\'t follow anyone ' }}</p>
       </div>

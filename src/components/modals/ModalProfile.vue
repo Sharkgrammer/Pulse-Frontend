@@ -15,18 +15,18 @@
                @click="showProfileImage = true"/>
         </div>
 
-        <div class="p-5 pt-2 pl-10 pr-10 text-center w-full text-gray-100">
+        <div class="p-5 pt-2 pl-10 pr-10 text-center w-full text-gray-900 dark:text-gray-100">
           <p class="text-xl font-bold">{{ user.first_name + " " + user.last_name }}</p>
-          <p class="text-lg text-gray-300" v-if="user.username === this.getUsername()">{{ user.email }}</p>
-          <p class="text-lg text-gray-400 hover:animate-wave">{{ user.username }}</p>
+          <p class="text-lg text-gray-700 dark:text-gray-300" v-if="user.username === this.getUsername()">{{ user.email }}</p>
+          <p class="text-lg text-gray-500 hover:animate-wave">{{ user.username }}</p>
 
           <div class="w-full flex justify-center text-left p-1" v-if="user.prof_desc">
-            <div class="w-60 rounded-xl border border-gray-600 p-2">
+            <div class="w-60 rounded-xl border border-gray-500 p-2">
               <p class="text-lg">{{ user.prof_desc }}</p>
             </div>
           </div>
 
-          <p class="text-xl text-gray-200 pt-2 pb-1 select-none">
+          <p class="text-xl text-gray-800 dark:text-gray-200 pt-2 pb-1 select-none">
             {{ user.username === this.getUsername() ? 'Your' : user.first_name + ' ' + user.last_name }} Interests</p>
 
           <div class="ml-20 mr-20 p-2 border border-gray-500 rounded-xl">
@@ -42,24 +42,24 @@
           <div class="flex justify-evenly pt-5">
             <div class="inline-flex cursor-pointer" @click="openFollowersModal">
               <IconFollower/>
-              <span class="pl-1 font-bold text-gray-300">{{ user.followers + ' Followers' }}</span>
+              <span class="pl-1 font-bold text-gray-700 dark:text-gray-300">{{ user.followers + ' Followers' }}</span>
             </div>
 
             <div class="inline-flex cursor-pointer" @click="openFollowingModal">
               <IconFollowing/>
-              <span class="pl-1 font-bold text-gray-300">{{ user.following + ' Following' }}</span>
+              <span class="pl-1 font-bold text-gray-700 dark:text-gray-300">{{ user.following + ' Following' }}</span>
             </div>
 
           </div>
 
           <div class="w-full flex justify-center gap-12 pt-5 select-none">
 
-            <div class="text-gray-400" v-if="user.username === this.getUsername()">
+            <div class="text-gray-600 dark:text-gray-400" v-if="user.username === this.getUsername()">
               <p>Last Login</p>
               <p>{{ getDate(user.last_login) }}</p>
             </div>
 
-            <div class="text-gray-400">
+            <div class="text-gray-600 dark:text-gray-400">
               <p>Member Since</p>
               <p>{{ getDate(user.date_joined) }}</p>
             </div>

@@ -1,7 +1,6 @@
 <template>
 
-  <div class="w-post text-center border dark:border-gray-700 cursor-pointer
-      dark:hover:border-gray-300 dark:hover:bg-gray-900"
+  <div class="w-post text-center border border-gray-400 dark:border-gray-700 cursor-pointer border-gray-500 hover:bg-white dark:hover:border-gray-300 dark:hover:bg-gray-800"
        :class="showExtraBorder ? 'post-fix' : 'post'" @mouseover="showExtraBorder = true"
        @mouseleave="showExtraBorder = false" @click="openPost">
 
@@ -20,12 +19,12 @@
           <div>
 
             <div>
-              <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
-              <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
+              <p class="text-gray-800 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
+              <p class="text-gray-600 dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
             </div>
 
           </div>
-          <p class="text-gray-600 dark:text-gray-100 text-lg pt-1">{{ post.content }}</p>
+          <p class="text-gray-700 dark:text-gray-300 text-lg pt-1">{{ post.content }}</p>
         </div>
 
         <!-- Content Div -->
@@ -34,7 +33,7 @@
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
-        <p class="dark:text-gray-400 text-right text-sm pb-2">{{ formatDate(post.created_date) }}</p>
+        <p class="text-gray-500 text-right text-sm pb-2">{{ formatDate(post.created_date) }}</p>
 
         <div class="w-full" @click.stop>
           <ReactsLine :pid="post.pid" :likes="post.likes" :comments="post.comments" :shares="post.shares"

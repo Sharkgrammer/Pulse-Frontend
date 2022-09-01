@@ -9,12 +9,13 @@
   </div>
 
 
-  <div class="text-gray-100 mt-2 mr-2">
+  <div class="text-gray-900 dark:text-gray-100 mt-2 mr-2">
 
     <div v-if="userResults && postResults" :key="userResults && postResults">
 
       <!-- Users -->
-      <div v-if="userResults" :key="userResults" class="border-gray-300 border hover:border-accent rounded-xl p-2 mb-3">
+      <div v-if="userResults" :key="userResults"
+           class="border-gray-700 dark:border-gray-300 border hover:border-accent rounded-xl p-2 mb-3">
 
         <div v-if="userResults.length > 0">
 
@@ -32,8 +33,9 @@
 
           </div>
 
-          <div class="p-1 text-gray-500 text-center cursor-pointer hover:text-gray-400 mt-2 mb-2 select-none">
-            <p @click="loadMoreUsers" v-if="userResults.length >= userAmt" :key="userAmt">Load More Users...</p>
+          <div class="p-1 text-gray-500 text-center mt-2 mb-2 select-none">
+            <p class="cursor-pointer hover:text-gray-600 dark:hover:text-gray-400" @click="loadMoreUsers"
+               v-if="userResults.length >= userAmt" :key="userAmt">Load More Users...</p>
             <p v-else>No More People Found</p>
           </div>
         </div>
@@ -45,7 +47,8 @@
       </div>
 
       <!-- Posts -->
-      <div v-if="postResults" :key="postResults" class="border-gray-300 border hover:border-accent rounded-xl p-2">
+      <div v-if="postResults" :key="postResults"
+           class="border-gray-700 dark:border-gray-300 border hover:border-accent rounded-xl p-2">
 
         <div v-if="postResults.length > 0">
 
@@ -62,8 +65,9 @@
 
           </div>
 
-          <div class="p-1 text-gray-500 text-center cursor-pointer hover:text-gray-400 mb-2 select-none">
-            <p @click="loadMorePosts" v-if="postResults.length >= postAmt" :key="postAmt">Load More Posts...</p>
+          <div class="p-1 text-gray-500 text-center mb-2 select-none">
+            <p class="cursor-pointer hover:text-gray-600 dark:hover:text-gray-400" @click="loadMorePosts"
+               v-if="postResults.length >= postAmt" :key="postAmt">Load More Posts...</p>
             <p v-else>No More Posts Found</p>
           </div>
 
@@ -79,7 +83,7 @@
 
     </div>
 
-    <div v-else class="border-gray-300 border rounded-xl">
+    <div v-else class="border-gray-700 dark:border-gray-300 border rounded-xl">
       <p class="p-1 text-gray-500 text-center mb-2 mt-2 select-none">Nothing here yet.</p>
     </div>
 

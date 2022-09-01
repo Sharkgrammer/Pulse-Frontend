@@ -35,8 +35,8 @@
       <TextBox :disabled="!editInformation" :value="user.prof_desc" :multiline="true" placeholder="Profile Description"
                :key="editInformation" @update="updateDesc"/>
 
-      <input v-if="editInformation" type="file" class="h-10 w-full px-3 py-2 mt-2 border rounded-lg bg-gray-800 focus:border-accent
-          border-gray-300 text-gray-300 focus:outline-none hover:border-accent" @input="updateImage"/>
+      <input v-if="editInformation" type="file" class="h-10 w-full px-3 py-2 mt-2 border rounded-lg focus:border-accent
+          border-gray-700 dark:border-gray-300 text-gray-700 dark:text-gray-300 focus:outline-none hover:border-accent" @input="updateImage"/>
 
       <p v-if="infoErrorMessage" class="pt-1 text-lg text-red-800 text-center">{{ infoErrorMessage }}</p>
 
@@ -61,7 +61,7 @@
              border-gray-500 rounded-xl">
 
           <div v-for="interest in interests" :key="interest">
-            <p class="text-gray-300 text-bol capitalize">{{ interest.name }}</p>
+            <p class="text-gray-700 dark:text-gray-300 text-bol capitalize">{{ interest.name }}</p>
           </div>
 
         </div>
@@ -82,7 +82,7 @@
     <HRV2SM class="m-20 mt-0 mb-1"/>
 
     <div>
-      <p class="text-gray-400 text-lg pb-2">More options will be available later</p>
+      <p class="text-gray-500 text-lg pb-2">More options will be available later</p>
     </div>
 
     <HRV2SM class="mt-2 mb-3"/>

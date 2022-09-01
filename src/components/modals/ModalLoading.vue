@@ -5,7 +5,7 @@
     <div class="p-16 animate-gentle-pulse">
       <IconLoading size="large"/>
 
-      <p class="pt-5 text-gray-100 text-2xl font-bold">{{ 'Loading' + dots }}</p>
+      <p class="pt-5 text-gray-900 dark:text-gray-100 text-2xl font-bold">{{ 'Loading' + dots }}</p>
     </div>
 
   </ModalWrapper>

@@ -27,6 +27,13 @@ document.addEventListener("hideOverflow", function (e) {
     document.body.style.overflowY = res;
 });
 
+document.addEventListener("darkmode", function (e) {
+    let data = e.detail;
+    if (data === 0) return
+
+    data ? document.body.classList.add("dark") : document.body.classList.remove("dark")
+});
+
 app.use(store)
 app.use(router)
 app.mount('#app')

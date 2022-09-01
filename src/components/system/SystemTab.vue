@@ -4,14 +4,15 @@
 
 
     <div class="w-full pt-5 flex justify-end pr-5">
-      <img src="@/assets/img/logo.png" class="h-20 cursor-pointer" @click="goHome" alt="logo"/>
+      <img v-if="isDark" src="@/assets/img/logo.png" class="h-20 cursor-pointer" @click="goHome" alt="logo"/>
+      <img v-else src="@/assets/img/logoBlack.png" class="h-20 cursor-pointer" @click="goHome" alt="logo"/>
     </div>
 
     <div class="grid grid-cols-3 pr-5 pt-5">
 
-      <div class="col-start-2 col-span-2 w-full space-y-5 text-2xl text-bold text-gray-100 text-right">
+      <div class="col-start-2 col-span-2 w-full space-y-5 text-2xl text-bold text-right text-gray-900 dark:text-gray-100">
 
-        <div class="space-y-0.5 cursor-pointer hover:text-gray-300" @click="goHome">
+        <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300" @click="goHome">
           <div class="inline-flex">
             <span class="pr-1">Home</span>
             <IconHome class="mt-1"/>
@@ -19,7 +20,7 @@
           <HRV2SM/>
         </div>
 
-        <div class="space-y-0.5 cursor-pointer hover:text-gray-300" @click="openFollowersModal">
+        <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300" @click="openFollowersModal">
           <div class="inline-flex">
             <span class="pr-1">Followers</span>
             <IconFollower class="mt-1"/>
@@ -27,7 +28,7 @@
           <HRV2SM/>
         </div>
 
-        <div class="space-y-0.5 cursor-pointer hover:text-gray-300" @click="openFollowingModal">
+        <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300" @click="openFollowingModal">
           <div class="inline-flex">
             <span class="pr-1">Following</span>
             <IconFollowing class="mt-1"/>
@@ -35,7 +36,7 @@
           <HRV2SM/>
         </div>
 
-        <div class="space-y-0.5 cursor-pointer hover:text-gray-300" @click="openSettingsModal">
+        <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300" @click="openSettingsModal">
           <div class="inline-flex">
             <span class="pr-1">Settings</span>
             <IconSetting class="mt-1"/>
@@ -85,7 +86,11 @@ export default {
       showSettingsModal: false,
       showFollowersModal: false,
       getFollowers: true,
+      isDark: false,
     }
+  },
+  mounted(){
+    this.isDark = document.body.classList.contains("dark")
   },
   methods: {
     goHome() {
@@ -101,7 +106,7 @@ export default {
     openFollowingModal() {
       this.getFollowers = false;
       this.showFollowersModal = true;
-    }
+    },
   }
 }
 </script>

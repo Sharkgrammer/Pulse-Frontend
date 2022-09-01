@@ -6,10 +6,10 @@
            @click="openProfile(this.getUsername())"/>
     </div>
 
-    <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-100 hover:animate-rainbow cursor-pointer"
+    <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-900 dark:text-gray-100 hover:animate-rainbow cursor-pointer"
          @click="openProfile(this.getUsername())">
       <p class="text-xl font-bold">{{ this.getName() }}</p>
-      <p class="text-lg text-gray-400 hover:animate-wave">{{ this.getUsername() }}</p>
+      <p class="text-lg text-gray-500 hover:animate-wave">{{ this.getUsername() }}</p>
 
       <div class="flex justify-evenly pt-2">
         <div class="inline-flex">

@@ -6,7 +6,7 @@
 
     <div class="transform w-modal">
 
-      <div class="rounded-xl bg-gray-800 text-gray-100 shadow-xl animate-fade-in">
+      <div class="rounded-xl bg-lightBg dark:bg-darkBg text-gray-900 dark:text-gray-100 shadow-xl animate-fade-in">
         <slot :close="close"/>
       </div>
 

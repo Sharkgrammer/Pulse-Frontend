@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-post bg-gray-100 dark:bg-gray-800 text-center pt-5 border-l border-r dark:border-gray-700">
+  <div class="w-post text-center pt-5 border-l border-r border-gray-400 dark:border-gray-700">
     <div class="w-full pr-4 pl-4">
 
       <!-- Rest of the content -->
@@ -15,12 +15,12 @@
               <TextBox :key="resetText" placeholder="Whatcha thinking?" @update="updateText" @keyup.enter="sendPost"/>
 
               <div class="flex w-full mt-2">
-                <IconImage class="text-gray-100 cursor-pointer hover:text-accent h-8 w-8"
+                <IconImage class="text-gray-800 dark:text-gray-200 cursor-pointer hover:text-accent h-8 w-8"
                            @click="this.$refs.fileInput.click()"/>
 
                 <div class="flex h-full my-auto ml-3" v-if="file !== null">
-                  <p class="text-gray-300 w-60 text-right overflow-hidden overflow-ellipsis">{{ fileText }}</p>
-                  <IconDelete class="text-gray-100 ml-1 cursor-pointer hover:text-red-400" @click="clearFile"/>
+                  <p class="text-gray-700 dark:text-gray-300 w-60 text-right overflow-hidden overflow-ellipsis">{{ fileText }}</p>
+                  <IconDelete class="text-gray-900 dark:text-gray-100 ml-1 cursor-pointer hover:text-red-400" @click="clearFile"/>
                 </div>
                 <div class="h-full my-auto ml-0.5" v-else>
                   <p class="text-gray-500 text-left select-none">&#60;&#8722;&#8722; Click to add an image</p>

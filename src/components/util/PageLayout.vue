@@ -2,7 +2,7 @@
 <template>
 
 
-  <div>
+  <div class="bg-lightBg dark:bg-darkBg min-h-screen h-full">
 
     <!-- Visual Size Checker -->
     <div v-if="false"

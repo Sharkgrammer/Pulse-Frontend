@@ -1,13 +1,15 @@
 <template>
 
-  <div class="w-full h-full flex justify-center">
+  <div class="w-full h-full flex justify-center dark:bg-darkBg min-h-screen h-full">
 
     <div class="w-1/3">
 
       <div class="flex justify-center mt-20 mb-10">
-        <img src="@/assets/img/logo.png" class="h-28 cursor-pointer" @click="goHome" alt="logo"/>
+        <img v-if="isDark" src="@/assets/img/logo.png" class="h-28 cursor-pointer" alt="logo"/>
+        <img v-else src="@/assets/img/logoBlack.png" class="h-28 cursor-pointer" alt="logo"/>
       </div>
-      <p class="pt-2 text-2xl text-gray-100 text-center">Welcome to Social Shonks</p>
+
+      <p class="pt-2 text-2xl text-gray-900 dark:text-gray-100 text-center">Welcome to Social Shonks</p>
 
       <div>
         <TextBox class="p-2" @keyup.enter="login" @update="updateEmail" placeholder="Email" type="email"/>
@@ -21,17 +23,17 @@
                  :multiline="true"/>
 
         <div v-if="showRegister"
-             class="text-gray-100 text-center p-2 m-2 border border-gray-300 rounded-xl hover:border-accent">
+             class="text-gray-900 dark:text-gray-100 text-center p-2 m-2 border border-gray-700 dark:border-gray-300 rounded-xl hover:border-accent">
 
-          <p class="text-gray-200 text-xl">Add your interests here!</p>
-          <p class="text-gray-400 text-lg">It helps us show you better content</p>
+          <p class="text-gray-800 dark:text-gray-200 text-xl">Add your interests here!</p>
+          <p class="text-gray-500 text-lg">It helps us show you better content</p>
 
           <InterestPane :emitData="true" @updateData="updateInterests"/>
         </div>
 
-        <div class="text-gray-100 p-2" v-if="showRegister">
-          <input type="file" class="h-10 w-full px-3 py-2 border rounded-lg bg-gray-800 focus:border-accent
-          border-gray-300 text-gray-300 focus:outline-none hover:border-accent" @input="updateImage"/>
+        <div class="text-gray-900 dark:text-gray-100 p-2" v-if="showRegister">
+          <input type="file" class="h-10 w-full px-3 py-2 border rounded-lg bg-lightBg dark:bg-darkBg focus:border-accent
+          border-gray-700 dark:border-gray-300 text-gray-700 dark:text-gray-300 focus:outline-none hover:border-accent" @input="updateImage"/>
         </div>
 
       </div>
@@ -69,8 +71,12 @@ import ModalLoading from "@/components/modals/ModalLoading";
 export default {
   name: "LoginPage",
   components: {ModalLoading, InterestPane, ButtonOutline, TextBox},
+  mounted(){
+    this.isDark = document.body.classList.contains("dark")
+  },
   data() {
     return {
+      isDark: false,
       firstName: "",
       lastName: "",
       email: "",

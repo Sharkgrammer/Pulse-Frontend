@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-post text-center pt-2 border-l border-r dark:border-gray-700">
+  <div class="w-post text-center pt-2 border-l border-r border-gray-400 dark:border-gray-700">
 
     <IconLoading />
 

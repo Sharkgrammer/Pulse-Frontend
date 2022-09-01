@@ -12,16 +12,16 @@
     <div class="col-span-8">
 
       <div class="text-left pb-2">
-        <p class="text-gray-900 dark:text-gray-200 font-bold text-xl cursor-pointer" @click="openProfile">
+        <p class="text-gray-800 dark:text-gray-200 font-bold text-xl cursor-pointer" @click="openProfile">
           {{ comment.profile_name }}
-          <span class="dark:text-gray-400 text-lg hover:animate-rainbow">({{ comment.profile_username }})</span>
+          <span class="text-gray-600 dark:text-gray-400 text-lg hover:animate-rainbow">({{ comment.profile_username }})</span>
         </p>
-        <p class="text-gray-600 dark:text-gray-100 text-lg">{{ comment.content }}</p>
+        <p class="text-gray-700 dark:text-gray-300 text-lg">{{ comment.content }}</p>
       </div>
     </div>
 
     <div class="col-span-2 w-full h-full flex items-center justify-center">
-      <div class="flex dark:text-gray-100 hover:text-red-800 dark:hover:text-red-500 cursor-pointer"
+      <div class="flex text-gray-900 dark:text-gray-100 hover:text-red-800 dark:hover:text-red-500 cursor-pointer"
            @click="likeComment" @mouseover="likeBounce = false" @mouseleave="likeBounce=true">
         <PostReact :outline="!like" :key="like" :bounce="!likeBounce"/>
         <span class="inline-block mt-0.5 ml-1">{{ likeCount }}</span>
@@ -30,7 +30,7 @@
 
   </div>
 
-  <p class="dark:text-gray-400 text-right text-sm pr-5">{{ formatDate(comment.created_date) }}</p>
+  <p class="text-gray-500 text-right text-sm pr-5">{{ formatDate(comment.created_date) }}</p>
 
   <HRV2 class="mt-2"/>
 

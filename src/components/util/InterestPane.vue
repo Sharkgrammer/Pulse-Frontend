@@ -21,7 +21,7 @@
         <div class="grid grid-cols-2 p-2 border border-gray-500 rounded-xl"
              v-if="allInterests && allInterests.length > 0">
 
-          <p v-for="i in allInterests" :key="i" class="text-gray-300 capitalize cursor-pointer select-none"
+          <p v-for="i in allInterests" :key="i" class="text-gray-700 dark:text-gray-300 capitalize cursor-pointer select-none"
              @click="add(i)">{{ i.name }}</p>
 
         </div>
@@ -39,7 +39,7 @@
         <p>Your Interests</p>
         <div v-if="yourInterests.length > 0" class="grid grid-cols-2 p-2 border border-gray-500 rounded-xl">
 
-          <p v-for="i in yourInterests" :key="i" class="text-gray-300 capitalize cursor-pointer select-none"
+          <p v-for="i in yourInterests" :key="i" class="text-gray-700 dark:text-gray-300 capitalize cursor-pointer select-none"
              @click="remove(i)">{{ i.name }}</p>
 
         </div>

@@ -4,12 +4,12 @@
 
     <input v-if="!multiline" :type='type' :disabled="disabled" :placeholder="placeholder" v-model="textValue"
            :class="disabled ? 'disabled': 'enabled'" :maxlength="max"
-           class="h-10 w-full px-3 py-2 border rounded-lg bg-gray-800 text-gray-300 focus:outline-none"/>
+           class="h-10 box"/>
 
 
     <textarea v-else :disabled="disabled" :placeholder="placeholder" :class="disabled ? 'disabled': 'enabled'"
               v-model="multiValue"
-              class="w-full px-3 py-2 border rounded-lg bg-gray-800 text-gray-300 focus:outline-none">
+              class="box">
   </textarea>
 
 
@@ -69,11 +69,15 @@ export default {
 <style scoped>
 
 .enabled {
-  @apply hover:border-accent focus:border-accent border-gray-300;
+  @apply hover:border-accent focus:border-accent border-gray-700 dark:border-gray-300;
 }
 
 .disabled {
-  @apply border-gray-500
+  @apply border-gray-500;
+}
+
+.box {
+  @apply w-full px-3 py-2 border rounded-lg focus:outline-none bg-lightBg text-gray-600 dark:bg-darkBg dark:text-gray-300;
 }
 
 </style>

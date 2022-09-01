@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-post bg-gray-100 dark:bg-gray-800 text-center pt-5 border-l border-r dark:border-gray-700">
+  <div class="w-post text-center pt-5 border-l border-r border-gray-400 dark:border-gray-700">
 
     <div class="w-full grid grid-cols-12 pr-2 pb-2">
 
@@ -15,11 +15,11 @@
 
         <div class="text-left pb-2">
           <div @click="openProfile(post.profile_username)" class="cursor-pointer">
-            <p class="text-gray-900 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
-            <p class="dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
+            <p class="text-gray-800 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
+            <p class="text-gray-600 dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
           </div>
 
-          <p class="text-gray-600 dark:text-gray-100 text-lg pt-1">{{ post.content }}</p>
+          <p class="text-gray-700 dark:text-gray-300 text-lg pt-1">{{ post.content }}</p>
         </div>
 
         <!-- Content Div -->
@@ -28,7 +28,7 @@
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
-        <p class="dark:text-gray-400 text-right text-sm">{{ formatDate(post.created_date) }}</p>
+        <p class="500 text-right text-sm">{{ formatDate(post.created_date) }}</p>
 
 
       </div>

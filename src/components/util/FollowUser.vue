@@ -4,21 +4,21 @@
          @click="openProfile"/>
 
     <div class="pl-2 pr-2 w-full cursor-pointer" @click="openProfile">
-      <p v-if="search === ''" class="text-gray-100 text-lg">{{ user.first_name + " " + user.last_name }}</p>
+      <p v-if="search === ''" class="text-gray-900 dark:text-gray-100 text-lg">{{ user.first_name + " " + user.last_name }}</p>
 
-      <p v-else class="text-gray-100 text-lg">
+      <p v-else class="text-gray-900 dark:text-gray-100 text-lg">
         {{ name1 }}<b class="text-accent">{{ name2 }}</b>{{ name3 }}
       </p>
 
-      <p v-if="search === ''" class="text-gray-300 text-md hover:animate-rainbow">{{ user.username }}</p>
+      <p v-if="search === ''" class="text-gray-700 dark:text-gray-300 text-md hover:animate-rainbow">{{ user.username }}</p>
 
-      <p v-else class="text-gray-300 text-md">
+      <p v-else class="text-gray-700 dark:text-gray-300 text-md">
         {{ username1 }}<b class="text-accent">{{ username2 }}</b>{{ username3 }}
       </p>
     </div>
 
     <div class="flex items-center" v-if="user.username !== getUsername()">
-      <ButtonOutline :title="buttonText" size="small" class="text-gray-100" :key="buttonText"
+      <ButtonOutline :title="buttonText" size="small" class="text-gray-900 dark:text-gray-100" :key="buttonText"
                      @click="followUser(user.username)"/>
     </div>
 

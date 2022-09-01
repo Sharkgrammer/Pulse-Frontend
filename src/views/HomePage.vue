@@ -9,7 +9,7 @@
     </div>
 
     <LoadingPost v-if="showLoadingPost"/>
-    <NothingPost v-else />
+    <NothingPost v-else/>
   </PageLayout>
 
 </template>
@@ -50,7 +50,8 @@ export default {
       if (data !== false) this.posts = data;
     },
     getWelcomeMessage() {
-      return "Good Afternoon " + utils.getFirstName(this);
+      // TODO make this say other things
+      return "Good Afternoon " + utils.getFirstName(this) + " " + utils.getLastName(this);
     },
     refreshPosts() {
       this.amt++;
@@ -66,10 +67,7 @@ export default {
     },
     scroll() {
       window.onscroll = () => {
-        let bottomOfWindow = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) +
-            window.innerHeight === document.documentElement.offsetHeight
-
-        if (bottomOfWindow) {
+        if ((document.documentElement.scrollHeight - window.pageYOffset) === (document.documentElement.offsetHeight)) {
           this.updatePostAmt()
         }
       }
