@@ -75,7 +75,7 @@
         </div>
 
         <div v-else>
-          <p class="p-1 text-gray-500 text-center select-none">No Posts found :( </p>
+          <p class="p-1 text-gray-500 text-center select-none">No posts found :( </p>
         </div>
 
       </div>

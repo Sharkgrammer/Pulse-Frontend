@@ -20,6 +20,10 @@ module.exports = {
             maxWidth: {
                 '1/2': '50%',
             },
+            maxHeight: {
+                'modal': '50rem',
+                'modal-content': '40rem',
+            },
             padding: {
                 'post-t': '0.56rem',
                 'post-b': '0.07rem'

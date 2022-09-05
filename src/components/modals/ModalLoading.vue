@@ -2,11 +2,13 @@
 
   <ModalWrapper :ignoreBar="true">
 
-    <div class="p-16 animate-gentle-pulse">
-      <IconLoading size="large"/>
+    <template #content>
+      <div class="p-16 animate-gentle-pulse">
+        <IconLoading size="large"/>
 
-      <p class="pt-5 text-gray-900 dark:text-gray-100 text-2xl font-bold">{{ 'Loading' + dots }}</p>
-    </div>
+        <p class="pt-5 text-gray-900 dark:text-gray-100 text-2xl font-bold">{{ 'Loading' + dots }}</p>
+      </div>
+    </template>
 
   </ModalWrapper>
 

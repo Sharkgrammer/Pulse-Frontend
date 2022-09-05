@@ -1,69 +1,76 @@
 <template>
 
-  <ModalWrapper v-slot="slotProps" v-if="user" :key="user">
+  <ModalWrapper v-if="user" :key="user">
 
-    <p class="pt-2 text-2xl font-bold pr-0.5 pl-0.5 select-none">
-      {{ user.first_name + " " + user.last_name + "\'s Profile" + (showProfileImage ? ' Image' : '') }}</p>
-    <HRV2SM class="mt-2 mb-2"/>
+    <template #header>
+      <p class="pt-2 text-2xl font-bold pr-0.5 pl-0.5 select-none">
+        {{ user.first_name + " " + user.last_name + "\'s Profile" + (showProfileImage ? ' Image' : '') }}</p>
 
+    </template>
 
-    <div v-if="!showProfileImage">
+    <template #content>
 
-      <div class="pt-2">
-        <div class="flex items-start justify-center">
-          <img :src="this._backend_url + user.prof_image" class="rounded-full h-32 w-32 cursor-pointer" loading="lazy"
-               @click="showProfileImage = true"/>
-        </div>
+      <div v-if="!showProfileImage">
 
-        <div class="p-5 pt-2 pl-10 pr-10 text-center w-full text-gray-900 dark:text-gray-100">
-          <p class="text-xl font-bold">{{ user.first_name + " " + user.last_name }}</p>
-          <p class="text-lg text-gray-700 dark:text-gray-300" v-if="user.username === this.getUsername()">{{ user.email }}</p>
-          <p class="text-lg text-gray-500 hover:animate-wave">{{ user.username }}</p>
-
-          <div class="w-full flex justify-center text-left p-1" v-if="user.prof_desc">
-            <div class="w-60 rounded-xl border border-gray-500 p-2">
-              <p class="text-lg">{{ user.prof_desc }}</p>
-            </div>
+        <div class="pt-2">
+          <div class="flex items-start justify-center">
+            <img :src="this._backend_url + user.prof_image" class="rounded-full h-32 w-32 cursor-pointer" loading="lazy"
+                 @click="showProfileImage = true"/>
           </div>
 
-          <p class="text-xl text-gray-800 dark:text-gray-200 pt-2 pb-1 select-none">
-            {{ user.username === this.getUsername() ? 'Your' : user.first_name + ' ' + user.last_name }} Interests</p>
+          <div class="p-5 pt-2 pl-10 pr-10 text-center w-full text-gray-900 dark:text-gray-100">
+            <p class="text-xl font-bold">{{ user.first_name + " " + user.last_name }}</p>
+            <p class="text-lg text-gray-700 dark:text-gray-300" v-if="user.username === this.getUsername()">{{
+                user.email
+              }}</p>
+            <p class="text-lg text-gray-500 hover:animate-wave">{{ user.username }}</p>
 
-          <div class="ml-20 mr-20 p-2 border border-gray-500 rounded-xl">
-            <div class="grid grid-cols-4" v-if="user.interests.length > 0"
-                 :key="user">
-              <p v-for="i in user.interests" :key="i" class="capitalize select-none">{{ i }}</p>
+            <div class="w-full flex justify-center text-left p-1" v-if="user.prof_desc">
+              <div class="w-60 rounded-xl border border-gray-500 p-2">
+                <p class="text-lg">{{ user.prof_desc }}</p>
+              </div>
             </div>
 
-            <p v-else class="text-gray-500">No Interests Found</p>
-          </div>
+            <p class="text-xl text-gray-800 dark:text-gray-200 pt-2 pb-1 select-none">
+              {{ user.username === this.getUsername() ? 'Your' : user.first_name + ' ' + user.last_name }} Interests</p>
 
+            <div class="ml-20 mr-20 p-2 border border-gray-500 rounded-xl">
+              <div class="grid grid-cols-4" v-if="user.interests.length > 0"
+                   :key="user">
+                <p v-for="i in user.interests" :key="i" class="capitalize select-none">{{ i }}</p>
+              </div>
 
-          <div class="flex justify-evenly pt-5">
-            <div class="inline-flex cursor-pointer" @click="openFollowersModal">
-              <IconFollower/>
-              <span class="pl-1 font-bold text-gray-700 dark:text-gray-300">{{ user.followers + ' Followers' }}</span>
+              <p v-else class="text-gray-500">No Interests Found</p>
             </div>
 
-            <div class="inline-flex cursor-pointer" @click="openFollowingModal">
-              <IconFollowing/>
-              <span class="pl-1 font-bold text-gray-700 dark:text-gray-300">{{ user.following + ' Following' }}</span>
+
+            <div class="flex justify-evenly pt-5">
+              <div class="inline-flex cursor-pointer" @click="openFollowersModal">
+                <IconFollower/>
+                <span class="pl-1 font-bold text-gray-700 dark:text-gray-300">{{ user.followers + ' Followers' }}</span>
+              </div>
+
+              <div class="inline-flex cursor-pointer" @click="openFollowingModal">
+                <IconFollowing/>
+                <span class="pl-1 font-bold text-gray-700 dark:text-gray-300">{{ user.following + ' Following' }}</span>
+              </div>
+
             </div>
 
-          </div>
+            <div class="w-full flex justify-center gap-12 pt-5 select-none">
 
-          <div class="w-full flex justify-center gap-12 pt-5 select-none">
+              <div class="text-gray-600 dark:text-gray-400" v-if="user.username === this.getUsername()">
+                <p>Last Login</p>
+                <p>{{ getDate(user.last_login) }}</p>
+              </div>
 
-            <div class="text-gray-600 dark:text-gray-400" v-if="user.username === this.getUsername()">
-              <p>Last Login</p>
-              <p>{{ getDate(user.last_login) }}</p>
+              <div class="text-gray-600 dark:text-gray-400">
+                <p>Member Since</p>
+                <p>{{ getDate(user.date_joined) }}</p>
+              </div>
+
+
             </div>
-
-            <div class="text-gray-600 dark:text-gray-400">
-              <p>Member Since</p>
-              <p>{{ getDate(user.date_joined) }}</p>
-            </div>
-
 
           </div>
 
@@ -71,30 +78,39 @@
 
       </div>
 
-    </div>
+
+      <div v-else @click="showProfileImage = false" class="p-2 flex justify-center">
+        <img :src="this._backend_url + user.prof_image" class="rounded-xl cursor-pointer" loading="lazy"/>
+      </div>
+    </template>
 
 
-    <div v-else @click="showProfileImage = false" class="p-2 flex justify-center">
-      <img :src="this._backend_url + user.prof_image" class="rounded-xl cursor-pointer" loading="lazy"/>
-    </div>
+    <template #footer="slotProps">
 
-    <HRV2SM class="mt-2 mb-3"/>
-    <div class="pb-3 grid grid-cols-4 w-full" v-if="user.username !== getUsername()">
-      <ButtonOutline class="col-span-1 col-start-2" :title="followText" @click="followUser(user.username)"/>
-      <ButtonOutline class="col-span-1" title="Close" @click="slotProps.close"/>
-    </div>
-    <div v-else class="pb-3 w-full">
-      <ButtonOutline title="Close" @click="slotProps.close"/>
-    </div>
+      <div class="pb-3 grid grid-cols-5 w-full" v-if="user.username !== getUsername()">
+        <ButtonOutline class="col-span-1 col-start-2" :title="followText" @click="followUser(user.username)"/>
+        <ButtonOutline class="col-span-1" title="See Posts" @click="showPostModal = true"/>
+        <ButtonOutline class="col-span-1" title="Close" @click="slotProps.close"/>
+      </div>
+      <div v-else class="pb-3 grid grid-cols-4 w-full">
+        <ButtonOutline class="col-span-1 col-start-2" title="See Posts" @click="showPostModal = true"/>
+        <ButtonOutline class="col-span-1" title="Close" @click="slotProps.close"/>
+      </div>
 
-    <slot name="slotOuter">
+    </template>
+
+
+    <template #outer>
       <!-- The same model handles both followers and following -->
       <ModalFollowers :followers="getFollowers" v-if="showFollowersModal" :key="showFollowersModal"
                       :username="user.username" @close="showFollowersModal = false"
                       @followUpdate="this.$emit('followUpdate')"
                       :name="user.username !== getUsername() ? user.first_name + ' ' + user.last_name : ''"/>
 
-    </slot>
+      <ModalPosts :user="user" :isYou="user.username === getUsername()" v-if="showPostModal" :key="showPostModal"
+                  @close="showPostModal = false"/>
+
+    </template>
 
   </ModalWrapper>
 
@@ -102,7 +118,6 @@
 </template>
 
 <script>
-import HRV2SM from "@/components/forms/HRV2SM";
 import * as network from "@/assets/js/network";
 import ButtonOutline from "@/components/buttons/ButtonOutline";
 import ModalWrapper from "@/components/modals/util/ModalWrapper";
@@ -111,10 +126,11 @@ import IconFollowing from "@/components/icons/IconFollowing";
 import * as utils from "@/assets/js/utility";
 import {date_med} from "@/assets/js/dates";
 import ModalFollowers from "@/components/modals/ModalFollowers";
+import ModalPosts from "@/components/modals/ModalPosts";
 
 export default {
   name: "ModalProfile",
-  components: {ModalFollowers, IconFollowing, IconFollower, ModalWrapper, ButtonOutline, HRV2SM},
+  components: {ModalPosts, ModalFollowers, IconFollowing, IconFollower, ModalWrapper, ButtonOutline},
   props: {
     username: {
       type: String,
@@ -128,6 +144,7 @@ export default {
       followText: "Follow",
       showProfileImage: false,
       showFollowersModal: false,
+      showPostModal: false,
       getFollowers: true,
     }
   },
