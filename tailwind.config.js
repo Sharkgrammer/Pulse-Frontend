@@ -21,8 +21,8 @@ module.exports = {
                 '1/2': '50%',
             },
             maxHeight: {
-                'modal': '50rem',
-                'modal-content': '40rem',
+                'modal': '100vh',
+                'modal-content': '80vh',
             },
             padding: {
                 'post-t': '0.56rem',

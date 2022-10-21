@@ -3,14 +3,26 @@
   <div class="w-profile">
 
 
-    <div class="w-full pt-5 flex justify-end pr-5">
-      <img v-if="isDark" src="@/assets/img/logo.png" class="h-20 cursor-pointer" @click="goHome" alt="logo"/>
-      <img v-else src="@/assets/img/logoBlack.png" class="h-20 cursor-pointer" @click="goHome" alt="logo"/>
+    <div class="w-full pt-3 flex justify-end pr-5 cursor-pointer" @click="goHome" @mouseover="animateLogo = true"
+         @mouseleave="animateLogo = false">
+
+      <div v-if="!animateLogo">
+        <img v-if="isDark" src="@/assets/img/logo.png" class="h-32" alt="logo"/>
+        <img v-else src="@/assets/img/logoBlack.png" class="h-32" alt="logo"/>
+      </div>
+
+      <div v-else>
+        <img v-if="isDark" src="@/assets/img/logoAnim.gif" class="h-32" alt="logo"/>
+        <img v-else src="@/assets/img/logoAnimBlack.gif" class="h-32" alt="logo"/>
+      </div>
+
     </div>
 
-    <div class="grid grid-cols-3 pr-5 pt-5">
 
-      <div class="col-start-2 col-span-2 w-full space-y-5 text-2xl text-bold text-right text-gray-900 dark:text-gray-100">
+    <div class="grid grid-cols-3 pr-5 pt-3">
+
+      <div
+          class="col-start-2 col-span-2 w-full space-y-5 text-2xl text-bold text-right text-gray-900 dark:text-gray-100">
 
         <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300" @click="goHome">
           <div class="inline-flex">
@@ -20,7 +32,8 @@
           <HRV2SM/>
         </div>
 
-        <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300" @click="openFollowersModal">
+        <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
+             @click="openFollowersModal">
           <div class="inline-flex">
             <span class="pr-1">Followers</span>
             <IconFollower class="mt-1"/>
@@ -28,7 +41,8 @@
           <HRV2SM/>
         </div>
 
-        <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300" @click="openFollowingModal">
+        <div class="space-y-0.5 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
+             @click="openFollowingModal">
           <div class="inline-flex">
             <span class="pr-1">Following</span>
             <IconFollowing class="mt-1"/>
@@ -87,9 +101,10 @@ export default {
       showFollowersModal: false,
       getFollowers: true,
       isDark: false,
+      animateLogo: false,
     }
   },
-  mounted(){
+  mounted() {
     this.isDark = document.body.classList.contains("dark")
   },
   methods: {
