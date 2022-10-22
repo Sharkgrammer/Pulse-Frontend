@@ -5,13 +5,13 @@
   <div class="bg-lightBg dark:bg-darkBg min-h-screen h-full">
 
     <!-- Visual Size Checker -->
-    <div v-if="false"
-         class="w-full h-10 bg-pink-500 sm:bg-red-500 md:bg-yellow-500 lg:bg-accent xl:bg-green-500 2xl:bg-purple-500">
-
+    <div v-if="true" class="w-full h-10 bg-purple-500 sm:bg-blue-500 md:bg-yellow-500 md lg:bg-green-500">
     </div>
 
+    <NavBar class="md:hidden" />
 
-    <div class="w-full flex justify-center">
+
+    <div class="w-full pr-10 pl-10 md:flex md:justify-center md:pr-2 md:pl-2">
 
       <SystemTab @followUpdate="checkUser(); this.$refs.friendTab.$forceUpdate" @profileUpdate="profileUpdate"/>
 
@@ -34,10 +34,11 @@ import FriendTab from "@/components/system/FriendTab";
 import SystemTab from "@/components/system/SystemTab";
 import * as network from "@/assets/js/network";
 import * as utils from "@/assets/js/utility";
+import NavBar from "@/components/mobile/NavBar";
 
 export default {
   name: "PageLayout",
-  components: {FriendTab, SystemTab},
+  components: {NavBar, FriendTab, SystemTab},
   mounted() {
     this.checkUser();
   },

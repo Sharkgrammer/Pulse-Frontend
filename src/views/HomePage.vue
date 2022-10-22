@@ -2,14 +2,18 @@
 
 
   <PageLayout>
-    <SystemPost :title="getWelcomeMessage()" @postUpdate="refreshPosts"/>
+    <div class="w-full max-w-post md:w-post">
 
-    <div v-for="post in posts" :key="post">
-      <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
+      <SystemPost :title="getWelcomeMessage()" @postUpdate="refreshPosts"/>
+
+      <div v-for="post in posts" :key="post">
+        <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
+      </div>
+
+      <LoadingPost v-if="showLoadingPost"/>
+      <NothingPost v-else/>
+
     </div>
-
-    <LoadingPost v-if="showLoadingPost"/>
-    <NothingPost v-else/>
   </PageLayout>
 
 </template>

@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-post text-center border border-gray-400 dark:border-gray-700 cursor-pointer border-gray-500 hover:bg-white dark:hover:border-gray-300 dark:hover:bg-gray-800"
+  <div class="text-center border border-gray-400 dark:border-gray-700 cursor-pointer border-gray-500 hover:bg-white dark:hover:border-gray-300 dark:hover:bg-gray-800"
        :class="showExtraBorder ? 'post-fix' : 'post'" @mouseover="showExtraBorder = true"
        @mouseleave="showExtraBorder = false" @click="openPost">
 

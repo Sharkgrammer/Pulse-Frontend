@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-profile">
+  <div class="w-profile hidden lg:block">
 
 
     <div class="w-full pt-3 flex justify-end pr-5 cursor-pointer" @click="goHome" @mouseover="animateLogo = true"

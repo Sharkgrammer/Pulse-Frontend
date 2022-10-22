@@ -1,5 +1,5 @@
 <template>
-  <div class="w-friend pl-5">
+  <div class="w-friend pl-5 hidden lg:block">
 
     <div class="flex items-start justify-center pt-5">
       <img :src="this._backend_url + getProfileImage()" class="profile-image-lg cursor-pointer" loading="lazy"

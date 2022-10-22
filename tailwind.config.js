@@ -17,6 +17,14 @@ module.exports = {
                 'friend': '25rem',
                 'modal': '40rem',
             },
+            screens: {
+                // sm is were ill aim for mobile i guess.
+                'sm': '500px',
+                // md for, uh, something. Tablets? Its a weird middleground
+                'md': '720px',
+                // lg for desktop
+                'lg': '1110px',
+            },
             maxWidth: {
                 '1/2': '50%',
             },
