@@ -4,7 +4,7 @@
   <PageLayout>
     <div class="w-full max-w-post md:w-post">
 
-      <SystemPost :title="getWelcomeMessage()" @postUpdate="refreshPosts"/>
+      <SystemPost :name="getusersName()" @postUpdate="refreshPosts"/>
 
       <div v-for="post in posts" :key="post">
         <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
@@ -53,9 +53,8 @@ export default {
       //console.log(data)
       if (data !== false) this.posts = data;
     },
-    getWelcomeMessage() {
-      // TODO make this say other things
-      return "Good Afternoon " + utils.getFirstName(this) + " " + utils.getLastName(this);
+    getusersName() {
+      return utils.getFirstName(this) + " " + utils.getLastName(this);
     },
     refreshPosts() {
       this.amt++;

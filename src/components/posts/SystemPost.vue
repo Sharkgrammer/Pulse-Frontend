@@ -3,16 +3,15 @@
   <div class="text-center pt-5 border-l border-r border-gray-400 dark:border-gray-700">
     <div class="w-full pr-4 pl-4">
 
-      <!-- Rest of the content -->
       <div class="">
 
         <div class="text-left">
-          <p class="text-gray-900 pb-1 dark:text-gray-100 font-bold text-xl select-none">{{ title }}</p>
+          <p class="text-gray-900 pb-1 dark:text-gray-100 font-bold text-xl select-none">{{ getWelcomeMessage() }}</p>
 
           <div class="grid grid-cols-6 gap-0">
 
             <div class="w-full col-span-5">
-              <TextBox :key="resetText" placeholder="Whatcha thinking?" @update="updateText" @keyup.enter="sendPost"/>
+              <TextBox :key="resetText" :placeholder="getPlaceholderMessage()" @update="updateText" @keyup.enter="sendPost"/>
 
               <div class="flex w-full mt-2">
                 <IconImage class="text-gray-800 dark:text-gray-200 cursor-pointer hover:text-accent h-8 w-8"
@@ -75,14 +74,10 @@ export default {
   },
   emits: ['postUpdate'],
   props: {
-    title: {
+    name: {
       type: String,
       default: ""
     },
-    content: {
-      type: String,
-      default: ""
-    }
   },
   methods: {
     updateText(val) {
@@ -132,6 +127,33 @@ export default {
         this.$emit('postUpdate');
       }
 
+    },
+    getWelcomeMessage() {
+      let messagePrefix = ["Good", "Pleasant", "Eh", "Blessed", "Top of the", "Grand ol'", "Fine", "Sigh... Good"]
+
+      let n = Math.floor(Math.random() * messagePrefix.length);
+
+      let message = "";
+      let hours = new Date().getHours();
+
+       if (hours >= 18 || hours <= 2){
+         message = "Evening"
+       } else if (hours >= 3 && hours <= 12){
+         message = "Morning"
+       }else{
+         message = "Evening"
+       }
+
+      return messagePrefix[n] + " " + message + ", " + this.name;
+    },
+    getPlaceholderMessage(){
+      let messages = ["Whatcha thinking?", "I love you", "Whats the haps?", "How are you?", "Where did you go?",
+        "I missed you", "Twee..I mean..Post here", "Insert message here", "This is the box you're looking for",
+        "Say something funny!", "Tell your crush about your feelings", "Ring your parents", "Wake up"]
+
+      let n = Math.floor(Math.random() * messages.length);
+
+      return messages[n];
     }
   }
 }
