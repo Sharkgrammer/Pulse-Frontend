@@ -4,10 +4,11 @@
          @click="openProfile"/>
 
     <div class="pl-2 pr-2 w-full cursor-pointer" @click="openProfile">
-      <p v-if="search === ''" class="text-gray-900 dark:text-gray-100 text-lg">{{ user.first_name + " " + user.last_name }}</p>
+      <p v-if="search === ''" class="text-gray-900 dark:text-gray-100 text-lg flex items-center">{{ user.name }}
+        <IconVerified v-if="user.verified" class="ml-1"/> </p>
 
-      <p v-else class="text-gray-900 dark:text-gray-100 text-lg">
-        {{ name1 }}<b class="text-accent">{{ name2 }}</b>{{ name3 }}
+      <p v-else class="text-gray-900 dark:text-gray-100 text-lg flex items-center">
+        <span>{{ name1 }}<b class="text-accent">{{ name2 }}</b>{{ name3 }}</span> <IconVerified v-if="user.verified" class="ml-1"/>
       </p>
 
       <p v-if="search === ''" class="text-gray-700 dark:text-gray-300 text-md hover:animate-rainbow">{{ user.username }}</p>
@@ -32,10 +33,11 @@ import HRV2SM from "@/components/forms/HRV2SM";
 import ButtonOutline from "@/components/buttons/ButtonOutline";
 import {getUsername, spliceSearch} from "@/assets/js/utility";
 import {NetworkRequest} from "@/assets/js/network";
+import IconVerified from "@/components/icons/IconVerified";
 
 export default {
   name: "FollowUser",
-  components: {ButtonOutline, HRV2SM},
+  components: {IconVerified, ButtonOutline, HRV2SM},
   emits: ['followUpdate', 'openProfile'],
   props: {
     user: {
@@ -93,8 +95,7 @@ export default {
     },
     calcBold() {
       // I have to do it this way, v-html w/ computed would open up XSS attacks :(
-      let fullName = this.user.first_name + " " + this.user.last_name;
-      let name = spliceSearch(fullName, this.search)
+      let name = spliceSearch(this.user.name, this.search)
       this.name1 = name[0]
       this.name2 = name[1]
       this.name3 = name[2]

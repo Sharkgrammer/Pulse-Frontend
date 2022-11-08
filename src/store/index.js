@@ -12,6 +12,7 @@ export default createStore({
             prof_image: "",
             followers: 0,
             following: 0,
+            verified: false,
         }
     },
     mutations: {
@@ -39,6 +40,9 @@ export default createStore({
         setFollowing(state, following) {
             state.following = following
         },
+        setVerified(state, verified) {
+            state.verified = verified
+        },
     },
     getters: {
         access: state => state.access,
@@ -49,6 +53,7 @@ export default createStore({
         prof_image: state => state.prof_image,
         followers: state => state.followers,
         following: state => state.following,
+        verified: state => state.verified,
     },
     plugins: [createPersistedState()]
 });

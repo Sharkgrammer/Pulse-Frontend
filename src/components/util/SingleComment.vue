@@ -13,7 +13,7 @@
 
       <div class="text-left pb-2">
         <p class="text-gray-800 dark:text-gray-200 font-bold text-xl cursor-pointer" @click="openProfile">
-          {{ comment.profile_name }}
+          <span class="flex items-center">{{ comment.profile_name }} <IconVerified v-if="this.comment.profile_verified" class="ml-1"/> </span>
           <span class="text-gray-600 dark:text-gray-400 text-lg hover:animate-rainbow">({{ comment.profile_username }})</span>
         </p>
         <p class="text-gray-700 dark:text-gray-300 text-lg">{{ comment.content }}</p>
@@ -41,10 +41,11 @@ import PostReact from "@/components/util/PostReact";
 import HRV2 from "@/components/forms/HRV2";
 import * as network from "@/assets/js/network";
 import {datetime_med} from "@/assets/js/dates";
+import IconVerified from "@/components/icons/IconVerified";
 
 export default {
   name: "SingleComment",
-  components: {HRV2, PostReact},
+  components: {IconVerified, HRV2, PostReact},
   props: {
     comment: null,
   },

@@ -106,6 +106,14 @@ export function getFollowing(context) {
     return context.$store.getters.following
 }
 
+export function setVerified(context, verified) {
+    context.$store.commit("setVerified", verified)
+}
+
+export function getVerified(context) {
+    return context.$store.getters.verified
+}
+
 export async function redirectToLogin() {
     await router.push({name: 'Login'})
 }
@@ -131,6 +139,7 @@ export function updateUser(context, data) {
     this.setFollowing(context, data.following);
     this.setFollowers(context, data.followers);
     this.setProfImage(context, data.prof_image);
+    this.setVerified(context, data.verified);
 }
 
 export function spliceSearch(text, search) {

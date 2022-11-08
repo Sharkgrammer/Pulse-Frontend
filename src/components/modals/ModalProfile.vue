@@ -4,7 +4,7 @@
 
     <template #header>
       <p class="pt-2 text-2xl font-bold pr-0.5 pl-0.5 select-none">
-        {{ user.first_name + " " + user.last_name + "\'s Profile" + (showProfileImage ? ' Image' : '') }}</p>
+        {{ user.name + "\'s Profile" + (showProfileImage ? ' Image' : '') }}</p>
 
     </template>
 
@@ -19,7 +19,7 @@
           </div>
 
           <div class="p-5 pt-2 pl-10 pr-10 text-center w-full text-gray-900 dark:text-gray-100">
-            <p class="text-xl font-bold">{{ user.first_name + " " + user.last_name }}</p>
+            <p class="text-xl font-bold flex justify-center items-center">{{ user.name }} <IconVerified v-if="user.verified" class="ml-1" /></p>
             <p class="text-lg text-gray-700 dark:text-gray-300" v-if="user.username === this.getUsername()">{{
                 user.email
               }}</p>
@@ -32,7 +32,7 @@
             </div>
 
             <p class="text-xl text-gray-800 dark:text-gray-200 pt-2 pb-1 select-none">
-              {{ user.username === this.getUsername() ? 'Your' : user.first_name + ' ' + user.last_name }} Interests</p>
+              {{ user.username === this.getUsername() ? 'Your' : user.name }} Interests</p>
 
             <div class="ml-20 mr-20 p-2 border border-gray-500 rounded-xl">
               <div class="grid grid-cols-4" v-if="user.interests.length > 0"
@@ -105,7 +105,7 @@
       <ModalFollowers :followers="getFollowers" v-if="showFollowersModal" :key="showFollowersModal"
                       :username="user.username" @close="showFollowersModal = false"
                       @followUpdate="this.$emit('followUpdate')"
-                      :name="user.username !== getUsername() ? user.first_name + ' ' + user.last_name : ''"/>
+                      :name="user.username !== getUsername() ? user.name : ''"/>
 
       <ModalPosts :user="user" :isYou="user.username === getUsername()" v-if="showPostModal" :key="showPostModal"
                   @close="showPostModal = false"/>
@@ -127,10 +127,11 @@ import * as utils from "@/assets/js/utility";
 import {date_med} from "@/assets/js/dates";
 import ModalFollowers from "@/components/modals/ModalFollowers";
 import ModalPosts from "@/components/modals/ModalPosts";
+import IconVerified from "@/components/icons/IconVerified";
 
 export default {
   name: "ModalProfile",
-  components: {ModalPosts, ModalFollowers, IconFollowing, IconFollower, ModalWrapper, ButtonOutline},
+  components: {IconVerified, ModalPosts, ModalFollowers, IconFollowing, IconFollower, ModalWrapper, ButtonOutline},
   props: {
     username: {
       type: String,

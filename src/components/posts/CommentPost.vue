@@ -15,7 +15,8 @@
 
         <div class="text-left pb-2">
           <div @click="openProfile(post.profile_username)" class="cursor-pointer">
-            <p class="text-gray-800 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
+            <p class="text-gray-800 dark:text-gray-200 font-bold text-xl flex items-center">{{ post.profile_name }}
+              <IconVerified v-if="this.post.profile_verified" class="ml-1"/></p>
             <p class="text-gray-600 dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
           </div>
 
@@ -28,7 +29,7 @@
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
-        <p class="500 text-right text-sm">{{ formatDate(post.created_date) }}</p>
+        <p class="text-gray-500 text-right text-sm">{{ formatDate(post.created_date) }}</p>
 
 
       </div>
@@ -79,10 +80,11 @@ import SingleComment from "@/components/util/SingleComment";
 import ModalLoading from "@/components/modals/ModalLoading";
 import ModalProfile from "@/components/modals/ModalProfile";
 import {datetime_full} from "@/assets/js/dates";
+import IconVerified from "@/components/icons/IconVerified";
 
 export default {
   name: "CommentPost",
-  components: {ModalProfile, ModalLoading, SingleComment, ButtonIcon, TextBox, HRV2, ReactsLine},
+  components: {IconVerified, ModalProfile, ModalLoading, SingleComment, ButtonIcon, TextBox, HRV2, ReactsLine},
   data() {
     return {
       commentText: "",

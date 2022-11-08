@@ -12,7 +12,8 @@
       <div class="col-span-10">
 
         <div class="text-left p-1">
-          <p class="text-gray-800 dark:text-gray-200 font-bold">{{ post.profile_name }}
+          <p class="text-gray-800 dark:text-gray-200 font-bold">
+            <span class="flex items-center">{{ post.profile_name }} <IconVerified v-if="this.post.profile_verified" class="ml-1"/> </span>
             <span class="text-gray-600 dark:text-gray-400 text-sm hover:animate-rainbow">({{ post.profile_username }})</span>
           </p>
 
@@ -54,10 +55,11 @@ import ReactsLine from "@/components/util/ReactsLine";
 import HRV2SM from "@/components/forms/HRV2SM";
 import * as utils from "@/assets/js/utility";
 import {datetime_med} from "@/assets/js/dates";
+import IconVerified from "@/components/icons/IconVerified";
 
 export default {
   name: "SmallUserPost",
-  components: {HRV2SM, ReactsLine},
+  components: {IconVerified, HRV2SM, ReactsLine},
   props: {
     post: {
       type: Object,

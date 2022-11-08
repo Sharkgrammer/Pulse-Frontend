@@ -1,8 +1,9 @@
 <template>
 
-  <div class="text-center border border-gray-400 dark:border-gray-700 cursor-pointer border-gray-500 hover:bg-white dark:hover:border-gray-300 dark:hover:bg-gray-800"
-       :class="showExtraBorder ? 'post-fix' : 'post'" @mouseover="showExtraBorder = true"
-       @mouseleave="showExtraBorder = false" @click="openPost">
+  <div
+      class="text-center border border-gray-400 dark:border-gray-700 cursor-pointer border-gray-500 hover:bg-white dark:hover:border-gray-300 dark:hover:bg-gray-800"
+      :class="showExtraBorder ? 'post-fix' : 'post'" @mouseover="showExtraBorder = true"
+      @mouseleave="showExtraBorder = false" @click="openPost">
 
     <div class="w-full grid grid-cols-12 pr-2 pb-2">
 
@@ -19,7 +20,9 @@
           <div>
 
             <div>
-              <p class="text-gray-800 dark:text-gray-200 font-bold text-xl">{{ post.profile_name }}</p>
+              <p class="text-gray-800 dark:text-gray-200 font-bold text-xl flex items-center">{{ post.profile_name }}
+                <IconVerified v-if="this.post.profile_verified" class="ml-1"/>
+              </p>
               <p class="text-gray-600 dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
             </div>
 
@@ -57,10 +60,11 @@ import HRV2 from "@/components/forms/HRV2";
 import router from "@/router/router";
 import ReactsLine from "@/components/util/ReactsLine";
 import {datetime_med} from "@/assets/js/dates";
+import IconVerified from "@/components/icons/IconVerified";
 
 export default {
   name: "UserPost",
-  components: {ReactsLine, HRV2},
+  components: {IconVerified, ReactsLine, HRV2},
   props: {
     post: {
       type: Object,
@@ -69,7 +73,7 @@ export default {
   },
   mounted() {
     // TODO remove this debug statement
-    console.log(this.post.content + " :" +this.post.score)
+    console.log(this.post.content + " :" + this.post.score)
   },
   data() {
     return {

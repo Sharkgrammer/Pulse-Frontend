@@ -8,7 +8,7 @@
 
     <div class="pt-2 pl-10 pr-10 text-center w-full text-gray-900 dark:text-gray-100 hover:animate-rainbow cursor-pointer"
          @click="openProfile(this.getUsername())">
-      <p class="text-xl font-bold">{{ this.getName() }}</p>
+      <p class="text-xl font-bold flex justify-center"><span class="flex items-center">{{ this.getName() }} <IconVerified v-if="this.getVerified()" class="ml-1"/></span> </p>
       <p class="text-lg text-gray-500 hover:animate-wave">{{ this.getUsername() }}</p>
 
       <div class="flex justify-evenly pt-2">
@@ -55,10 +55,11 @@ import IconFollowing from "@/components/icons/IconFollowing";
 import * as utils from "@/assets/js/utility";
 import FollowUser from "@/components/util/FollowUser";
 import ModalProfile from "@/components/modals/ModalProfile";
+import IconVerified from "@/components/icons/IconVerified";
 
 export default {
   name: "FriendTab",
-  components: {ModalProfile, FollowUser, IconFollowing, IconFollower, HRV2SM},
+  components: {IconVerified, ModalProfile, FollowUser, IconFollowing, IconFollower, HRV2SM},
   data() {
     return {
       users: Object,
@@ -96,6 +97,9 @@ export default {
     },
     getFollowing() {
       return utils.getFollowing(this);
+    },
+    getVerified() {
+      return utils.getVerified(this);
     },
   }
 }

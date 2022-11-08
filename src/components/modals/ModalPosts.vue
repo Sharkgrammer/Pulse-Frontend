@@ -5,7 +5,7 @@
     <template #header>
 
       <p class="pt-2 text-2xl font-bold pr-0.5 pl-0.5">{{
-          isYou ? 'Your' : user.first_name + ' ' + user.last_name + '\'s'
+          isYou ? 'Your' : user.name + '\'s'
         }} Posts</p>
 
     </template>
