@@ -1,6 +1,6 @@
 <template>
 
-  <ModalWrapper :ignoreBar="true">
+  <ModalWrapper :ignoreBar="true" :hideHr="true">
 
     <template #content>
       <div class="p-16 animate-gentle-pulse">

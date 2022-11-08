@@ -114,6 +114,14 @@ export function getVerified(context) {
     return context.$store.getters.verified
 }
 
+export function setLatestMode(context, latestMode) {
+    context.$store.commit("setLatestMode", latestMode)
+}
+
+export function getLatestMode(context) {
+    return context.$store.getters.latestMode
+}
+
 export async function redirectToLogin() {
     await router.push({name: 'Login'})
 }

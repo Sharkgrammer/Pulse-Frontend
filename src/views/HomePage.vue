@@ -26,6 +26,7 @@ import * as utils from "@/assets/js/utility";
 import LoadingPost from "@/components/posts/LoadingPost";
 import PageLayout from "@/components/util/PageLayout";
 import NothingPost from "@/components/posts/NothingPost";
+import {getLatestMode} from "@/assets/js/utility";
 
 export default {
   name: "HomePage",
@@ -46,6 +47,7 @@ export default {
 
       let params = {
         amt: this.postAmt,
+        latest: getLatestMode(this),
       }
 
       let data = await network.NetworkRequest(this, "/api/v1/post", "GET", null, params);
@@ -70,7 +72,7 @@ export default {
     },
     scroll() {
       window.onscroll = () => {
-        if ((document.documentElement.scrollHeight - window.pageYOffset) === (document.documentElement.offsetHeight)) {
+        if ((document.documentElement.scrollHeight - window.pageYOffset) <= (document.documentElement.offsetHeight + 200)) {
           this.updatePostAmt()
         }
       }

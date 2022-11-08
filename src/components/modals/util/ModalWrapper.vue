@@ -9,13 +9,13 @@
       <div
           class="rounded-xl bg-lightBg dark:bg-darkBg text-gray-900 dark:text-gray-100 shadow-xl animate-fade-in max-h-modal">
         <slot name="header"/>
-        <HRV2SM class="mt-2 mb-2"/>
+        <HRV2SM v-if="!hideHr" class="mt-2 mb-2"/>
 
-        <div class="max-h-modal-content overflow-y-scroll">
+        <div class="max-h-modal-content overflow-y-auto">
           <slot name="content"/>
         </div>
 
-        <HRV2SM class="mt-2 mb-3"/>
+        <HRV2SM v-if="!hideHr" class="mt-2 mb-3"/>
         <slot :close="close" name="footer"/>
       </div>
 
@@ -34,6 +34,10 @@ export default {
   emits: ['close'],
   props: {
     ignoreBar: {
+      type: Boolean,
+      default: false
+    },
+    hideHr: {
       type: Boolean,
       default: false
     }

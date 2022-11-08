@@ -13,6 +13,7 @@ export default createStore({
             followers: 0,
             following: 0,
             verified: false,
+            latestMode: false,
         }
     },
     mutations: {
@@ -43,6 +44,9 @@ export default createStore({
         setVerified(state, verified) {
             state.verified = verified
         },
+        setLatestMode(state, latestMode) {
+            state.latestMode = latestMode
+        },
     },
     getters: {
         access: state => state.access,
@@ -54,6 +58,7 @@ export default createStore({
         followers: state => state.followers,
         following: state => state.following,
         verified: state => state.verified,
+        latestMode: state => state.latestMode,
     },
     plugins: [createPersistedState()]
 });

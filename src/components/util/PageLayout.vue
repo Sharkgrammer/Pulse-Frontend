@@ -5,7 +5,7 @@
   <div class="bg-lightBg dark:bg-darkBg min-h-screen h-full">
 
     <!-- Visual Size Checker -->
-    <div v-if="true" class="w-full h-10 bg-purple-500 sm:bg-blue-500 md:bg-yellow-500 md lg:bg-green-500">
+    <div v-if="false" class="w-full h-10 bg-purple-500 sm:bg-blue-500 md:bg-yellow-500 md lg:bg-green-500">
     </div>
 
     <NavBar class="md:hidden" />

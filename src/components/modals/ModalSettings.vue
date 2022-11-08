@@ -65,7 +65,7 @@
              border-gray-500 rounded-xl">
 
             <div v-for="interest in interests" :key="interest">
-              <p class="text-gray-700 dark:text-gray-300 text-bol capitalize">{{ interest.name }}</p>
+              <p class="text-gray-700 dark:text-gray-300 text-bold capitalize">{{ interest.name }}</p>
             </div>
 
           </div>
@@ -85,8 +85,13 @@
       <p class="pt-2 text-lg">Other Settings</p>
       <HRV2SM class="m-20 mt-0 mb-1"/>
 
+      <div class="text-gray-700 dark:text-gray-300 pl-10 pr-10 pt-1 w-full flex items-center justify-end">
+        <p :key="latestMode">Post Feed Mode: <b>{{ latestMode ? "Latest Followers Mode" : "Home/Algo Mode"}}</b></p>
+        <ButtonOutline class="ml-3" title="Change Mode" @click="changeLatestMode" />
+      </div>
+
       <div>
-        <p class="text-gray-500 text-lg pb-2">More options will be available later</p>
+        <p class="text-gray-500 text-lg pb-2 pt-4">More options will be available later</p>
       </div>
 
     </template>
@@ -118,6 +123,7 @@ import ModalWrapper from "@/components/modals/util/ModalWrapper";
 import TextBox from "@/components/forms/TextBox";
 import * as val from "@/assets/js/validate";
 import ModalLoading from "@/components/modals/ModalLoading";
+import {getLatestMode, setLatestMode} from "@/assets/js/utility";
 
 export default {
   name: "ModalSettings",
@@ -138,11 +144,13 @@ export default {
       image: null,
       previewImageUrl: null,
       showLoading: false,
+      latestMode: false,
     }
   },
   async mounted() {
     await this.getUser();
     await this.getInterests();
+    this.latestMode = getLatestMode(this);
   },
   methods: {
     async getUser() {
@@ -162,6 +170,10 @@ export default {
     },
     getName() {
       return utils.getFirstName(this) + " " + utils.getLastName(this);
+    },
+    changeLatestMode(){
+      this.latestMode = !this.latestMode;
+      setLatestMode(this, this.latestMode)
     },
     logout() {
       utils.logout(this);
