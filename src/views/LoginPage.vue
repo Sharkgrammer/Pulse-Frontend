@@ -9,7 +9,7 @@
         <img v-else src="@/assets/img/logoBlack.png" class="h-28 cursor-pointer" alt="logo"/>
       </div>
 
-      <p class="pt-2 text-2xl text-gray-900 dark:text-gray-100 text-center">Welcome to Social Shonks</p>
+      <p class="pt-2 text-2xl text-gray-900 dark:text-gray-100 text-center">Pulse: The heartbeat of the Internet</p>
 
       <div>
         <TextBox class="p-2" @keyup.enter="login" @update="updateEmail" placeholder="Email" type="email"/>
