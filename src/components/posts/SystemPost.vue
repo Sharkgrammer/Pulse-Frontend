@@ -1,6 +1,6 @@
 <template>
 
-  <div class="text-center pt-5 border-l border-r border-gray-400 dark:border-gray-700">
+  <div class="text-center pt-2 sm:pt-5 border-l border-r border-gray-400 dark:border-gray-700">
     <div class="w-full pr-4 pl-4">
 
       <div class="">
@@ -8,13 +8,13 @@
         <div class="text-left">
           <p class="text-gray-900 pb-1 dark:text-gray-100 font-bold text-xl select-none">{{ getWelcomeMessage() }}</p>
 
-          <div class="grid grid-cols-6 gap-0">
+          <div class="grid grid-cols-8 lg:grid-cols-6 gap-2">
 
-            <div class="w-full col-span-5">
+            <div class="w-full col-span-6 lg:col-span-5">
               <TextBox :key="resetText" :placeholder="getPlaceholderMessage()" @update="updateText" @keyup.enter="sendPost"/>
 
               <div class="flex w-full mt-2">
-                <IconImage class="text-gray-800 dark:text-gray-200 cursor-pointer hover:text-accent h-8 w-8"
+                <IconImage class="text-gray-800 dark:text-gray-200 cursor-pointer hover:text-accent dark:hover:text-accent h-8 w-8"
                            @click="this.$refs.fileInput.click()"/>
 
                 <div class="flex h-full my-auto ml-3" v-if="file !== null">
@@ -22,14 +22,14 @@
                   <IconDelete class="text-gray-900 dark:text-gray-100 ml-1 cursor-pointer hover:text-red-400" @click="clearFile"/>
                 </div>
                 <div class="h-full my-auto ml-0.5" v-else>
-                  <p class="text-gray-500 text-left select-none">&#60;&#8722;&#8722; Click to add an image</p>
+                  <p class="text-gray-500 text-left select-none" @click="this.$refs.fileInput.click()">&#60;&#8722;&#8722; Click to add an image</p>
                 </div>
               </div>
 
             </div>
 
 
-            <div class="h-full col-span-1 flex justify-center items-center">
+            <div class="h-full col-span-2 lg:col-span-1 flex justify-center items-center">
               <ButtonIcon class="h-14 w-14 rotate-90" @click="sendPost"/>
             </div>
 

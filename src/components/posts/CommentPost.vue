@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-post text-center pt-5 border-l border-r border-gray-400 dark:border-gray-700">
+  <div class="md:w-post text-center pt-5 border-l border-r border-gray-400 dark:border-gray-700">
 
     <div class="w-full grid grid-cols-12 pr-2 pb-2">
 
@@ -16,7 +16,7 @@
         <div class="text-left pb-2">
           <div @click="openProfile(post.profile_username)" class="cursor-pointer">
             <p class="text-gray-800 dark:text-gray-200 font-bold text-xl flex items-center">{{ post.profile_name }}
-              <IconVerified v-if="this.post.profile_verified" class="ml-1"/></p>
+              <IconVerified v-if="this.post.profile_verified" class="ml-1"/><IconAd v-if="this.post.advertisement" class="ml-1"/></p>
             <p class="text-gray-600 dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
           </div>
 
@@ -29,14 +29,17 @@
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
-        <p class="text-gray-500 text-right text-sm">{{ formatDate(post.created_date) }}</p>
+        <div class="flex">
+          <p v-if="this.post.advertisement" class="w-full text-gray-500 text-left text-sm pb-2">Ad</p>
+          <p class="w-full text-gray-500 text-right text-sm pb-2">{{ formatDate(post.created_date) }}</p>
+        </div>
 
 
       </div>
 
     </div>
 
-    <div class="w-full pl-10 pr-10">
+    <div class="w-full pl-2 pr-2 lg:pl-10 lg:pr-10">
       <HRV2/>
       <div class="mb-1 mt-1">
         <ReactsLine :pid="post.pid" :likes="post.likes" :comments="post.comments" :shares="post.shares"
@@ -81,10 +84,11 @@ import ModalLoading from "@/components/modals/ModalLoading";
 import ModalProfile from "@/components/modals/ModalProfile";
 import {datetime_full} from "@/assets/js/dates";
 import IconVerified from "@/components/icons/IconVerified";
+import IconAd from "@/components/icons/IconAd";
 
 export default {
   name: "CommentPost",
-  components: {IconVerified, ModalProfile, ModalLoading, SingleComment, ButtonIcon, TextBox, HRV2, ReactsLine},
+  components: {IconVerified, IconAd, ModalProfile, ModalLoading, SingleComment, ButtonIcon, TextBox, HRV2, ReactsLine},
   data() {
     return {
       commentText: "",

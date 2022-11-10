@@ -19,7 +19,7 @@
     </div>
 
     <div class="flex items-center" v-if="user.username !== getUsername()">
-      <ButtonOutline :title="buttonText" size="small" class="text-gray-900 dark:text-gray-100" :key="buttonText"
+      <ButtonOutline :title="buttonText" class="text-gray-900 dark:text-gray-100" :key="buttonText"
                      @click="followUser(user.username)"/>
     </div>
 

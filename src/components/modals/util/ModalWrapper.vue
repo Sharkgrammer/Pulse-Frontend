@@ -1,6 +1,6 @@
 <template>
 
-  <div class="fixed z-10 inset-0 text-center flex justify-center items-center">
+  <div class="fixed z-10 inset-0 text-center flex justify-center items-center pl-5 pr-5">
 
     <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity" @click.self="close()"/>
 

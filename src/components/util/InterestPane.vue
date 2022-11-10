@@ -18,10 +18,10 @@
 
       <div class="ml-2 mr-2">
         <p>All Interests</p>
-        <div class="grid grid-cols-2 p-2 border border-gray-500 rounded-xl"
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:p-2 border border-gray-500 rounded-xl"
              v-if="allInterests && allInterests.length > 0">
 
-          <p v-for="i in allInterests" :key="i" class="text-gray-700 dark:text-gray-300 capitalize cursor-pointer select-none"
+          <p v-for="i in allInterests" :key="i" class="text-gray-700 p-1 lg:p-0 dark:text-gray-300 capitalize cursor-pointer select-none"
              @click="add(i)">{{ i.name }}</p>
 
         </div>
@@ -30,16 +30,16 @@
           <p class="text-gray-500">Interest Not Found</p>
         </div>
         <div v-else class="p-2 border border-gray-500 rounded-xl">
-          <p class="text-gray-500">Awaiting Search..</p>
+          <p class="text-gray-500">Waiting..</p>
         </div>
 
       </div>
 
       <div class="ml-2 mr-2">
         <p>Your Interests</p>
-        <div v-if="yourInterests.length > 0" class="grid grid-cols-2 p-2 border border-gray-500 rounded-xl">
+        <div v-if="yourInterests.length > 0" class="grid grid-cols-1 lg:grid-cols-2 lg:p-2 border border-gray-500 rounded-xl">
 
-          <p v-for="i in yourInterests" :key="i" class="text-gray-700 dark:text-gray-300 capitalize cursor-pointer select-none"
+          <p v-for="i in yourInterests" :key="i" class="text-gray-700 p-1 lg:p-0 dark:text-gray-300 capitalize cursor-pointer select-none"
              @click="remove(i)">{{ i.name }}</p>
 
         </div>
@@ -52,7 +52,7 @@
 
   </div>
 
-  <div class="w-full text-right pr-5 mt-2" v-if="!emitData">
+  <div class="w-full text-right pr-2 mt-2" v-if="!emitData">
     <div class="flex justify-end gap-4">
       <ButtonOutline title="Cancel" @click="cancel"/>
       <ButtonOutline title="Save" @click="save"/>

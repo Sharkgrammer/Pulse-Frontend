@@ -5,22 +5,28 @@
   <div class="bg-lightBg dark:bg-darkBg min-h-screen h-full">
 
     <!-- Visual Size Checker -->
-    <div v-if="false" class="w-full h-10 bg-purple-500 sm:bg-blue-500 md:bg-yellow-500 md lg:bg-green-500">
+    <div v-if="false" class="w-full h-10 bg-purple-500 sm:bg-blue-500 md:bg-yellow-500 lg:bg-green-500">
     </div>
 
-    <NavBar class="md:hidden" />
+    <!-- <div class="md:hidden"> -->
+    <div class="lg:hidden">
+      <NavBar  />
+    </div>
 
 
-    <div class="w-full pr-10 pl-10 md:flex md:justify-center md:pr-2 md:pl-2">
+    <div class="w-full sm:pr-10 sm:pl-10 md:flex md:justify-center md:pr-2 md:pl-2">
 
-      <SystemTab @followUpdate="checkUser(); this.$refs.friendTab.$forceUpdate" @profileUpdate="profileUpdate"/>
+      <div class="w-profile hidden lg:block">
+        <SystemTab @followUpdate="checkUser(); this.$refs.friendTab.$forceUpdate" @profileUpdate="profileUpdate"/>
+      </div>
 
       <div ref="siteTab">
         <slot/>
       </div>
 
-      <FriendTab @followUpdate="checkUser" ref="friendTab"/>
-
+      <div class="w-friend pl-5 hidden lg:block">
+        <FriendTab @followUpdate="checkUser" ref="friendTab"/>
+      </div>
     </div>
 
 

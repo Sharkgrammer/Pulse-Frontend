@@ -15,7 +15,7 @@
 
       <!-- Users -->
       <div v-if="userResults" :key="userResults"
-           class="border-gray-700 dark:border-gray-300 border hover:border-accent rounded-xl p-2 mb-3">
+           class="border-gray-700 dark:border-gray-300 border hover:border-accent dark:hover:border-accent rounded-xl p-2 mb-3">
 
         <div v-if="userResults.length > 0">
 
@@ -48,7 +48,7 @@
 
       <!-- Posts -->
       <div v-if="postResults" :key="postResults"
-           class="border-gray-700 dark:border-gray-300 border hover:border-accent rounded-xl p-2">
+           class="border-gray-700 dark:border-gray-300 border hover:border-accent dark:hover:border-accent rounded-xl p-2">
 
         <div v-if="postResults.length > 0">
 

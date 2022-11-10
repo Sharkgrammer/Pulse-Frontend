@@ -30,7 +30,7 @@ module.exports = {
             },
             maxHeight: {
                 'modal': '100vh',
-                'modal-content': '80vh',
+                'modal-content': '70vh',
             },
             padding: {
                 'post-t': '0.56rem',

@@ -3,7 +3,7 @@
 
   <PageLayout>
 
-    <div v-if="post !== null">
+    <div class="w-full" v-if="post !== null">
 
       <CommentPost :post="post" :comments="comments" :key="post || comments" @commentUpdate="updateData"
                    @followUpdate="this.$emit('followUpdate')"/>
@@ -13,7 +13,7 @@
     </div>
 
     <div v-else>
-      <div class="w-post ">
+      <div class="w-post">
 
         <LoadingPost/>
         <HRV2/>

@@ -13,6 +13,7 @@ export default createStore({
             followers: 0,
             following: 0,
             verified: false,
+            annoy: false,
             latestMode: false,
         }
     },
@@ -47,6 +48,9 @@ export default createStore({
         setLatestMode(state, latestMode) {
             state.latestMode = latestMode
         },
+        setAnnoy(state, annoy) {
+            state.annoy = annoy
+        },
     },
     getters: {
         access: state => state.access,
@@ -59,6 +63,7 @@ export default createStore({
         following: state => state.following,
         verified: state => state.verified,
         latestMode: state => state.latestMode,
+        annoy: state => state.annoy,
     },
     plugins: [createPersistedState()]
 });

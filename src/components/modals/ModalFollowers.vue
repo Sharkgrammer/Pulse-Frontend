@@ -11,7 +11,7 @@
 
 
     <template #content>
-      <div class="pl-10 pr-10 pb-2">
+      <div class="pl-2 pr-2 lg:pl-10 lg:pr-10 pb-2">
 
         <div v-if="users && users.length > 0">
           <div v-for="x in users" :key="x" class="pl-2 pr-2">

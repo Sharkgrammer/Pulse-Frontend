@@ -9,19 +9,18 @@
     <template #content>
 
       <p class="pt-2 text-lg">Profile Information</p>
-      <HRV2SM class="m-20 mt-0 mb-2"/>
+      <HRV2SM class="m-5 mt-0 mb-2 lg:mb-1 lg:mr-20 lg:ml-20"/>
 
-      <div class="pl-10 pr-10" :key="user" v-if="user">
+      <div class="pl-2 pr-2 lg:pl-10 lg:pr-10" :key="user" v-if="user">
 
-        <div class="grid grid-cols-2 gap-4 pb-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-4">
 
           <div class="flex justify-center items-center pt-1">
             <img :src="!previewImageUrl ? this._backend_url + user.prof_image : this.previewImageUrl"
-                 class="rounded-full h-28 w-28"
-                 loading="lazy"/>
+                 class="rounded-full h-28 w-28" loading="lazy"/>
           </div>
 
-          <div class="pt-4">
+          <div class="lg:pt-4">
             <TextBox :disabled="!editInformation" :value="user.first_name" placeholder="First Name"
                      :key="editInformation" @update="updateFirstName"/>
             <TextBox class="mt-4" :disabled="!editInformation" :value="user.last_name" placeholder="Last Name"
@@ -46,23 +45,22 @@
 
       </div>
 
-      <div class="w-full pr-10 mt-2 flex justify-end gap-4">
+      <div class="w-full pr-2 lg:pr-10 mt-2 flex justify-end gap-4">
         <ButtonOutline v-if="editInformation" title="Cancel" @click="cancelProfileEdit"/>
         <ButtonOutline :title="editInformation ? 'Save' : 'Edit'" @click="saveProfileEdit"/>
       </div>
 
       <p class="pt-2 text-lg">Your Interests</p>
-      <HRV2SM class="m-20 mt-0 mb-1"/>
+      <HRV2SM class="m-5 mt-0 mb-2 lg:mb-1 lg:mr-20 lg:ml-20"/>
 
-      <div class="pl-5 pr-5">
+      <div class="pl-2 pr-2 lg:pl-5 lg:pr-5">
 
-        <div v-if="editInterests" class="p-2 mt-3 ml-5 mr-5 border border-gray-500 rounded-xl">
+        <div v-if="editInterests" class="p-2 mt-3 lg:ml-5 lg:mr-5 border border-gray-500 rounded-xl">
           <InterestPane @close="closeInterestPane"/>
         </div>
 
         <div v-else>
-          <div v-if="interests !== null && interests.length > 0" class="grid grid-cols-5 p-2 mt-3 ml-5 mr-5 border
-             border-gray-500 rounded-xl">
+          <div v-if="interests !== null && interests.length > 0" class="grid grid-cols-4 lg:grid-cols-5 p-2 mt-3 ml-2 mr-2 lg:ml-5 lg:mr-5 border border-gray-500 rounded-xl">
 
             <div v-for="interest in interests" :key="interest">
               <p class="text-gray-700 dark:text-gray-300 text-bold capitalize">{{ interest.name }}</p>
@@ -70,11 +68,11 @@
 
           </div>
 
-          <div v-else class="p-2 mt-3 ml-5 mr-5 border border-gray-500 rounded-xl">
+          <div v-else class="p-2 mt-3 ml-2 mr-2 lg:ml-5 lg:mr-5 border border-gray-500 rounded-xl">
             <p class="text-gray-500">No Interests Found</p>
           </div>
 
-          <div class="w-full text-right pr-5 mt-2">
+          <div class="w-full text-right pr-2 lg:pr-5 mt-2">
             <ButtonOutline title="Edit" @click="editInterests = !editInterests"/>
           </div>
         </div>
@@ -83,9 +81,9 @@
 
 
       <p class="pt-2 text-lg">Other Settings</p>
-      <HRV2SM class="m-20 mt-0 mb-1"/>
+      <HRV2SM class="m-5 mt-0 mb-2 lg:mb-1 lg:mr-20 lg:ml-20"/>
 
-      <div class="text-gray-700 dark:text-gray-300 pl-10 pr-10 pt-1 w-full flex items-center justify-end">
+      <div class="text-gray-700 dark:text-gray-300 pl-2 pr-2 lg:pl-10 lg:pr-10 pt-1 w-full flex items-center justify-end">
         <p :key="latestMode">Post Feed Mode: <b>{{ latestMode ? "Latest Followers Mode" : "Home/Algo Mode"}}</b></p>
         <ButtonOutline class="ml-3" title="Change Mode" @click="changeLatestMode" />
       </div>

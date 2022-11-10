@@ -26,7 +26,7 @@
             <p class="text-lg text-gray-500 hover:animate-wave">{{ user.username }}</p>
 
             <div class="w-full flex justify-center text-left p-1" v-if="user.prof_desc">
-              <div class="w-60 rounded-xl border border-gray-500 p-2">
+              <div class="w-3/4 border-b border-t border-gray-500 p-2">
                 <p class="text-lg">{{ user.prof_desc }}</p>
               </div>
             </div>
@@ -34,7 +34,7 @@
             <p class="text-xl text-gray-800 dark:text-gray-200 pt-2 pb-1 select-none">
               {{ user.username === this.getUsername() ? 'Your' : user.name }} Interests</p>
 
-            <div class="ml-20 mr-20 p-2 border border-gray-500 rounded-xl">
+            <div class="lg:ml-20 lg:mr-20 p-2 border border-gray-500 rounded-xl">
               <div class="grid grid-cols-4" v-if="user.interests.length > 0"
                    :key="user">
                 <p v-for="i in user.interests" :key="i" class="capitalize select-none">{{ i }}</p>
@@ -87,14 +87,14 @@
 
     <template #footer="slotProps">
 
-      <div class="pb-3 grid grid-cols-5 w-full" v-if="user.username !== getUsername()">
-        <ButtonOutline class="col-span-1 col-start-2" :title="followText" @click="followUser(user.username)"/>
-        <ButtonOutline class="col-span-1" title="See Posts" @click="showPostModal = true"/>
-        <ButtonOutline class="col-span-1" title="Close" @click="slotProps.close"/>
+      <div class="pb-3 flex justify-evenly w-full" v-if="user.username !== getUsername()">
+        <ButtonOutline :title="followText" @click="followUser(user.username)"/>
+        <ButtonOutline title="See Posts" @click="showPostModal = true"/>
+        <ButtonOutline title="Close" @click="slotProps.close"/>
       </div>
-      <div v-else class="pb-3 grid grid-cols-4 w-full">
-        <ButtonOutline class="col-span-1 col-start-2" title="See Posts" @click="showPostModal = true"/>
-        <ButtonOutline class="col-span-1" title="Close" @click="slotProps.close"/>
+      <div v-else class="pb-3 flex justify-evenly w-full">
+        <ButtonOutline title="See Posts" @click="showPostModal = true"/>
+        <ButtonOutline title="Close" @click="slotProps.close"/>
       </div>
 
     </template>

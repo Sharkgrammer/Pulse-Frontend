@@ -77,7 +77,7 @@ export default {
 }
 
 .box {
-  @apply w-full px-3 py-2 border rounded-lg focus:outline-none bg-lightBg text-gray-600 dark:bg-darkBg dark:text-gray-300;
+  @apply w-full px-3 py-2 border rounded-lg focus:outline-none bg-lightBg text-gray-600 dark:bg-darkBg dark:text-gray-300 hover:border-accent dark:hover:border-accent;
 }
 
 </style>

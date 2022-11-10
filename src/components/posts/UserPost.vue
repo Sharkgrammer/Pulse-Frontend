@@ -5,12 +5,11 @@
       :class="showExtraBorder ? 'post-fix' : 'post'" @mouseover="showExtraBorder = true"
       @mouseleave="showExtraBorder = false" @click="openPost">
 
-    <div class="w-full grid grid-cols-12 pr-2 pb-2">
+    <div class="w-full grid grid-cols-12 pr-2 pb-2 gap-2 sm:gap-0">
 
       <!-- Image Only -->
       <div class="col-span-2 flex items-start justify-center">
-        <img :src="this._backend_url + post.profile_image" class="profile-image" loading="lazy" width="50"
-             height="50"/>
+        <img :src="this._backend_url + post.profile_image" class="profile-image p-0.5 sm:p-0" loading="lazy"/>
       </div>
 
       <!-- Rest of the content -->
@@ -21,7 +20,7 @@
 
             <div>
               <p class="text-gray-800 dark:text-gray-200 font-bold text-xl flex items-center">{{ post.profile_name }}
-                <IconVerified v-if="this.post.profile_verified" class="ml-1"/>
+                <IconVerified v-if="this.post.profile_verified" class="ml-1"/> <IconAd v-if="this.post.advertisement" class="ml-1"/>
               </p>
               <p class="text-gray-600 dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
             </div>
@@ -36,7 +35,10 @@
                class="rounded-2xl shadow max-h-96 max-w-96"/>
         </div>
 
-        <p class="text-gray-500 text-right text-sm pb-2">{{ formatDate(post.created_date) }}</p>
+        <div class="flex">
+          <p v-if="this.post.advertisement" class="w-full text-gray-500 text-left text-sm pb-2">Ad</p>
+          <p class="w-full text-gray-500 text-right text-sm pb-2">{{ formatDate(post.created_date) }}</p>
+        </div>
 
         <div class="w-full" @click.stop>
           <ReactsLine :pid="post.pid" :likes="post.likes" :comments="post.comments" :shares="post.shares"
@@ -61,10 +63,11 @@ import router from "@/router/router";
 import ReactsLine from "@/components/util/ReactsLine";
 import {datetime_med} from "@/assets/js/dates";
 import IconVerified from "@/components/icons/IconVerified";
+import IconAd from "@/components/icons/IconAd";
 
 export default {
   name: "UserPost",
-  components: {IconVerified, ReactsLine, HRV2},
+  components: {IconVerified, IconAd, ReactsLine, HRV2},
   props: {
     post: {
       type: Object,

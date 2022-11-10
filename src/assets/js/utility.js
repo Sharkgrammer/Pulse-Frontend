@@ -122,6 +122,14 @@ export function getLatestMode(context) {
     return context.$store.getters.latestMode
 }
 
+export function setAnnoy(context, annoy) {
+    context.$store.commit("setAnnoy", annoy)
+}
+
+export function getAnnoy(context) {
+    return context.$store.getters.annoy
+}
+
 export async function redirectToLogin() {
     await router.push({name: 'Login'})
 }
@@ -148,6 +156,7 @@ export function updateUser(context, data) {
     this.setFollowers(context, data.followers);
     this.setProfImage(context, data.prof_image);
     this.setVerified(context, data.verified);
+    this.setAnnoy(context, data.annoy);
 }
 
 export function spliceSearch(text, search) {
