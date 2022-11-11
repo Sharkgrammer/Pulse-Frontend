@@ -14,7 +14,7 @@
       <div class="pl-2 pr-2 lg:pl-10 lg:pr-10 pb-2">
 
         <div v-if="users && users.length > 0">
-          <div v-for="x in users" :key="x" class="pl-2 pr-2">
+          <div v-for="x in users" :key="x" class="pl-2 pr-2" @click="showProfile(x.username)">
             <FollowUser :user="x" @followUpdate="this.$emit('followUpdate')"/>
           </div>
         </div>
@@ -34,6 +34,10 @@
       </div>
     </template>
 
+    <template #outer>
+      <ModalProfile v-if="showProfileVar" :username="profileUsername" @close="showProfileVar = false"/>
+    </template>
+
   </ModalWrapper>
 
 </template>
@@ -43,10 +47,14 @@ import ModalWrapper from "@/components/modals/util/ModalWrapper";
 import ButtonOutline from "@/components/buttons/ButtonOutline";
 import * as network from "@/assets/js/network";
 import FollowUser from "@/components/util/FollowUser";
+import {defineAsyncComponent} from "vue";
 
 export default {
   name: "ModalFollowers",
-  components: {FollowUser, ButtonOutline, ModalWrapper},
+  components: {
+    FollowUser, ButtonOutline, ModalWrapper,
+    "ModalProfile": defineAsyncComponent(() => import("./ModalProfile.vue"))
+  },
   emits: ['followUpdate'],
   props: {
     followers: {
@@ -60,17 +68,23 @@ export default {
     name: {
       type: String,
       default: '',
-    }
+    },
   },
   data() {
     return {
       users: null,
+      showProfileVar: false,
+      profileUsername: ""
     }
   },
   async mounted() {
     await this.getFollows()
   },
   methods: {
+    showProfile(username) {
+      this.profileUsername = username;
+      this.showProfileVar = true;
+    },
     async getFollows() {
       let params = {
         followers: this.followers
