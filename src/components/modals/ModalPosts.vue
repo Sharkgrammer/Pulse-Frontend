@@ -13,7 +13,7 @@
 
     <template #content>
 
-      <div class="pl-10 pr-10" v-if="posts && posts.length > 0">
+      <div class="pl-2 pr-2 lg:pl-10 lg:pr-10" v-if="posts && posts.length > 0">
         <SmallUserPost class="m-3" v-for="post in posts" :key="post" :post="post"/>
       </div>
 

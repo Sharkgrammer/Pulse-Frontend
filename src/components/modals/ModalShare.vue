@@ -8,15 +8,17 @@
 
 
     <template #content>
-      <div class="flex h-full justify-center pb-3 pt-3 cursor-pointer text-gray-200 hover:text-gray-300"
-           @click="copyURL">
+      <div class="hidden lg:block">
+        <div class="flex h-full justify-center pb-3 pt-3 cursor-pointer text-gray-200 hover:text-gray-300"
+             @click="copyURL">
 
-        <IconCopy size="share-xl"/>
-        <p class="my-auto text-xl">Copy a link to this post</p>
+          <IconCopy size="share-xl"/>
+          <p class="my-auto text-xl">Copy a link to this post</p>
 
+        </div>
       </div>
 
-      <p class="text-gray-400 text-lg pb-2">More share options will be available later</p>
+      <p class="text-gray-400 text-lg p-2">More options will be available later</p>
     </template>
 
 
