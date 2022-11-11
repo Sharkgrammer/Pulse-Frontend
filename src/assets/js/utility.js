@@ -130,6 +130,18 @@ export function getAnnoy(context) {
     return context.$store.getters.annoy
 }
 
+export function setDarkMode(context, darkMode) {
+    // For once, actually effect something else here
+    let event = new CustomEvent("darkmode", {"detail": darkMode});
+    document.dispatchEvent(event);
+
+    context.$store.commit("setDarkMode", darkMode)
+}
+
+export function getDarkMode(context) {
+    return context.$store.getters.darkMode
+}
+
 export async function redirectToLogin() {
     await router.push({name: 'Login'})
 }

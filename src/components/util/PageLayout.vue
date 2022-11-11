@@ -10,7 +10,7 @@
 
     <!-- <div class="md:hidden"> -->
     <div class="lg:hidden">
-      <NavBar  />
+      <NavBar/>
     </div>
 
 
@@ -20,8 +20,8 @@
         <SystemTab @followUpdate="checkUser(); this.$refs.friendTab.$forceUpdate" @profileUpdate="profileUpdate"/>
       </div>
 
-      <div ref="siteTab">
-        <slot/>
+      <div ref="siteTab" >
+        <slot />
       </div>
 
       <div class="w-friend pl-5 hidden lg:block">
@@ -45,6 +45,11 @@ import NavBar from "@/components/mobile/NavBar";
 export default {
   name: "PageLayout",
   components: {NavBar, FriendTab, SystemTab},
+  data() {
+    return {
+      temp: false
+    }
+  },
   mounted() {
     this.checkUser();
   },

@@ -3,16 +3,17 @@
   <div class="">
 
 
-    <div class="w-full pt-3 flex justify-center lg:justify-end pr-5 cursor-pointer" @click="goHome" @mouseover="animateLogo = true"
+    <div class="w-full pt-3 flex justify-center lg:justify-end pr-5 cursor-pointer" @click="goHome"
+         @mouseover="animateLogo = true"
          @mouseleave="animateLogo = false">
 
       <div v-if="!animateLogo">
-        <img v-if="isDark" src="@/assets/img/logo.png" class="h-32" alt="logo"/>
+        <img v-if="getDarkMode()" src="@/assets/img/logo.png" class="h-32" alt="logo"/>
         <img v-else src="@/assets/img/logoBlack.png" class="h-32" alt="logo"/>
       </div>
 
       <div v-else>
-        <img v-if="isDark" src="@/assets/img/logoAnim.gif" class="h-32" alt="logo"/>
+        <img v-if="getDarkMode()" src="@/assets/img/logoAnim.gif" class="h-32" alt="logo"/>
         <img v-else src="@/assets/img/logoAnimBlack.gif" class="h-32" alt="logo"/>
       </div>
 
@@ -63,8 +64,9 @@
     </div>
 
     <div class="text-sm text-center lg:text-right text-gray-500 pr-5 pt-3">
-      <p class="select-none"><span class="capitalize">{{ getName() }}</span> v{{ getVersion() }}<span
-          v-if="userAnnoy">A</span><span v-if="isDark">D</span><span v-else>L</span></p>
+      <p class="select-none"><span class="capitalize">{{ getName() }}</span>
+        v{{ getVersion() }}<span>{{ userAnnoy ? "A" : "" }}</span><span>{{ isDark ? "D" : "L" }}</span>
+        <span>{{ latestMode ? "L" : "H" }}</span></p>
     </div>
 
     <!-- Search Div -->
@@ -96,7 +98,7 @@ import ModalSettings from "@/components/modals/ModalSettings";
 import ModalFollowers from "@/components/modals/ModalFollowers";
 import SearchBox from "@/components/search/SearchBox";
 import {version, name} from "@/../package.json";
-import {getAnnoy} from "@/assets/js/utility";
+import {getAnnoy, getDarkMode, getLatestMode} from "@/assets/js/utility";
 
 export default {
   name: "SystemTab",
@@ -112,13 +114,18 @@ export default {
       isDark: false,
       animateLogo: false,
       userAnnoy: false,
+      latestMode: false,
     }
   },
   mounted() {
-    this.isDark = document.body.classList.contains("dark");
+    this.isDark = getDarkMode(this);
     this.userAnnoy = getAnnoy(this);
+    this.latestMode = getLatestMode(this);
   },
   methods: {
+    getDarkMode() {
+      return getDarkMode(this);
+    },
     getName() {
       return name;
     },

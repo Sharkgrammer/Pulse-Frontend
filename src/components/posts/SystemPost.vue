@@ -14,7 +14,7 @@
               <TextBox :key="resetText" :placeholder="getPlaceholderMessage()" @update="updateText" @keyup.enter="sendPost"/>
 
               <div class="flex w-full mt-2">
-                <IconImage class="text-gray-800 dark:text-gray-200 cursor-pointer hover:text-accent dark:hover:text-accent h-8 w-8"
+                <IconImage class="text-gray-800 dark:text-gray-200 cursor-pointer hover:text-accent dark:hover:text-accent h-10 w-10 lg:h-8 lg:w-8"
                            @click="this.$refs.fileInput.click()"/>
 
                 <div class="flex h-full my-auto ml-3" v-if="file !== null">

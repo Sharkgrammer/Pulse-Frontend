@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-2 gap-0 text-center flex items-center text-gray-300 font-bold text-lg">
+  <div class="grid grid-cols-2 gap-0 text-center flex items-center text-gray-700 dark:text-gray-300 font-bold text-lg">
     <p class="border border border-gray-700 p-3" @click="showSystemTab">Your Options</p>
     <p class="border border-l-0 border-gray-700 p-3" @click="showFriendTab">Your Profile</p>
   </div>

@@ -5,10 +5,12 @@
 
 <script>
 
+import {getDarkMode} from "@/assets/js/utility";
+
 export default {
   name: 'App',
   mounted() {
-    let event = new CustomEvent("darkmode", {"detail": true});
+    let event = new CustomEvent("darkmode", {"detail": getDarkMode(this)});
     document.dispatchEvent(event);
   },
 }

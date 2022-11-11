@@ -2,16 +2,19 @@
 
   <div class="w-full h-full flex justify-center dark:bg-darkBg min-h-screen h-full">
 
-    <div class="w-1/3">
+    <div class="w-5/6 lg:w-1/3">
 
-      <div class="flex justify-center mt-20 mb-10">
+      <div class="flex justify-center mt-20">
         <img v-if="isDark" src="@/assets/img/logo.png" class="h-28 cursor-pointer" alt="logo"/>
         <img v-else src="@/assets/img/logoBlack.png" class="h-28 cursor-pointer" alt="logo"/>
       </div>
 
-      <p class="pt-2 text-2xl text-gray-900 dark:text-gray-100 text-center">Pulse: The heartbeat of the Internet</p>
+      <div class="text-2xl text-gray-900 dark:text-gray-100 text-center mt-5">
+        <p class="text-3xl font-bold">Pulse</p>
+        <p>The heartbeat of the Internet</p>
+      </div>
 
-      <div>
+      <div class="mt-5">
         <TextBox class="p-2" @keyup.enter="login" @update="updateEmail" placeholder="Email" type="email"/>
         <TextBox class="p-2" @keyup.enter="login" @update="updatePassword" placeholder="Password" type="password"/>
         <TextBox v-if="showRegister" class="p-2" @update="updatePasswordVal" placeholder="Password Validation"

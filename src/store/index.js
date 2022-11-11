@@ -14,6 +14,7 @@ export default createStore({
             following: 0,
             verified: false,
             annoy: false,
+            darkMode: true,
             latestMode: false,
         }
     },
@@ -51,6 +52,9 @@ export default createStore({
         setAnnoy(state, annoy) {
             state.annoy = annoy
         },
+        setDarkMode(state, darkMode) {
+            state.darkMode = darkMode
+        },
     },
     getters: {
         access: state => state.access,
@@ -64,6 +68,7 @@ export default createStore({
         verified: state => state.verified,
         latestMode: state => state.latestMode,
         annoy: state => state.annoy,
+        darkMode: state => state.darkMode,
     },
     plugins: [createPersistedState()]
 });

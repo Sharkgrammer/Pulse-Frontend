@@ -88,8 +88,10 @@
         <ButtonOutline class="ml-3" title="Change Mode" @click="changeLatestMode" />
       </div>
 
-      <div>
-        <p class="text-gray-500 text-lg pb-2 pt-4">More options will be available later</p>
+
+      <div class="text-gray-700 dark:text-gray-300 pb-2 pl-2 pr-2 lg:pl-10 lg:pr-10 pt-1 w-full flex items-center justify-end">
+        <p :key="latestMode">App Mode: <b>{{ darkMode ? "Dark Mode" : "Light Mode"}}</b></p>
+        <ButtonOutline class="ml-3" title="Change Mode" @click="changeDarkMode" />
       </div>
 
     </template>
@@ -121,7 +123,7 @@ import ModalWrapper from "@/components/modals/util/ModalWrapper";
 import TextBox from "@/components/forms/TextBox";
 import * as val from "@/assets/js/validate";
 import ModalLoading from "@/components/modals/ModalLoading";
-import {getLatestMode, setLatestMode} from "@/assets/js/utility";
+import {getDarkMode, getLatestMode, setDarkMode, setLatestMode} from "@/assets/js/utility";
 
 export default {
   name: "ModalSettings",
@@ -143,12 +145,14 @@ export default {
       previewImageUrl: null,
       showLoading: false,
       latestMode: false,
+      darkMode: false,
     }
   },
   async mounted() {
     await this.getUser();
     await this.getInterests();
     this.latestMode = getLatestMode(this);
+    this.darkMode = getDarkMode(this);
   },
   methods: {
     async getUser() {
@@ -172,6 +176,10 @@ export default {
     changeLatestMode(){
       this.latestMode = !this.latestMode;
       setLatestMode(this, this.latestMode)
+    },
+    changeDarkMode(){
+      this.darkMode = !this.darkMode;
+      setDarkMode(this, this.darkMode)
     },
     logout() {
       utils.logout(this);

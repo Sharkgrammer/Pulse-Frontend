@@ -1,13 +1,14 @@
 <template>
 
-
   <PageLayout>
     <div class="w-full max-w-post md:w-post">
 
-      <SystemPost :name="getusersName()" @postUpdate="refreshPosts"/>
+      <SystemPost :name="getUsersName()" @postUpdate="refreshPosts"/>
 
-      <div v-for="post in posts" :key="post">
-        <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
+      <div :key="getLatestMode()">
+        <div v-for="post in posts" :key="post">
+          <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
+        </div>
       </div>
 
       <LoadingPost v-if="showLoadingPost"/>
@@ -36,13 +37,27 @@ export default {
       posts: Object,
       postAmt: 7,
       showLoadingPost: true,
+      oldLatestMode : false,
     }
   },
-  mounted() {
-    this.getAllPosts();
+  async mounted() {
+    await this.getAllPosts();
     this.scroll();
+    this.oldLatestMode = getLatestMode(this);
   },
   methods: {
+    getLatestMode(){
+      // TODO this is a hacky solution to make updating Settings update this page
+      // Re-rendering the slot from PageLayout doesn't redo the network request
+      let newLatestMode = getLatestMode(this);
+
+      if (newLatestMode !== this.oldLatestMode){
+        this.oldLatestMode = newLatestMode;
+        this.getAllPosts();
+      }
+
+      return newLatestMode;
+    },
     async getAllPosts() {
 
       let params = {
@@ -55,7 +70,7 @@ export default {
       //console.log(data)
       if (data !== false) this.posts = data;
     },
-    getusersName() {
+    getUsersName() {
       return utils.getFirstName(this) + " " + utils.getLastName(this);
     },
     refreshPosts() {
