@@ -1,9 +1,7 @@
 <template>
 
-  <div
-      class="text-center border border-gray-400 dark:border-gray-700 cursor-pointer border-gray-500 hover:bg-white dark:hover:border-gray-300 dark:hover:bg-gray-800"
-      :class="showExtraBorder ? 'post-fix' : 'post'" @mouseover="showExtraBorder = true"
-      @mouseleave="showExtraBorder = false" @click="openPost">
+  <div class="text-center hover:bg-white dark:hover:bg-gray-800 cursor-pointer pt-2"
+      @click="openPost">
 
     <div class="w-full grid grid-cols-12 pr-2 pb-2 gap-2 sm:gap-0">
 
@@ -78,11 +76,6 @@ export default {
     // TODO remove this debug statement
     console.log(this.post.content + " :" + this.post.score)
   },
-  data() {
-    return {
-      showExtraBorder: false,
-    }
-  },
   methods: {
     openPost() {
       router.push({name: 'Post', query: {pid: this.post.pid}});
@@ -96,13 +89,5 @@ export default {
 
 <style scoped>
 
-.post-fix {
-  @apply pt-2;
-}
 
-.post {
-  border-top: transparent;
-  border-bottom: transparent;
-  @apply pt-post-t pb-post-b
-}
 </style>

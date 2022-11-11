@@ -1,6 +1,6 @@
 <template>
 
-  <div class="text-center pt-2 sm:pt-5 border-l border-r border-gray-400 dark:border-gray-700">
+  <div class="text-center pt-2 sm:pt-5">
     <div class="w-full pr-4 pl-4">
 
       <div class="">

@@ -9,7 +9,7 @@ module.exports = {
                 accent_light: '#B3ECFF',
                 accent_dark: '#2782A1',
                 darkBg: 'rgb(17 24 39)',
-                lightBg: 'rgb(249 250 251)'
+                lightBg: 'rgb(250, 248, 248)'
             },
             spacing: {
                 'post': '32rem',

@@ -1,6 +1,6 @@
 <template>
 
-  <div class="md:w-post text-center pt-5 border-l border-r border-gray-400 dark:border-gray-700">
+  <div class="md:w-post text-center pt-5">
 
     <div class="w-full grid grid-cols-12 pr-2 pb-2">
 
