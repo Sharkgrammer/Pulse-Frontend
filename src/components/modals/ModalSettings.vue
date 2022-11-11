@@ -85,13 +85,13 @@
 
       <div class="text-gray-700 dark:text-gray-300 pl-2 pr-2 lg:pl-10 lg:pr-10 pt-1 w-full flex items-center justify-end">
         <p :key="latestMode">Post Feed Mode: <b>{{ latestMode ? "Latest Followers Mode" : "Home/Algo Mode"}}</b></p>
-        <ButtonOutline class="ml-3" title="Change Mode" @click="changeLatestMode" />
+        <ButtonOutline class="ml-3" title="Change" @click="changeLatestMode" />
       </div>
 
 
-      <div class="text-gray-700 dark:text-gray-300 pb-2 pl-2 pr-2 lg:pl-10 lg:pr-10 pt-1 w-full flex items-center justify-end">
+      <div class="pt-2 text-gray-700 dark:text-gray-300 pb-2 pl-2 pr-2 lg:pl-10 lg:pr-10 pt-1 w-full flex items-center justify-end">
         <p :key="latestMode">App Mode: <b>{{ darkMode ? "Dark Mode" : "Light Mode"}}</b></p>
-        <ButtonOutline class="ml-3" title="Change Mode" @click="changeDarkMode" />
+        <ButtonOutline class="ml-3" title="Change" @click="changeDarkMode" />
       </div>
 
     </template>

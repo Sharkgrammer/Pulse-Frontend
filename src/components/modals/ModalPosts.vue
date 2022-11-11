@@ -71,7 +71,6 @@ export default {
       let data = await network.NetworkRequest(this, "/api/v1/post", "GET", null, params);
 
       if (data !== false) this.posts = data;
-      console.log(data)
     },
   }
 }

@@ -73,8 +73,8 @@ export default {
     }
   },
   mounted() {
-    // TODO remove this debug statement
-    console.log(this.post.content + " :" + this.post.score)
+    // TODO remove this debug statement. It lets me track the score of each post
+    //console.log(this.post.content + " :" + this.post.score)
   },
   methods: {
     openPost() {

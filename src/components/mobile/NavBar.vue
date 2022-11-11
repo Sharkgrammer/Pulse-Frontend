@@ -11,7 +11,7 @@
   </div>
 
   <div class="grid grid-cols-2 gap-0 text-center flex items-center text-gray-700 dark:text-gray-300 font-bold text-lg
-        border-b dark:border-gray-700 border-gray-400">
+        border-b border-t dark:border-gray-700 border-gray-400">
     <p class="border-r dark:border-gray-700 border-gray-400 p-3" @click="showSystemTab">Your Options</p>
     <p class="p-3" @click="showFriendTab">Your Profile</p>
   </div>
