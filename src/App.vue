@@ -1,4 +1,8 @@
 <template>
+
+  <GDPRPopup/>
+  <AdPopup />
+
   <router-view :key="$route.fullPath"/>
 
 </template>
@@ -6,9 +10,12 @@
 <script>
 
 import {getDarkMode} from "@/assets/js/utility";
+import GDPRPopup from "@/components/popups/GDPRPopup";
+import AdPopup from "@/components/popups/AdPopup";
 
 export default {
   name: 'App',
+  components: {AdPopup, GDPRPopup},
   mounted() {
     let event = new CustomEvent("darkmode", {"detail": getDarkMode(this)});
     document.dispatchEvent(event);

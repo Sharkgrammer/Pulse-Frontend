@@ -1,22 +1,23 @@
 <template>
 
+  <div id="fireworksContainer" class="absolute h-full w-full pointer-events-none" />
+
   <PageLayout>
-    <div class="w-full max-w-post md:w-post">
+      <div class="w-full max-w-post md:w-post">
 
-      <SystemPost :name="getUsersName()" @postUpdate="refreshPosts"/>
+        <SystemPost :name="getUsersName()" @postUpdate="refreshPosts(); setOffFireworks()"/>
 
-      <div :key="getLatestMode()">
-        <div v-for="post in posts" :key="post">
-          <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
+        <div :key="getLatestMode()">
+          <div v-for="post in posts" :key="post">
+            <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
+          </div>
         </div>
+
+        <LoadingPost v-if="showLoadingPost"/>
+        <NothingPost v-else/>
+
       </div>
-
-      <LoadingPost v-if="showLoadingPost"/>
-      <NothingPost v-else/>
-
-    </div>
-  </PageLayout>
-
+    </PageLayout>
 </template>
 
 <script>
@@ -27,7 +28,8 @@ import * as utils from "@/assets/js/utility";
 import LoadingPost from "@/components/posts/LoadingPost";
 import PageLayout from "@/components/util/PageLayout";
 import NothingPost from "@/components/posts/NothingPost";
-import {getLatestMode} from "@/assets/js/utility";
+import {getAnnoy, getLatestMode} from "@/assets/js/utility";
+import { Fireworks } from 'fireworks-js'
 
 export default {
   name: "HomePage",
@@ -37,7 +39,7 @@ export default {
       posts: Object,
       postAmt: 7,
       showLoadingPost: true,
-      oldLatestMode : false,
+      oldLatestMode: false,
     }
   },
   async mounted() {
@@ -46,12 +48,23 @@ export default {
     this.oldLatestMode = getLatestMode(this);
   },
   methods: {
-    getLatestMode(){
+    setOffFireworks() {
+      if (!getAnnoy(this)) return;
+
+      const container = document.querySelector('#fireworksContainer');
+      const fireworks = new Fireworks(container);
+      fireworks.start();
+
+      setTimeout(function () {
+        fireworks.waitStop();
+      }, 2500)
+    },
+    getLatestMode() {
       // TODO this is a hacky solution to make updating Settings update this page
       // Re-rendering the slot from PageLayout doesn't redo the network request
       let newLatestMode = getLatestMode(this);
 
-      if (newLatestMode !== this.oldLatestMode){
+      if (newLatestMode !== this.oldLatestMode) {
         this.oldLatestMode = newLatestMode;
         this.getAllPosts();
       }
