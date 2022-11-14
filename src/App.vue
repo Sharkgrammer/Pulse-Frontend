@@ -1,7 +1,7 @@
 <template>
 
   <GDPRPopup/>
-  <AdPopup />
+  <AdPopupController v-if="getAnnoy()"/>
 
   <router-view :key="$route.fullPath"/>
 
@@ -9,17 +9,32 @@
 
 <script>
 
-import {getDarkMode} from "@/assets/js/utility";
+import {getAnnoy, getDarkMode} from "@/assets/js/utility";
 import GDPRPopup from "@/components/popups/GDPRPopup";
-import AdPopup from "@/components/popups/AdPopup";
+import AdPopupController from "@/components/popups/AdPopupController";
 
 export default {
   name: 'App',
-  components: {AdPopup, GDPRPopup},
+  components: {AdPopupController, GDPRPopup},
+  data() {
+    return {
+      userAnnoy: false
+    }
+  },
   mounted() {
     let event = new CustomEvent("darkmode", {"detail": getDarkMode(this)});
     document.dispatchEvent(event);
   },
+  methods: {
+    getAnnoy() {
+      //  Don't show ads on the login page
+      if (this.$route.path == "/login") {
+        return false;
+      } else {
+        return getAnnoy(this);
+      }
+    }
+  }
 }
 </script>
 
@@ -32,7 +47,7 @@ export default {
 }
 
 body {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 100vh;
 }
 

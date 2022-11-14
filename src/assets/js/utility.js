@@ -143,6 +143,8 @@ export function getDarkMode(context) {
 }
 
 export async function redirectToLogin() {
+    localStorage.clear();
+
     await router.push({name: 'Login'})
 }
 
