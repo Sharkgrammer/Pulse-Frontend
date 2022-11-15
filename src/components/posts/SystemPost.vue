@@ -11,18 +11,23 @@
           <div class="grid grid-cols-8 lg:grid-cols-6 gap-2">
 
             <div class="w-full col-span-6 lg:col-span-5">
-              <TextBox :key="resetText" :placeholder="getPlaceholderMessage()" @update="updateText" @keyup.enter="sendPost"/>
+              <TextBox :key="resetText" :placeholder="getPlaceholderMessage()" @update="updateText"
+                       @keyup.enter="sendPost"/>
 
               <div class="flex w-full mt-2">
-                <IconImage class="text-gray-800 dark:text-gray-200 cursor-pointer hover:text-accent dark:hover:text-accent h-10 w-10 lg:h-8 lg:w-8"
-                           @click="this.$refs.fileInput.click()"/>
+                <IconImage
+                    class="text-gray-800 dark:text-gray-200 cursor-pointer hover:text-accent dark:hover:text-accent h-10 w-10 lg:h-8 lg:w-8"
+                    @click="this.$refs.fileInput.click()"/>
 
                 <div class="flex h-full my-auto ml-3" v-if="file !== null">
-                  <p class="text-gray-700 dark:text-gray-300 w-60 text-right overflow-hidden overflow-ellipsis">{{ fileText }}</p>
-                  <IconDelete class="text-gray-900 dark:text-gray-100 ml-1 cursor-pointer hover:text-red-400" @click="clearFile"/>
+                  <p class="text-gray-700 dark:text-gray-300 w-60 text-right overflow-hidden overflow-ellipsis">
+                    {{ fileText }}</p>
+                  <IconDelete class="text-gray-900 dark:text-gray-100 ml-1 cursor-pointer hover:text-red-400"
+                              @click="clearFile"/>
                 </div>
                 <div class="h-full my-auto ml-0.5" v-else>
-                  <p class="text-gray-500 text-left select-none" @click="this.$refs.fileInput.click()">&#60;&#8722;&#8722; Click to add an image</p>
+                  <p class="text-gray-500 text-left select-none" @click="this.$refs.fileInput.click()">&#60;&#8722;&#8722;
+                    Click to add an image</p>
                 </div>
               </div>
 
@@ -136,17 +141,17 @@ export default {
       let message = "";
       let hours = new Date().getHours();
 
-       if (hours >= 18 || hours <= 2){
-         message = "Evening"
-       } else if (hours >= 3 && hours <= 12){
-         message = "Morning"
-       }else{
-         message = "Evening"
-       }
+      if (hours >= 18 || hours <= 2) {
+        message = "Evening"
+      } else if (hours >= 3 && hours <= 12) {
+        message = "Morning"
+      } else {
+        message = "Afternoon"
+      }
 
       return messagePrefix[n] + " " + message + ", " + this.name;
     },
-    getPlaceholderMessage(){
+    getPlaceholderMessage() {
       let messages = ["Whatcha thinking?", "I love you", "Whats the haps?", "How are you?", "Where did you go?",
         "I missed you", "Twee..I mean..Post here", "Insert message here", "This is the box you're looking for",
         "Say something funny!", "Tell your crush about your feelings", "Ring your parents", "Wake up"]
