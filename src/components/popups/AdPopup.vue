@@ -1,7 +1,7 @@
 <template>
 
 
-  <div :id="'adBox' + id" class="z-50 absolute flex items-center justify-center select-none cursor-pointer">
+  <div :id="'adBox' + id" class="z-50 fixed flex items-center justify-center select-none cursor-pointer">
     <img :src="src" :key="src" class="max-h-60 h-52" :class="src === '' ? 'hidden':''"/>
   </div>
 
@@ -43,7 +43,7 @@ export default {
       let h = window.innerHeight;
 
       let x = Math.floor(Math.random() * (w - 300));
-      let y = Math.floor(Math.random() * (h - 300)) + window.scrollY;
+      let y = Math.floor(Math.random() * (h - 300));
 
       let xMove = Math.floor(Math.random() * 3) + 1;
       let yMove = Math.floor(Math.random() * 3) + 1;
@@ -65,9 +65,9 @@ export default {
           posX = true;
         }
 
-        if (y + ad.clientHeight >= h + window.scrollY) {
+        if (y + ad.clientHeight >= h) {
           posY = true;
-        } else if (y <= window.scrollY) {
+        } else if (y <= 0) {
           posY = false;
         }
 
