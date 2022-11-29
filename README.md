@@ -1,24 +1,11 @@
-# social-shonks
+# Pulse (Frontend)
 
-## Project setup
-```
-npm install
-```
+A social media site built in Vue.js with a Django backend. This is the Vue.js frontend component
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+I post about the development process on LinkedIn in you're interesting in how it was designed. 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# Main Screen
+![Pulse main screen](https://i.imgur.com/bmK4cnX.png)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Video Demo
+https://www.youtube.com/watch?v=eJxtoCWF4Sg
