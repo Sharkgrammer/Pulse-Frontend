@@ -316,7 +316,15 @@ export default {
 
         if (data !== false) {
           await this.getUser();
-          network.updateUser(this, this.user)
+
+          utils.setFirstName(this, this.user.first_name);
+          utils.setLastName(this, this.user.last_name);
+          utils.setUsername(this, this.user.username);
+          utils.setFollowing(this, this.user.following);
+          utils.setFollowers(this, this.user.followers);
+          utils.setProfImage(this, this.user.prof_image);
+          utils.setVerified(this, this.user.verified);
+          utils.setAnnoy(this, this.user.annoy);
 
           this.editInformation = false;
           this.$emit("profileUpdate")
