@@ -4,6 +4,7 @@ import LoginPage from "@/views/LoginPage";
 import PostPage from "@/views/PostPage";
 import ErrorPage from "@/views/ErrorPage";
 import DemoPage from "@/views/DemoPage.vue";
+import PrivacyPage from "@/views/PrivacyPage.vue";
 
 const routes = [
     {
@@ -15,6 +16,11 @@ const routes = [
         path: "/login",
         name: "Login",
         component: DemoPage,
+    },
+    {
+        path: "/privacy",
+        name: "Privacy",
+        component: PrivacyPage,
     },
     {
         path: "/oldlogin",

@@ -1,20 +1,10 @@
 <template>
 
-  <div class="w-full flex justify-center dark:bg-darkBg min-h-screen h-full">
+  <div class="w-full flex justify-center items-center dark:bg-darkBg min-h-screen h-full">
 
     <div class="w-5/6 lg:w-1/3">
 
-      <div class="flex justify-center mt-20">
-        <img v-if="isDark" src="@/assets/img/logo.png" class="h-28 cursor-pointer" alt="logo"/>
-        <img v-else src="@/assets/img/logoBlack.png" class="h-28 cursor-pointer" alt="logo"/>
-      </div>
-
-      <div class="text-2xl text-gray-900 dark:text-gray-100 text-center mt-5">
-        <h1 class="text-3xl font-bold">Pulse</h1>
-        <p>The heartbeat of the Internet</p>
-      </div>
-
-      <div class="py-5 text-white flex flex-col gap-2">
+      <div class="py-5 text-white flex flex-col gap-2" v-if="serverOnline">
 
         <h1 class="text-xl">This is a demo application to demonstrate most this Twitter clones functionality and
           style.</h1>
@@ -35,13 +25,13 @@
             <p class="px-2 text-center">A normal account with no notable features</p>
 
             <div class="profile">
-              <ButtonOutline title="Login" />
+              <ButtonOutline title="Login"/>
             </div>
           </div>
 
           <div class="person" @click="loginAsLindon">
             <div class="profile">
-              <img :src="this._backend_url + '/media/profs/Unsouled_6XWUAV2.png'" loading="lazy"/>
+              <img :src="this._backend_url + '/media/profs/Unsouled_6XWUAV2.PNG'" loading="lazy"/>
             </div>
 
             <p class="text-2xl text-center">Lindon</p>
@@ -49,7 +39,7 @@
             <p class="px-2 text-center">A verified advertiser account with a special "annoy" flag set</p>
 
             <div class="profile">
-              <ButtonOutline title="Login" />
+              <ButtonOutline title="Login"/>
             </div>
 
           </div>
@@ -57,8 +47,19 @@
         </div>
 
         <div class="flex justify-end">
-          <ButtonOutline title="See non-demo login page" @click="goToOld" />
+          <ButtonOutline title="See non-demo login page" @click="goToOld"/>
         </div>
+
+      </div>
+
+      <div class="flex justify-center text-white" v-else>
+
+        <div class="text-center">
+          <p class="text-3xl">Server is booting up{{ dots }}</p>
+          <p class="">This can take a few minutes as its a free server which is suitable for a portfolio application.</p>
+          <IconLoading/>
+        </div>
+
 
       </div>
 
@@ -77,13 +78,20 @@ import * as utils from "@/assets/js/utility";
 import router from "../router/router";
 import ModalLoading from "@/components/modals/ModalLoading.vue";
 import ButtonOutline from "@/components/buttons/ButtonOutline.vue";
+import IconLoading from "@/components/icons/IconLoading.vue";
 
 
 export default {
   name: "DemoPage",
-  components: {ButtonOutline, ModalLoading},
+  components: {IconLoading, ButtonOutline, ModalLoading},
   async mounted() {
     this.isDark = document.body.classList.contains("dark");
+
+    window.setInterval(() => {
+      this.createLoadingTitle()
+    }, 500)
+
+    this.checkServer();
   },
   data() {
     return {
@@ -91,6 +99,8 @@ export default {
       showLoading: false,
       email: "",
       password: "",
+      serverOnline: false,
+      dots: ""
     }
   },
   methods: {
@@ -107,8 +117,17 @@ export default {
 
       this.login();
     },
-    async goToOld(){
+    async goToOld() {
       await router.push({name: 'oldlogin', query: {}});
+    },
+    async checkServer() {
+      let data = await network.NetworkRequest(this, "/api/v1/get_ad", "GET", null, null, false, true)
+
+      if (!data) {
+        this.checkServer();
+      } else {
+        this.serverOnline = true;
+      }
     },
     async login() {
       if (this.email.length === 0 || this.password.length === 0) return;
@@ -145,6 +164,13 @@ export default {
 
       this.showLoading = false;
     },
+    createLoadingTitle() {
+      if (this.dots.length > 2) {
+        this.dots = ""
+      } else {
+        this.dots += "."
+      }
+    }
   }
 }
 </script>

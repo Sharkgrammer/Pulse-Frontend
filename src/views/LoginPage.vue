@@ -135,42 +135,7 @@ export default {
       this.interests = interests;
     },
     async login() {
-      if (this.showRegister) return;
-
-      //TODO validation
-      if (this.email.length === 0 || this.password.length === 0) return;
-
-      let user = {
-        email: this.email,
-        password: this.password,
-      };
-
-      this.showLoading = true;
-      let loggedIn = await network.login(this, user)
-
-      if (loggedIn) {
-        let params = {
-          email: this.email,
-          lin: true
-        }
-
-        let data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, params, true)
-
-        if (data !== false) {
-          utils.updateUser(this, data)
-
-          if (this.interests !== null) {
-            await network.NetworkRequest(this, "/api/v1/update_interests", "POST", {interests: this.interests}, null, false);
-          }
-
-          await router.push({name: 'Home', query: {}});
-        }
-
-      } else {
-        this.errorMessage = "Username or Password Incorrect"
-      }
-
-      this.showLoading = false;
+      await router.push({name: 'Login', query: {}});
     },
     async registerComplete(){
       this.showMessage = false;
