@@ -149,7 +149,7 @@ export default {
         let data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, params, true)
 
         if (data !== false) {
-          utils.updateUser(this, data)
+          network.updateUser(this, data)
 
           if (this.interests !== null) {
             await network.NetworkRequest(this, "/api/v1/update_interests", "POST", {interests: this.interests}, null, false);

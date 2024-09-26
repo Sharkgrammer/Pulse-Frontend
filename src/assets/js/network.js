@@ -137,3 +137,16 @@ export async function NetworkRequest(context, urlEnd, type = "GET", body = null,
         return result
     }
 }
+
+// TODO why? :(
+// Moved here to try to fix a bug
+export function updateUser(context, data) {
+    utils.setFirstName(context, data.first_name);
+    utils.setLastName(context, data.last_name);
+    utils.setUsername(context, data.username);
+    utils.setFollowing(context, data.following);
+    utils.setFollowers(context, data.followers);
+    utils.setProfImage(context, data.prof_image);
+    utils.setVerified(context, data.verified);
+    utils.setAnnoy(context, data.annoy);
+}

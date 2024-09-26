@@ -316,7 +316,7 @@ export default {
 
         if (data !== false) {
           await this.getUser();
-          utils.updateUser(this, this.user)
+          network.updateUser(this, this.user)
 
           this.editInformation = false;
           this.$emit("profileUpdate")

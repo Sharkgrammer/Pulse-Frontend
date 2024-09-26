@@ -58,7 +58,7 @@ export default {
       let data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, {username: utils.getUsername(this)});
 
       if (data !== false) {
-        utils.updateUser(this, data);
+        network.updateUser(this, data);
       }
     },
     async profileUpdate() {
