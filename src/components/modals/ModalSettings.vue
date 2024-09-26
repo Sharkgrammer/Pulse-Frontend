@@ -47,7 +47,7 @@
 
       <div class="w-full pr-2 lg:pr-10 mt-2 flex justify-end gap-4">
         <ButtonOutline v-if="editInformation" title="Cancel" @click="cancelProfileEdit"/>
-        <ButtonOutline :title="editInformation ? 'Save' : 'Edit'" @click="saveProfileEdit"/>
+        <ButtonOutline :title="editInformation ? 'Save' : 'Edit'" @click="showMessage = true"/>
       </div>
 
       <p class="pt-2 text-lg">Your Interests</p>
@@ -107,6 +107,11 @@
 
     <template #outer>
       <ModalLoading v-if="showLoading" :key="showLoading"/>
+
+      <ModalMessage v-if="showMessage" :key="showMessage" @close="showMessage = false"
+                    title="You tried to edit your profile"
+                    content="Registering doesn't work in this demo as I don't want to moderate unfiltered data."/>
+
     </template>
 
   </ModalWrapper>
@@ -124,10 +129,11 @@ import TextBox from "@/components/forms/TextBox";
 import * as val from "@/assets/js/validate";
 import ModalLoading from "@/components/modals/ModalLoading";
 import {getDarkMode, getLatestMode, setDarkMode, setLatestMode} from "@/assets/js/utility";
+import ModalMessage from "@/components/modals/ModalMessage.vue";
 
 export default {
   name: "ModalSettings",
-  components: {ModalLoading, TextBox, ModalWrapper, InterestPane, ButtonOutline, HRV2SM},
+  components: {ModalMessage, ModalLoading, TextBox, ModalWrapper, InterestPane, ButtonOutline, HRV2SM},
   emits: ['profileUpdate'],
   data() {
     return {
@@ -146,6 +152,7 @@ export default {
       showLoading: false,
       latestMode: false,
       darkMode: false,
+      showMessage: false
     }
   },
   async mounted() {

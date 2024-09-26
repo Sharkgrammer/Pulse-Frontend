@@ -32,6 +32,8 @@
 
             <p class="text-2xl text-center">Mercy</p>
 
+            <p class="px-2 text-center">A normal account with no notable features</p>
+
             <div class="profile">
               <ButtonOutline title="Login" />
             </div>
@@ -39,10 +41,12 @@
 
           <div class="person" @click="loginAsLindon">
             <div class="profile">
-              <img :src="this._backend_url + '/media/profs/unsouled.png'" loading="lazy"/>
+              <img :src="this._backend_url + '/media/profs/Unsouled_6XWUAV2.png'" loading="lazy"/>
             </div>
 
             <p class="text-2xl text-center">Lindon</p>
+
+            <p class="px-2 text-center">A verified advertiser account with a special "annoy" flag set</p>
 
             <div class="profile">
               <ButtonOutline title="Login" />

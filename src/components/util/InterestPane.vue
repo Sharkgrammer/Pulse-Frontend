@@ -1,13 +1,10 @@
 <template>
   <div>
 
-    <div v-if="!emitData" class="grid grid-cols-6 gap-2 w-full p-2 flex justify-center items-center">
+    <div v-if="!emitData" class="w-full p-2 flex justify-center items-center">
 
-      <TextBox class="w-full col-span-5 pl-2" placeholder="Search for interests.." :max="10" @update="updateText"/>
+      <TextBox class="w-full pl-2" placeholder="Search for interests.." :max="10" @update="updateText"/>
 
-      <div class="h-full col-span-1 flex justify-center items-center">
-        <ButtonIcon class="h-12 w-12" icon="add" @click="create"/>
-      </div>
     </div>
 
     <div v-else class="w-full p-2 flex justify-center items-center">
@@ -69,7 +66,7 @@ import ButtonOutline from "@/components/buttons/ButtonOutline";
 
 export default {
   name: "InterestPane",
-  components: {ButtonOutline, ButtonIcon, TextBox},
+  components: {ButtonOutline, TextBox},
   props: {
     emitData: {
       type: Boolean,
