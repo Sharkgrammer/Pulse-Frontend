@@ -115,7 +115,7 @@ export default {
       this.$emit('postUpdate');
     },
     getWelcomeMessage() {
-      let messagePrefix = ["Good", "Pleasant", "Eh", "Blessed", "Top of the", "Grand ol'", "Fine", "Sigh... Good"]
+      let messagePrefix = ["Good", "Pleasant", "Blessed", "Top of the", "Grand ol'", "Fine"]
 
       let n = Math.floor(Math.random() * messagePrefix.length);
 
