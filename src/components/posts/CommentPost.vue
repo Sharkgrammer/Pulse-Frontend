@@ -83,7 +83,6 @@ import ReactsLine from "@/components/util/ReactsLine";
 import HRV2 from "@/components/forms/HRV2";
 import TextBox from "@/components/forms/TextBox";
 import ButtonIcon from "@/components/buttons/ButtonIcon";
-import * as network from "@/assets/js/network";
 import SingleComment from "@/components/util/SingleComment";
 import ModalLoading from "@/components/modals/ModalLoading";
 import ModalProfile from "@/components/modals/ModalProfile";

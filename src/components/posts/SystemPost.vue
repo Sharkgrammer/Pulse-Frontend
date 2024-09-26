@@ -63,7 +63,6 @@ import TextBox from "@/components/forms/TextBox";
 import ButtonIcon from "@/components/buttons/ButtonIcon";
 import IconImage from "@/components/icons/IconImage";
 import IconDelete from "@/components/icons/IconDelete";
-import * as network from "@/assets/js/network";
 import ModalLoading from "@/components/modals/ModalLoading";
 import ModalMessage from "@/components/modals/ModalMessage.vue";
 

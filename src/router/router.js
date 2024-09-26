@@ -3,6 +3,7 @@ import HomePage from "@/views/HomePage";
 import LoginPage from "@/views/LoginPage";
 import PostPage from "@/views/PostPage";
 import ErrorPage from "@/views/ErrorPage";
+import DemoPage from "@/views/DemoPage.vue";
 
 const routes = [
     {
@@ -13,6 +14,11 @@ const routes = [
     {
         path: "/login",
         name: "Login",
+        component: DemoPage,
+    },
+    {
+        path: "/oldlogin",
+        name: "OldLogin",
         component: LoginPage,
     },
     {
