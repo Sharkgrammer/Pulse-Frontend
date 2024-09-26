@@ -16,7 +16,9 @@
         <div class="text-left pb-2">
           <div @click="openProfile(post.profile_username)" class="cursor-pointer">
             <p class="text-gray-800 dark:text-gray-200 font-bold text-xl flex items-center">{{ post.profile_name }}
-              <IconVerified v-if="this.post.profile_verified" class="ml-1"/><IconAd v-if="this.post.advertisement" class="ml-1"/></p>
+              <IconVerified v-if="this.post.profile_verified" class="ml-1"/>
+              <IconAd v-if="this.post.advertisement" class="ml-1"/>
+            </p>
             <p class="text-gray-600 dark:text-gray-400 hover:animate-rainbow -mt-0.5">{{ post.profile_username }}</p>
           </div>
 
@@ -71,6 +73,9 @@
   <ModalProfile :username="profileModalUsername" v-if="showProfileModal" :key="showProfileModal"
                 @close="showProfileModal = false" @followUpdate="this.$emit('followUpdate')"/>
 
+  <ModalMessage v-if="showMessage" :key="showMessage" title="You made a comment!" @close="postCommentClose"
+                content="Commenting doesn't work in this demo as I don't want to moderate unfiltered comment data. Instead the app will act as if you commented something and go from there."/>
+
 </template>
 
 <script>
@@ -85,17 +90,22 @@ import ModalProfile from "@/components/modals/ModalProfile";
 import {datetime_full} from "@/assets/js/dates";
 import IconVerified from "@/components/icons/IconVerified";
 import IconAd from "@/components/icons/IconAd";
+import ModalMessage from "@/components/modals/ModalMessage.vue";
 
 export default {
   name: "CommentPost",
-  components: {IconVerified, IconAd, ModalProfile, ModalLoading, SingleComment, ButtonIcon, TextBox, HRV2, ReactsLine},
+  components: {
+    ModalMessage,
+    IconVerified, IconAd, ModalProfile, ModalLoading, SingleComment, ButtonIcon, TextBox, HRV2, ReactsLine
+  },
   data() {
     return {
       commentText: "",
       showLoading: false,
       resetText: false,
       showProfileModal: false,
-      profileModalUsername: ""
+      profileModalUsername: "",
+      showMessage: false
     }
   },
   emits: ['commentUpdate', 'followUpdate'],
@@ -120,25 +130,18 @@ export default {
       return datetime_full(date)
     },
     async sendComment() {
-      let params = {
-        pid: this.post.pid
-      }
+      // Since this is the demo version, don't post to server
+      // Show message instead
 
-      let body = {
-        content: this.commentText,
-      }
-      this.showLoading = true;
-      let data = await network.NetworkRequest(this, "/api/v1/comment", "POST", body, params, false);
-      this.showLoading = false;
-
-      if (data !== false) {
-        this.commentText = "";
-        this.resetText = !this.resetText;
+      this.showMessage = true;
+    },
+    postCommentClose() {
+      this.commentText = "";
+      this.resetText = !this.resetText;
 
 
-        // Emit changes back to homepage to refresh please
-        this.$emit('commentUpdate');
-      }
+      // Emit changes back to homepage to refresh please
+      this.$emit('commentUpdate');
     }
   }
 }

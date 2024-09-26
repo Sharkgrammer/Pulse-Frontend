@@ -51,7 +51,8 @@
     <HRV2 class="mt-2"/>
 
     <ModalLoading v-if="showLoading" :key="showLoading"/>
-
+    <ModalMessage v-if="showMessage" :key="showMessage" title="You made a post!" @close="postMessageClose"
+                  content="Posting doesn't work in this demo as I don't want to moderate unfiltered post data. Instead the app will act as if you posted something and go from there."/>
   </div>
 
 </template>
@@ -64,10 +65,11 @@ import IconImage from "@/components/icons/IconImage";
 import IconDelete from "@/components/icons/IconDelete";
 import * as network from "@/assets/js/network";
 import ModalLoading from "@/components/modals/ModalLoading";
+import ModalMessage from "@/components/modals/ModalMessage.vue";
 
 export default {
   name: "SystemPost",
-  components: {ModalLoading, IconDelete, IconImage, ButtonIcon, TextBox, HRV2},
+  components: {ModalMessage, ModalLoading, IconDelete, IconImage, ButtonIcon, TextBox, HRV2},
   data() {
     return {
       file: null,
@@ -75,6 +77,7 @@ export default {
       postText: "",
       resetText: false,
       showLoading: false,
+      showMessage: false
     }
   },
   emits: ['postUpdate'],
@@ -97,41 +100,20 @@ export default {
       this.fileText = "";
     },
     async sendPost() {
-      // The server expects a put if its a file, or post otherwise
-      // and it expects the data to come in in two different ways, whoops
-      let netType = "POST"
-      let body = {}
+      // Since this is the demo version, don't post to server
+      // Show message instead
 
-      if (this.file === null) {
-        body = {
-          content: this.postText
-        }
+      this.showMessage = true;
+    },
+    postMessageClose(){
+      this.showMessage = false;
 
-      } else {
-        body = new FormData()
-        body.append('file', this.file)
-        body.append('file_name', this.fileText)
-        body.append('content', this.postText)
+      this.clearFile();
+      this.postText = "";
+      this.resetText = !this.resetText;
 
-        netType = "PUT"
-      }
-      this.showLoading = true;
-      let data = await network.NetworkRequest(this, "/api/v1/post", netType, body, null, false);
-      this.showLoading = false;
-
-
-      if (data !== false && data === "True" && data !== null) {
-        // Post has successfully been sent and recieved by the server, yay
-        // Reset the form
-        this.clearFile();
-        this.postText = "";
-        this.resetText = !this.resetText;
-
-
-        // Emit changes back to homepage to refresh please
-        this.$emit('postUpdate');
-      }
-
+      // Emit changes back to homepage to refresh please
+      this.$emit('postUpdate');
     },
     getWelcomeMessage() {
       let messagePrefix = ["Good", "Pleasant", "Eh", "Blessed", "Top of the", "Grand ol'", "Fine", "Sigh... Good"]

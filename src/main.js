@@ -8,7 +8,7 @@ import "./assets/js/utility.js";
 
 let app = createApp(App);
 
-//app.config.globalProperties._backend_url = "http://192.168.8.100:8000";
+//app.config.globalProperties._backend_url = "https://pulse-backend-3iq2.onrender.com";
 app.config.globalProperties._backend_url = "http://localhost:8000";
 app.config.globalProperties._frontend_url = "http://localhost:8080";
 
