@@ -149,7 +149,15 @@ export default {
         let data = await network.NetworkRequest(this, "/api/v1/user", "GET", null, params, true)
 
         if (data !== false) {
-          network.updateUser(this, data)
+
+          utils.setFirstName(this, data.first_name);
+          utils.setLastName(this, data.last_name);
+          utils.setUsername(this, data.username);
+          utils.setFollowing(this, data.following);
+          utils.setFollowers(this, data.followers);
+          utils.setProfImage(this, data.prof_image);
+          utils.setVerified(this, data.verified);
+          utils.setAnnoy(this, data.annoy);
 
           if (this.interests !== null) {
             await network.NetworkRequest(this, "/api/v1/update_interests", "POST", {interests: this.interests}, null, false);
