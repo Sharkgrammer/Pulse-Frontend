@@ -22,16 +22,38 @@
 
         <h1 class="text-center text-2xl pt-2">Who do you want to login as?</h1>
 
-        <div class="grid grid-cols-2">
+        <div class="grid grid-cols-2 gap-2">
 
-          <div class="bg-blue-500 h-20">
+          <div class="person" @click="loginAsMercy">
+
+            <div class="profile">
+              <img :src="this._backend_url + '/media/profs/mollypaint2.png'" loading="lazy"/>
+            </div>
+
+            <p class="text-2xl text-center">Mercy</p>
+
+            <div class="profile">
+              <ButtonOutline title="Login" />
+            </div>
+          </div>
+
+          <div class="person" @click="loginAsLindon">
+            <div class="profile">
+              <img :src="this._backend_url + '/media/profs/unsouled.png'" loading="lazy"/>
+            </div>
+
+            <p class="text-2xl text-center">Lindon</p>
+
+            <div class="profile">
+              <ButtonOutline title="Login" />
+            </div>
 
           </div>
 
-          <div class="bg-red-500 h-20">
+        </div>
 
-          </div>
-
+        <div class="flex justify-end">
+          <ButtonOutline title="See non-demo login page" @click="goToOld" />
         </div>
 
       </div>
@@ -48,14 +70,14 @@
 <script>
 import * as network from "@/assets/js/network";
 import * as utils from "@/assets/js/utility";
-import * as val from "@/assets/js/validate";
 import router from "../router/router";
 import ModalLoading from "@/components/modals/ModalLoading.vue";
+import ButtonOutline from "@/components/buttons/ButtonOutline.vue";
 
 
 export default {
   name: "DemoPage",
-  components: {ModalLoading},
+  components: {ButtonOutline, ModalLoading},
   async mounted() {
     this.isDark = document.body.classList.contains("dark");
   },
@@ -72,10 +94,17 @@ export default {
     loginAsLindon() {
       this.email = "lindon@pulse.com";
       this.password = "lindonpasswordplsnohack";
+
+      this.login();
     },
     loginAsMercy() {
       this.email = "mercy@pulse.com";
       this.password = "mercypasswordplsnohack";
+
+      this.login();
+    },
+    async goToOld(){
+      await router.push({name: 'oldlogin', query: {}});
     },
     async login() {
       if (this.email.length === 0 || this.password.length === 0) return;
@@ -118,4 +147,15 @@ export default {
 
 <style scoped>
 
+.person {
+  @apply cursor-pointer border border-white rounded-xl p-2 hover:border-gray-400 flex flex-col gap-2;
+}
+
+.profile {
+  @apply flex items-start justify-center w-full;
+}
+
+.profile > img {
+  @apply rounded-full h-32 w-32;
+}
 </style>

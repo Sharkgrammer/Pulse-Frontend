@@ -59,6 +59,9 @@
 
   <ModalLoading v-if="showLoading" :key="showLoading"/>
 
+  <ModalMessage v-if="showMessage" :key="showMessage" title="You registered an account!" @close="registerComplete"
+                content="Registering doesn't work in this demo as I don't want to moderate unfiltered data. The app will return you to the demo login."/>
+
 </template>
 
 <script>
@@ -70,10 +73,11 @@ import router from "../router/router";
 import ButtonOutline from "@/components/buttons/ButtonOutline";
 import InterestPane from "@/components/util/InterestPane";
 import ModalLoading from "@/components/modals/ModalLoading";
+import ModalMessage from "@/components/modals/ModalMessage.vue";
 
 export default {
   name: "LoginPage",
-  components: {ModalLoading, InterestPane, ButtonOutline, TextBox},
+  components: {ModalMessage, ModalLoading, InterestPane, ButtonOutline, TextBox},
   mounted(){
     this.isDark = document.body.classList.contains("dark")
   },
@@ -92,6 +96,7 @@ export default {
       errorMessage: "",
       showRegister: false,
       showLoading: false,
+      showMessage: false
     }
   },
   methods: {
@@ -167,43 +172,13 @@ export default {
 
       this.showLoading = false;
     },
+    async registerComplete(){
+      this.showMessage = false;
+
+      await router.push({name: 'Login', query: {}});
+    },
     async register() {
-      this.showLoading = true;
-
-      let user = {
-        first_name: this.firstName,
-        last_name: this.lastName,
-        email: this.email,
-        password: this.password,
-        passwordVal: this.passwordVal,
-        username: this.username,
-        image: this.image,
-      }
-
-      this.errorMessage = await val.validateUser(this, user)
-
-      if (this.errorMessage === "") {
-        let body = new FormData()
-        body.append('file', this.image)
-        body.append('first_name', this.firstName)
-        body.append('last_name', this.lastName)
-        body.append('email', this.email)
-        body.append('password', this.password)
-        body.append('username', this.username)
-        body.append('prof_desc', this.desc)
-
-        let data = await network.NetworkRequest(this, "/api/v1/create_user", "PUT", body, null, false, true)
-
-        if (data !== false) {
-          this.showRegister = false;
-          await this.login();
-        } else {
-          this.errorMessage = "Error, please try again later"
-        }
-
-      }
-
-      this.showLoading = false;
+      this.showMessage = true;
     }
   }
 }
