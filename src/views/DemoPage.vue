@@ -6,7 +6,7 @@
 
       <div class="py-5 text-white flex flex-col gap-2" v-if="serverOnline">
 
-        <h1 class="text-xl">This is a demo application to demonstrate most this Twitter clones functionality and
+        <h1 class="text-xl">This is a demo application to demonstrate most of this Twitter clones functionality and
           style.</h1>
         <h1 class="text-xl">Because of this, some functionality is restricted.</h1>
 
