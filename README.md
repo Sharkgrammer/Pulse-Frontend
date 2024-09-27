@@ -10,7 +10,7 @@ The demo branch contains the code used in the demo hosted version. It limits the
 ![Pulse main screen](https://i.imgur.com/bmK4cnX.png)
 
 # Demo Login
-![Pulse demo screen](https://i.imgur.com/MTXrwbg.png)
+![Pulse demo screen](https://i.imgur.com/dVSYMsb.png)
 
 # Video Demo
 https://www.youtube.com/watch?v=eJxtoCWF4Sg
