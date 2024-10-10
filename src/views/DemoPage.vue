@@ -158,6 +158,7 @@ export default {
           utils.setProfImage(this, data.prof_image);
           utils.setVerified(this, data.verified);
           utils.setAnnoy(this, data.annoy);
+          utils.setDemo(this, true);
 
           if (this.interests !== null) {
             await network.NetworkRequest(this, "/api/v1/update_interests", "POST", {interests: this.interests}, null, false);

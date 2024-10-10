@@ -142,6 +142,15 @@ export function getDarkMode(context) {
     return context.$store.getters.darkMode
 }
 
+export function setDemo(context, demo) {
+    context.$store.commit("setDemoStarted", demo)
+}
+
+export function getDemo(context) {
+    return context.$store.getters.demoStarted
+}
+
+
 export async function redirectToLogin() {
     localStorage.clear();
 

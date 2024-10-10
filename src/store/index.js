@@ -16,6 +16,7 @@ export default createStore({
             annoy: false,
             darkMode: true,
             latestMode: false,
+            demoStarted: false
         }
     },
     mutations: {
@@ -55,6 +56,9 @@ export default createStore({
         setDarkMode(state, darkMode) {
             state.darkMode = darkMode
         },
+        setDemoStarted(state, demoStarted) {
+            state.demoStarted = demoStarted
+        }
     },
     getters: {
         access: state => state.access,
@@ -69,6 +73,7 @@ export default createStore({
         latestMode: state => state.latestMode,
         annoy: state => state.annoy,
         darkMode: state => state.darkMode,
+        demoStarted: state => state.demoStarted
     },
     plugins: [createPersistedState()]
 });

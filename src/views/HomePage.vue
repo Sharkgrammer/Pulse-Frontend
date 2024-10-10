@@ -1,23 +1,23 @@
 <template>
 
-  <div id="fireworksContainer" class="absolute h-full w-full pointer-events-none" />
+  <div id="fireworksContainer" class="absolute h-full w-full pointer-events-none"/>
 
   <PageLayout>
-      <div class="w-full max-w-post md:w-post">
+    <div class="w-full max-w-post md:w-post">
 
-        <SystemPost :name="getUsersName()" @postUpdate="refreshPosts(); setOffFireworks()"/>
+      <SystemPost :name="getUsersName()" @postUpdate="refreshPosts(); setOffFireworks()"/>
 
-        <div :key="getLatestMode()">
-          <div v-for="post in posts" :key="post">
-            <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
-          </div>
+      <div :key="getLatestMode()">
+        <div v-for="post in posts" :key="post">
+          <UserPost :post="post" @followUpdate="this.$emit('followUpdate')"/>
         </div>
-
-        <LoadingPost v-if="showLoadingPost"/>
-        <NothingPost v-else/>
-
       </div>
-    </PageLayout>
+
+      <LoadingPost v-if="showLoadingPost"/>
+      <NothingPost v-else/>
+
+    </div>
+  </PageLayout>
 </template>
 
 <script>
@@ -28,8 +28,8 @@ import * as utils from "@/assets/js/utility";
 import LoadingPost from "@/components/posts/LoadingPost";
 import PageLayout from "@/components/util/PageLayout";
 import NothingPost from "@/components/posts/NothingPost";
-import {getAnnoy, getLatestMode} from "@/assets/js/utility";
-import { Fireworks } from 'fireworks-js'
+import {getAnnoy, getDemo, getLatestMode, redirectToLogin} from "@/assets/js/utility";
+import {Fireworks} from 'fireworks-js'
 
 export default {
   name: "HomePage",
@@ -43,6 +43,13 @@ export default {
     }
   },
   async mounted() {
+
+    if (!getDemo(this)) {
+      await redirectToLogin();
+
+      return;
+    }
+
     await this.getAllPosts();
     this.scroll();
     this.oldLatestMode = getLatestMode(this);
